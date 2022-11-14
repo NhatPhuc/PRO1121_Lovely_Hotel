@@ -34,7 +34,6 @@ public class MainActivity extends AppCompatActivity {
                 switch (position){
                     case 0:
                         bottomNavigationView.getMenu().findItem(R.id.nav_1).setChecked(true);
-
                         break;
                     case 1:
                         bottomNavigationView.getMenu().findItem(R.id.nav_2).setChecked(true);
