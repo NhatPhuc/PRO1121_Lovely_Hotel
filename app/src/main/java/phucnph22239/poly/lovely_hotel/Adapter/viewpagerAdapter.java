@@ -8,6 +8,7 @@ import androidx.fragment.app.FragmentStatePagerAdapter;
 import phucnph22239.poly.lovely_hotel.Fragment.Fragment1;
 import phucnph22239.poly.lovely_hotel.Fragment.Fragment2;
 import phucnph22239.poly.lovely_hotel.Fragment.Fragment3;
+import phucnph22239.poly.lovely_hotel.Fragment.FragmentThongKe;
 
 public class viewpagerAdapter extends FragmentStatePagerAdapter {
     public viewpagerAdapter(@NonNull FragmentManager fm, int behavior) {
@@ -23,7 +24,7 @@ public class viewpagerAdapter extends FragmentStatePagerAdapter {
             case 1:
                 return new Fragment2();
             case 2:
-                return new Fragment3();
+                return new FragmentThongKe();
             default:
                 return new Fragment1();
         }

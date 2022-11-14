@@ -3,13 +3,9 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Du_an_1/PRO1121_Lovely_Hotel/app/src/main/res/layout/activity_main.xml" value="0.17552083333333332" />
-        <entry key="..\:/Du_an_1/PRO1121_Lovely_Hotel/app/src/main/res/layout/fragment_1.xml" value="0.17552083333333332" />
-        <entry key="..\:/Du_an_1/PRO1121_Lovely_Hotel/app/src/main/res/layout/fragment_thongke.xml" value="0.16145833333333334" />
-        <entry key="..\:/Du_an_1/PRO1121_Lovely_Hotel/app/src/main/res/layout/item_phong.xml" value="0.17552083333333332" />
-        <entry key="..\:/Du_an_1/PRO1121_Lovely_Hotel/app/src/main/res/layout/item_sideshow.xml" value="0.17552083333333332" />
-        <entry key="..\:/Du_an_1/PRO1121_Lovely_Hotel/app/src/main/res/layout/item_signin.xml" value="0.17552083333333332" />
-        <entry key="..\:/Du_an_1/PRO1121_Lovely_Hotel/app/src/main/res/layout/item_signup.xml" value="0.17552083333333332" />
+        <entry key="..\:/#HocTap/PRO1121(DuAn1)/Lovely_Hotel/app/src/main/res/layout/activity_main.xml" value="0.25" />
+        <entry key="..\:/#HocTap/PRO1121(DuAn1)/Lovely_Hotel/app/src/main/res/layout/fragment_thongke.xml" value="0.25" />
+        <entry key="..\:/#HocTap/PRO1121(DuAn1)/Lovely_Hotel/app/src/main/res/menu/menu.xml" value="0.25" />
       </map>
     </option>
   </component>
