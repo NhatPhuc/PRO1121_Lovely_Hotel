@@ -14,9 +14,6 @@
         android:theme="@style/Theme.Lovely_Hotel"
         tools:targetApi="31">
         <activity
-            android:name=".doimkActivity"
-            android:exported="false" />
-        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
