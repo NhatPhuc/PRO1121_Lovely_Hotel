@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_height="match_parent">
+    <TextView
+        android:layout_marginTop="30dp"
+        android:layout_width="match_parent"
+        android:text="THỐNG KÊ DOANH THU"
+        android:gravity="center"
+        android:textStyle="bold"
+        android:textColor="#A51818"
+        android:textSize="25dp"
+        android:layout_height="wrap_content"/>
+    <LinearLayout
+        android:layout_marginTop="30dp"
+        android:orientation="horizontal"
+        android:padding="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <Button
+            android:id="@+id/btnNgayBD"
+            android:layout_margin="10dp"
+            android:text="Ngày bắt đầu"
+            android:backgroundTint="#1536ED"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+        <EditText
+            android:id="@+id/ed_ngayDau"
+            android:layout_margin="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+    </LinearLayout>
+    <LinearLayout
+        android:orientation="horizontal"
+        android:padding="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <Button
+            android:id="@+id/btnNgayKT"
+            android:layout_margin="10dp"
+            android:text="Ngày kẾT THÚC"
+            android:backgroundTint="#1536ED"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+        <EditText
+            android:id="@+id/ed_ngayKT"
+            android:layout_margin="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+    </LinearLayout>
+    <Button
+        android:id="@+id/btnThongke"
+        android:layout_marginTop="10dp"
+        android:layout_gravity="center"
+        android:text="THỐNG KÊ"
+        android:backgroundTint="#1536ED"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+</LinearLayout>
