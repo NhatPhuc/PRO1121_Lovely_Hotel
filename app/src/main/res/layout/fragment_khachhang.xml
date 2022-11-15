@@ -8,7 +8,7 @@
     tools:context=".Fragment.Fragment_don_dich_vu">
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/btnkhach_hang"
+        android:id="@+id/btn_add_khach_hang"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
@@ -16,11 +16,12 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.918"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/rcvkhach_hang"
-        app:layout_constraintVertical_bias="0.937" />
+        app:layout_constraintTop_toTopOf="@+id/rcv_khach_hang"
+        app:layout_constraintVertical_bias="0.937"
+        android:src="@drawable/ic_baseline_add_24"/>
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rcvkhach_hang"
+        android:id="@+id/rcv_khach_hang"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_constraintBottom_toBottomOf="parent"

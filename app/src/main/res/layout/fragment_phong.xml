@@ -7,7 +7,7 @@
     tools:context=".Fragment.FragmentPhong">
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/btndich_vu"
+        android:id="@+id/btn_add_phong"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
@@ -15,11 +15,12 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.918"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/rcvdich_vu"
-        app:layout_constraintVertical_bias="0.937" />
+        app:layout_constraintTop_toTopOf="@+id/rcv_phong"
+        app:layout_constraintVertical_bias="0.937"
+        android:src="@drawable/ic_baseline_add_24"/>
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rcvdich_vu"
+        android:id="@+id/rcv_phong"
         android:layout_width="410dp"
         android:layout_height="667dp"
         android:layout_marginStart="2dp"
@@ -30,15 +31,15 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/spinner" />
+        app:layout_constraintTop_toBottomOf="@+id/spinner_phong" />
 
     <Spinner
-        android:id="@+id/spinner"
+        android:id="@+id/spinner_phong"
         android:layout_width="409dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="1dp"
         android:layout_marginEnd="1dp"
-        app:layout_constraintBottom_toTopOf="@+id/rcvdich_vu"
+        app:layout_constraintBottom_toTopOf="@+id/rcv_phong"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
