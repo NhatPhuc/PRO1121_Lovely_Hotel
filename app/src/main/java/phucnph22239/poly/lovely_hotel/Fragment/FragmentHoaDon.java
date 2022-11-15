@@ -11,15 +11,18 @@ import android.view.ViewGroup;
 import phucnph22239.poly.lovely_hotel.R;
 
 
-public class FragmentPhong extends Fragment {
+public class FragmentHoaDon extends Fragment {
 
 
-    public FragmentPhong() {
+
+    public FragmentHoaDon() {
         // Required empty public constructor
     }
 
-    public static FragmentPhong newInstance() {
-        FragmentPhong fragment = new FragmentPhong();
+
+    public static FragmentHoaDon newInstance(String param1, String param2) {
+        FragmentHoaDon fragment = new FragmentHoaDon();
+
         return fragment;
     }
 
@@ -33,6 +36,6 @@ public class FragmentPhong extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_phong, container, false);
+        return inflater.inflate(R.layout.fragment_hoa_don, container, false);
     }
 }
