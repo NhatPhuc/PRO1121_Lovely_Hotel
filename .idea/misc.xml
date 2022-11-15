@@ -3,15 +3,19 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/#HocTap/PRO1121(DuAn1)/Lovely_Hotel/app/src/main/res/drawable/ic_android_black_24dp.xml" value="0.131" />
+        <entry key="..\:/#HocTap/PRO1121(DuAn1)/Lovely_Hotel/app/src/main/res/drawable/ic_round_account_circle_24.xml" value="0.131" />
         <entry key="..\:/#HocTap/PRO1121(DuAn1)/Lovely_Hotel/app/src/main/res/layout/activity_doimk.xml" value="0.21296296296296297" />
         <entry key="..\:/#HocTap/PRO1121(DuAn1)/Lovely_Hotel/app/src/main/res/layout/activity_main.xml" value="0.25" />
         <entry key="..\:/#HocTap/PRO1121(DuAn1)/Lovely_Hotel/app/src/main/res/layout/fragment_3.xml" value="0.1" />
         <entry key="..\:/#HocTap/PRO1121(DuAn1)/Lovely_Hotel/app/src/main/res/layout/fragment_doimatkhau.xml" value="0.13854166666666667" />
-        <entry key="..\:/#HocTap/PRO1121(DuAn1)/Lovely_Hotel/app/src/main/res/layout/fragment_don_dich_vu.xml" value="0.13854166666666667" />
+        <entry key="..\:/#HocTap/PRO1121(DuAn1)/Lovely_Hotel/app/src/main/res/layout/fragment_don_dich_vu.xml" value="0.2" />
+        <entry key="..\:/#HocTap/PRO1121(DuAn1)/Lovely_Hotel/app/src/main/res/layout/fragment_hoa_don.xml" value="0.2" />
         <entry key="..\:/#HocTap/PRO1121(DuAn1)/Lovely_Hotel/app/src/main/res/layout/fragment_khachhang.xml" value="0.25" />
         <entry key="..\:/#HocTap/PRO1121(DuAn1)/Lovely_Hotel/app/src/main/res/layout/fragment_phong.xml" value="0.25" />
         <entry key="..\:/#HocTap/PRO1121(DuAn1)/Lovely_Hotel/app/src/main/res/layout/fragment_thongke.xml" value="0.25" />
         <entry key="..\:/#HocTap/PRO1121(DuAn1)/Lovely_Hotel/app/src/main/res/layout/item_phong.xml" value="0.13854166666666667" />
+        <entry key="..\:/#HocTap/PRO1121(DuAn1)/Lovely_Hotel/app/src/main/res/layout/item_sideshow.xml" value="0.14635416666666667" />
         <entry key="..\:/#HocTap/PRO1121(DuAn1)/Lovely_Hotel/app/src/main/res/menu/menu.xml" value="0.25" />
       </map>
     </option>

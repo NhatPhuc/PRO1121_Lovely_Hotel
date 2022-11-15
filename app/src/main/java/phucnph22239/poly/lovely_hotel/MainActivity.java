@@ -41,6 +41,12 @@ public class MainActivity extends AppCompatActivity {
                     case 2:
                         bottomNavigationView.getMenu().findItem(R.id.nav_3).setChecked(true);
                         break;
+                    case 3:
+                        bottomNavigationView.getMenu().findItem(R.id.nav_4).setChecked(true);
+                        break;
+                    case 4:
+                        bottomNavigationView.getMenu().findItem(R.id.nav_5).setChecked(true);
+                        break;
                 }
 
             }
@@ -62,6 +68,12 @@ public class MainActivity extends AppCompatActivity {
                         break;
                     case R.id.nav_3:
                         viewPager.setCurrentItem(2);
+                        break;
+                    case R.id.nav_4:
+                        viewPager.setCurrentItem(3);
+                        break;
+                    case R.id.nav_5:
+                        viewPager.setCurrentItem(4);
                         break;
                 }
 
