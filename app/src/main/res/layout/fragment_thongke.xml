@@ -2,14 +2,15 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:orientation="vertical"
+    android:background="#80deea"
     android:layout_height="match_parent">
     <TextView
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="40dp"
         android:layout_width="match_parent"
         android:text="THỐNG KÊ DOANH THU"
         android:gravity="center"
         android:textStyle="bold"
-        android:textColor="@color/black"
+        android:textColor="@color/white"
         android:textSize="25dp"
         android:layout_height="wrap_content"/>
 
@@ -59,11 +60,12 @@
             android:src="@drawable/dateicon" />
     </RelativeLayout>
     <Button
+        android:background="@drawable/custom_edittext"
         android:id="@+id/doanhthu_btn_tinh"
         android:layout_marginTop="20dp"
         android:layout_gravity="center"
         android:text="THỐNG KÊ"
-        android:backgroundTint="#1536ED"
+        android:backgroundTint="#E91E63"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
 
@@ -75,6 +77,6 @@
         android:text="Doanh thu"
         android:layout_marginTop="20dp"
         android:textSize="20dp"
-        android:textColor="@color/black"
+        android:textColor="@color/white"
         />
 </LinearLayout>
