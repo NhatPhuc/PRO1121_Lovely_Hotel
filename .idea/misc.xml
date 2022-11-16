@@ -3,6 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+
         <entry key="..\:/#HocTap/PRO1121(DuAn1)/Lovely_Hotel/app/src/main/res/drawable/custom_edittext.xml" value="0.147" />
         <entry key="..\:/#HocTap/PRO1121(DuAn1)/Lovely_Hotel/app/src/main/res/drawable/ic_android_black_24dp.xml" value="0.131" />
         <entry key="..\:/#HocTap/PRO1121(DuAn1)/Lovely_Hotel/app/src/main/res/drawable/ic_round_account_circle_24.xml" value="0.131" />
@@ -19,6 +20,7 @@
         <entry key="..\:/#HocTap/PRO1121(DuAn1)/Lovely_Hotel/app/src/main/res/layout/item_phong.xml" value="0.25" />
         <entry key="..\:/#HocTap/PRO1121(DuAn1)/Lovely_Hotel/app/src/main/res/layout/item_sideshow.xml" value="0.14635416666666667" />
         <entry key="..\:/#HocTap/PRO1121(DuAn1)/Lovely_Hotel/app/src/main/res/menu/menu.xml" value="0.25" />
+        
       </map>
     </option>
   </component>
