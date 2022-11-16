@@ -32,7 +32,6 @@
             android:paddingStart="45dp" />
 
         <EditText
-            android:background="@drawable/custom_edittext"
             android:id="@+id/doanhthu_edt_tungay"
             android:layout_width="match_parent"
             android:layout_height="45dp"
@@ -40,6 +39,7 @@
             android:layout_marginTop="50dp"
             android:layout_marginEnd="50dp"
             android:layout_marginBottom="50dp"
+            android:background="@drawable/custom_edittext"
             android:hint="Từ Ngày"
             android:paddingStart="45dp" />
 

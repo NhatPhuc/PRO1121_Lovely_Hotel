@@ -30,7 +30,7 @@ public class DbHelper extends SQLiteOpenHelper {
                 "id INTEGER PRIMARY KEY AUTOINCREMENT," +
                 "room_type_id INTERGER REFERENCES Room_Types(id)," +
                 "name TEXT NOT NULL," +
-                "birthday DATE NOT NULL )";
+                "price int NOT NULL )";
         db.execSQL(createTableRooms);
 
         String createTableRoom_Types = "create table Room_Types (" +
