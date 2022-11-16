@@ -38,12 +38,6 @@ public class DbHelper extends SQLiteOpenHelper {
                 "name TEXT NOT NULL)";
         db.execSQL(createTableRoom_Types);
 
-        String createTableRoom_Type_Belongings = "create table Room_Type_Belongings (" +
-                "id INTEGER PRIMARY KEY AUTOINCREMENT," +
-                "room_type_id INTERGER REFERENCES Room_Types(id)," +
-                "name TEXT NOT NULL," +
-                "price INTEGER NOT NULL)";
-        db.execSQL(createTableRoom_Type_Belongings);
 
         String createTableBills = "create table Bills (" +
                 "id INTEGER PRIMARY KEY AUTOINCREMENT," +
@@ -77,7 +71,6 @@ public class DbHelper extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS Guests");
         db.execSQL("DROP TABLE IF EXISTS Rooms");
         db.execSQL("DROP TABLE IF EXISTS Room_Types");
-        db.execSQL("DROP TABLE IF EXISTS Room_Type_Belongings");
         db.execSQL("DROP TABLE IF EXISTS Bills");
         db.execSQL("DROP TABLE IF EXISTS Bill_Details");
         db.execSQL("DROP TABLE IF EXISTS Services");
