@@ -7,7 +7,7 @@
     tools:context=".Fragment.FragmentPhong">
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/btn_add_phong"
+        android:id="@+id/fab_add_phong"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
@@ -29,9 +29,10 @@
         android:layout_marginBottom="2dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/spinner_phong" />
+        app:layout_constraintTop_toBottomOf="@+id/spinner_phong"
+        tools:listitem="@layout/item_phong" />
 
     <Spinner
         android:id="@+id/spinner_phong"
