@@ -50,6 +50,7 @@ public class FragmentPhong extends Fragment {
 
         fab.setOnClickListener(v -> {
             openDialog();
+
         });
     }
 
@@ -63,6 +64,10 @@ public class FragmentPhong extends Fragment {
 
         btn_cancel.setOnClickListener(v -> {
             dialog.dismiss();
+        });
+
+        btn_add.setOnClickListener(v -> {
+
         });
 
     }
