@@ -8,8 +8,11 @@ import androidx.fragment.app.FragmentStatePagerAdapter;
 import phucnph22239.poly.lovely_hotel.Fragment.FragmentDoiMatKhau;
 import phucnph22239.poly.lovely_hotel.Fragment.FragmentHoaDon;
 import phucnph22239.poly.lovely_hotel.Fragment.FragmentPhong;
+import phucnph22239.poly.lovely_hotel.Fragment.FragmentTabDichVu;
+import phucnph22239.poly.lovely_hotel.Fragment.FragmentTabPhong;
 import phucnph22239.poly.lovely_hotel.Fragment.FragmentThongKe;
 import phucnph22239.poly.lovely_hotel.Fragment.Fragment_don_dich_vu;
+import phucnph22239.poly.lovely_hotel.Fragment.Fragment_khachhang;
 
 public class viewpagerAdapter extends FragmentStatePagerAdapter {
     public viewpagerAdapter(@NonNull FragmentManager fm, int behavior) {
@@ -19,18 +22,20 @@ public class viewpagerAdapter extends FragmentStatePagerAdapter {
     @NonNull
     @Override
     public Fragment getItem(int position) {
+        Fragment fragment = null;
         switch (position){
             case 0:
-                return new FragmentPhong();
+                return new FragmentTabPhong();
             case 1:
                 return new FragmentHoaDon();
             case 2:
-                return new Fragment_don_dich_vu();
+                return new FragmentTabDichVu();
+            case 3:
+                return new Fragment_khachhang();
             case 4:
                 return new FragmentThongKe();
-            default:
-                return new FragmentPhong();
         }
+        return fragment;
     }
 
     @Override
