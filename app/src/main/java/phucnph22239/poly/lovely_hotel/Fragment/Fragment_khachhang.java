@@ -8,6 +8,8 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,9 +18,18 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+
+import phucnph22239.poly.lovely_hotel.Adapter.KhachHangAdapter;
+import phucnph22239.poly.lovely_hotel.DAO.KhachHangDAO;
+import phucnph22239.poly.lovely_hotel.DTO.KhachHang;
 import phucnph22239.poly.lovely_hotel.R;
 
 public class Fragment_khachhang extends Fragment {
@@ -32,10 +43,22 @@ public class Fragment_khachhang extends Fragment {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_khachhang, container, false);
     }
+    RecyclerView rcv_kh ;
+    LinearLayoutManager linearLayoutManager;
+    KhachHangDAO dao ;
+    KhachHangAdapter adapter;
+    ArrayList<KhachHang> list ;
     FloatingActionButton btnADD;
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        rcv_kh = view.findViewById(R.id.rcv_khach_hang);
+        linearLayoutManager = new LinearLayoutManager(getContext());
+        rcv_kh.setLayoutManager(linearLayoutManager);
+        dao = new KhachHangDAO(getContext());
+        list = dao.getAll();
+        adapter = new KhachHangAdapter(getContext(),list);
+        rcv_kh.setAdapter(adapter);
         btnADD = view.findViewById(R.id.btn_add_khach_hang);
         btnADD.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -51,6 +74,37 @@ public class Fragment_khachhang extends Fragment {
                 window.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
                 Button btnCancel = dialog.findViewById(R.id.btnCancel);
                 Button btnAdd = dialog.findViewById(R.id.btnAdd_KH);
+                EditText ed_name = dialog.findViewById(R.id.edName);
+                EditText ed_phone = dialog.findViewById(R.id.edPhone);
+                EditText ed_birthday = dialog.findViewById(R.id.edBirthday);
+                btnAdd.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if(ed_name.getText().length()==0||
+                                ed_phone.getText().length()==0||
+                                ed_birthday.getText().length()==0){
+                            Toast.makeText(getContext(),"Không được để trống",Toast.LENGTH_SHORT).show();
+                        }else if(!(isValidFormat("dd/mm/yyyy",ed_birthday.getText().toString()))){
+                            Toast.makeText(getContext(),"Không đúng định dạng ngày",Toast.LENGTH_SHORT).show();
+                        }
+                        else {
+                            KhachHang khachHang = new KhachHang();
+                            khachHang.setName(ed_name.getText().toString());
+                            khachHang.setPhone(Integer.parseInt(ed_phone.getText().toString()));
+                            khachHang.setBirthday(ed_birthday.getText().toString());
+                            long res = dao.insert(khachHang);
+                            if (res>0){
+                                Toast.makeText(getContext(),"Thêm thành công",Toast.LENGTH_SHORT).show();
+                                list.clear();
+                                list.addAll(dao.getAll());
+                                adapter.notifyDataSetChanged();
+                            }else {
+                                Toast.makeText(getContext(),"Thêm thất bại",Toast.LENGTH_SHORT).show();
+                            }
+                            dialog.dismiss();
+                        }
+                    }
+                });
                 btnCancel.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -60,5 +114,18 @@ public class Fragment_khachhang extends Fragment {
                 dialog.show();
             }
         });
+    }
+    public boolean isValidFormat(String format, String value) {
+        Date date = null;
+        try {
+            SimpleDateFormat sdf = new SimpleDateFormat(format);
+            date = sdf.parse(value);
+            if (!value.equals(sdf.format(date))) {
+                date = null;
+            }
+        } catch (ParseException ex) {
+            ex.printStackTrace();
+        }
+        return date != null;
     }
 }
