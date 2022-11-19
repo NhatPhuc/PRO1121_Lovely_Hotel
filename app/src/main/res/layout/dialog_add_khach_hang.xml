@@ -34,14 +34,27 @@
             android:background="@drawable/custom_edittext"
             android:layout_width="match_parent"
             android:layout_height="40dp"/>
-        <EditText
-            android:padding="6dp"
-            android:id="@+id/edBirthday"
-            android:hint="Ngày sinh"
-            android:layout_marginTop="5dp"
+        <LinearLayout
+            android:layout_marginTop="6dp"
             android:background="@drawable/custom_edittext"
+            android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="40dp"/>
+            android:layout_height="wrap_content">
+            <ImageView
+                android:id="@+id/imgdate"
+                android:layout_marginTop="2dp"
+                android:src="@drawable/dateicon"
+                android:layout_width="40dp"
+                android:layout_height="40dp"/>
+            <EditText
+
+                android:padding="6dp"
+                android:id="@+id/edBirthday"
+                android:hint="Ngày sinh"
+                android:layout_marginTop="5dp"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"/>
+        </LinearLayout>
     </LinearLayout>
     <LinearLayout
         android:padding="16dp"
