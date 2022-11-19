@@ -36,7 +36,7 @@ public class KhachHangAdapter extends RecyclerView.Adapter<KhachHangAdapter.Khac
     public void onBindViewHolder(@NonNull KhachHangViewHolder holder, int position) {
         holder.txtName.setText("Khách hàng : "+list.get(position).getName());
         holder.txtPhone.setText("SĐT : "+list.get(position).getPhone());
-        holder.txtBirtday.setText("Birthday : "+list.get(position).getBirthday());
+        holder.txtBirtday.setText("Ngày sinh : "+list.get(position).getBirthday());
     }
 
     @Override
