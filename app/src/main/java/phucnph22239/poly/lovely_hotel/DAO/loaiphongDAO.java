@@ -25,6 +25,14 @@ public class loaiphongDAO {
         values.put("name",loaiphong.getName());
         return db.insert("Room_Types",null,values);
     }
+    public int upate(loaiphong lp){
+        ContentValues values=new ContentValues();
+        values.put("name",lp.getName());
+        return db.update("Room_Types",values,"id=?",new String[]{lp.getId()+""});
+    }
+    public int delete(int s){
+        return db.delete("Room_Types","id=?",new String[]{s+""});
+    }
     public List<loaiphong> getDaTa(String sql, String...selectionArgs){
         List<loaiphong> list=new ArrayList<>();
         Cursor c=db.rawQuery(sql,selectionArgs);
