@@ -1,15 +1,16 @@
 package phucnph22239.poly.lovely_hotel.DTO;
 
-public class LoaiPhong {
+public class LoaiDichVu {
     private int id;
     private String name;
-
-    public LoaiPhong() {
+    private int price;
+    public LoaiDichVu() {
     }
 
-    public LoaiPhong(int id, String name) {
+    public LoaiDichVu(int id, String name,int price) {
         this.id = id;
         this.name = name;
+        this.price = price;
     }
 
     public int getId() {
@@ -26,5 +27,13 @@ public class LoaiPhong {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public int getPrice() {
+        return price;
+    }
+
+    public void setPrice(int price) {
+        this.price = price;
     }
 }

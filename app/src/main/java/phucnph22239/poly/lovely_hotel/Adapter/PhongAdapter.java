@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
 
 import phucnph22239.poly.lovely_hotel.DAO.PhongDao;
-import phucnph22239.poly.lovely_hotel.DAO.loaiphongDAO;
+import phucnph22239.poly.lovely_hotel.DTO.LoaiPhong;
 import phucnph22239.poly.lovely_hotel.DTO.Phong;
 import phucnph22239.poly.lovely_hotel.R;
 
@@ -21,7 +21,7 @@ public class PhongAdapter extends RecyclerView.Adapter<PhongAdapter.phongViewHol
     private Context context;
     private List<Phong> list;
     private PhongDao phongDAO;
-    private loaiphong loaiphong;
+    private LoaiPhong lp;
     private loaiphongDAO loaiphongDAO;
 
     public PhongAdapter(Context context, List<Phong> list) {
@@ -40,8 +40,10 @@ public class PhongAdapter extends RecyclerView.Adapter<PhongAdapter.phongViewHol
     @Override
     public void onBindViewHolder(@NonNull phongViewHolder holder, int position) {
         Phong phong=list.get(position);
+        loaiphongDAO loaiphongDAO = new loaiphongDAO(context);//đặt tên biến ngu v < Duyên said :))
+        lp = loaiphongDAO.getID(String.valueOf(phong.getId()));
         holder.item_phong_ten.setText(""+phong.getName());
-        holder.item_phong_loaiphong.setText(""+loaiphong.);
+        holder.item_phong_loaiphong.setText(""+lp.getName());
         holder.item_phong_giaphong.setText(""+phong.getPrice());
     }
 

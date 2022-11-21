@@ -3,27 +3,28 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    app:cardCornerRadius="10dp">
+    app:cardCornerRadius="15dp"
+    android:layout_margin="10dp">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_margin="8dp">
+        android:orientation="vertical">
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:text="Phòng"
             android:textAlignment="center"
+            android:background="@color/teal_700"
             android:textSize="40dp"
-            android:background="#80deea"
             android:textStyle="bold"
             android:textColor="@color/white"/>
 
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:padding="10dp">
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/dialog_ed_tenphong"
                 android:layout_width="match_parent"
@@ -32,16 +33,30 @@
                 android:background="@drawable/custom_edittext"/>
         </com.google.android.material.textfield.TextInputLayout>
 
-        <Spinner
-            android:id="@+id/dialog_spn_loaiphong"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="40dp"
-            />
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Loại Phòng"
+                android:textColor="@color/black"
+                android:padding="10dp"
+                android:layout_marginLeft="5dp"/>
+            <Spinner
+                android:id="@+id/dialog_spn_loaiphong"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                />
+        </LinearLayout>
+
 
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:padding="10dp"
             >
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/dialog_ed_giaphong"
@@ -51,18 +66,12 @@
                 android:background="@drawable/custom_edittext"/>
         </com.google.android.material.textfield.TextInputLayout>
 
-        <CheckBox
-            android:id="@+id/ckb_phong"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Đã trả phòng"
-/>
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:weightSum="2">
+            android:weightSum="2"
+            android:padding="10dp">
             <Button
                 android:id="@+id/dialog_btn_themphong"
                 android:layout_width="0dp"
