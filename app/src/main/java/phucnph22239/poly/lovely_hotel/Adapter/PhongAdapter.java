@@ -1,7 +1,6 @@
 package phucnph22239.poly.lovely_hotel.Adapter;
 
 import android.content.Context;
-import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,11 +11,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
-import phucnph22239.poly.lovely_hotel.DAO.PhongDao;
-<<<<<<< HEAD
-=======
 import phucnph22239.poly.lovely_hotel.DAO.LoaiPhongDAO;
->>>>>>> f93e727fd84c26c3b1208091d9024c8a718a2136
+import phucnph22239.poly.lovely_hotel.DAO.PhongDao;
 import phucnph22239.poly.lovely_hotel.DTO.LoaiPhong;
 import phucnph22239.poly.lovely_hotel.DTO.Phong;
 import phucnph22239.poly.lovely_hotel.R;
@@ -26,13 +22,8 @@ public class PhongAdapter extends RecyclerView.Adapter<PhongAdapter.phongViewHol
     private Context context;
     private List<Phong> list;
     private PhongDao phongDAO;
-<<<<<<< HEAD
     private LoaiPhong lp;
-    private loaiphongDAO loaiphongDAO;
-=======
-    private LoaiPhong loaiphong;
     private LoaiPhongDAO loaiphongDAO;
->>>>>>> f93e727fd84c26c3b1208091d9024c8a718a2136
 
     public PhongAdapter(Context context, List<Phong> list) {
         this.context = context;
@@ -50,29 +41,10 @@ public class PhongAdapter extends RecyclerView.Adapter<PhongAdapter.phongViewHol
     @Override
     public void onBindViewHolder(@NonNull phongViewHolder holder, int position) {
         Phong phong=list.get(position);
-<<<<<<< HEAD
-        loaiphongDAO loaiphongDAO = new loaiphongDAO(context);//đặt tên biến ngu v < Duyên said :))
         lp = loaiphongDAO.getID(String.valueOf(phong.getId()));
         holder.item_phong_ten.setText(""+phong.getName());
         holder.item_phong_loaiphong.setText(""+lp.getName());
         holder.item_phong_giaphong.setText(""+phong.getPrice());
-=======
-        holder.item_phong_ten.setText("Phòng: "+phong.getName());
-
-        loaiphongDAO =new LoaiPhongDAO(context);
-        loaiphong = loaiphongDAO.getID(String.valueOf(phong.getRoom_type_id()));
-        holder.item_phong_loaiphong.setText("Loại phòng: \n"+loaiphong.getName());
-
-        holder.item_phong_giaphong.setText("Giá phòng: \n"+phong.getPrice()+" VNĐ");
-
-        if (phong.getStatus()==1){
-            holder.item_phong_trangthai.setText("Đang thuê");
-            holder.item_phong_trangthai.setTextColor(Color.GREEN);
-        }else{
-            holder.item_phong_trangthai.setText("Phòng trống");
-            holder.item_phong_trangthai.setTextColor(Color.RED);
-        }
->>>>>>> f93e727fd84c26c3b1208091d9024c8a718a2136
     }
 
     @Override

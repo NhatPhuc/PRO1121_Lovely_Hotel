@@ -25,7 +25,6 @@ import java.util.List;
 import phucnph22239.poly.lovely_hotel.Adapter.LoaiDichVuAdapter;
 import phucnph22239.poly.lovely_hotel.DAO.LoaiDichVuDao;
 import phucnph22239.poly.lovely_hotel.DTO.LoaiDichVu;
-import phucnph22239.poly.lovely_hotel.DTO.loaiphong;
 import phucnph22239.poly.lovely_hotel.R;
 
 
