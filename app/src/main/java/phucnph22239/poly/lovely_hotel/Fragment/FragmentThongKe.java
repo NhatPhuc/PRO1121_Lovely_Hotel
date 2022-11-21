@@ -27,7 +27,7 @@ public class FragmentThongKe extends Fragment {
     Button btnDoanhThu;
     ImageView btnTuNgay,btnDenNgay;
     EditText edtTuNgay,edtDenNgay;
-    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+    SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
     int mYear,mMonth,mDay;
     TextView tv;
     int temp=0;

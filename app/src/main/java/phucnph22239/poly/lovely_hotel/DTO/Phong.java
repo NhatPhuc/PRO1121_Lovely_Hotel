@@ -5,15 +5,17 @@ public class Phong {
     private String name;
     private int room_type_id;
     private int price;
+    private int status;
 
     public Phong() {
     }
 
-    public Phong(int id, String name, int room_type_id, int price) {
+    public Phong(int id, String name, int room_type_id, int price, int status) {
         this.id = id;
         this.name = name;
         this.room_type_id = room_type_id;
         this.price = price;
+        this.status = status;
     }
 
     public int getId() {
@@ -46,6 +48,14 @@ public class Phong {
 
     public void setPrice(int price) {
         this.price = price;
+    }
+
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
     }
 }
 

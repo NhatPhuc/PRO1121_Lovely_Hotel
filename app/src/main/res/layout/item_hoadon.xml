@@ -1,76 +1,128 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
-    android:layout_margin="8dp">
-    <androidx.cardview.widget.CardView
+    android:layout_margin="8dp"
+    app:cardCornerRadius="10dp"
+    >
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:cardCornerRadius="10dp"
+        android:orientation="vertical"
+        android:padding="10dp"
         >
         <TextView
-            android:id="@+id/tv_manager"
+            android:id="@+id/tv_bill_room"
             android:layout_width="match_parent"
-            android:layout_height="30dp"
-            android:textStyle="bold"
+            android:layout_height="wrap_content"
             android:textSize="20dp"
-            android:textColor="@color/black"
+            android:layout_marginBottom="10dp"
+            android:text="id phòng"
+
             />
         <TextView
-            android:id="@+id/tv_guest"
+            android:id="@+id/tv_bill_guest"
             android:layout_width="match_parent"
-            android:layout_height="30dp"
-            android:textStyle="bold"
+            android:layout_height="wrap_content"
             android:textSize="20dp"
-            android:textColor="@color/black"
-            android:layout_marginTop="30dp"
+            android:layout_marginBottom="10dp"
+            android:text="id khách hàng"
+
             />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="4">
+            <TextView
+                android:id="@+id/tv_bill_start_date"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="20dp"
+                android:layout_marginBottom="10dp"
+                android:text="ngày bắt đầu"
+                android:layout_weight="2"
+                />
+
+            <TextView
+                android:id="@+id/tv_bill_end_date"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="20dp"
+                android:layout_marginBottom="10dp"
+                android:text="ngày kết thúc"
+                android:layout_weight="2"
+
+                />
+        </LinearLayout>
+
         <TextView
-            android:id="@+id/tv_start_date"
+            android:id="@+id/tv_bill_date"
             android:layout_width="match_parent"
-            android:layout_height="30dp"
-            android:textStyle="bold"
+            android:layout_height="wrap_content"
             android:textSize="20dp"
-            android:textColor="@color/black"
-            android:layout_marginTop="60dp"
+            android:layout_marginBottom="10dp"
+            android:text="ngày tạo hóa đơn"
+
             />
+
         <TextView
-            android:id="@+id/tv_and_date"
+            android:id="@+id/tv_bill_status"
             android:layout_width="match_parent"
-            android:layout_height="30dp"
-            android:textStyle="bold"
+            android:layout_height="wrap_content"
             android:textSize="20dp"
-            android:textColor="@color/black"
-            android:layout_marginTop="90dp"
+            android:layout_marginBottom="10dp"
+            android:text="trạng thái phòng"
+
             />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="4">
+            <TextView
+                android:id="@+id/tv_bill_service_total"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="20dp"
+                android:layout_marginBottom="10dp"
+                android:text="tiền đồ bị mất"
+                android:layout_weight="2"
+
+                />
+            <TextView
+                android:id="@+id/tv_bill_lost_total"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="20dp"
+                android:layout_marginBottom="10dp"
+                android:text="tiền dịch vụ"
+                android:layout_weight="2"
+
+                />
+        </LinearLayout>
+
         <TextView
-            android:id="@+id/tv_status"
+            android:id="@+id/tv_bill_note"
             android:layout_width="match_parent"
-            android:layout_height="30dp"
-            android:textStyle="bold"
+            android:layout_height="wrap_content"
             android:textSize="20dp"
-            android:textColor="@color/black"
-            android:layout_marginTop="120dp"
+            android:layout_marginBottom="10dp"
+            android:text="Ghi chú"
+
             />
+
         <TextView
-            android:id="@+id/tv_total"
+            android:id="@+id/tv_bill_total"
             android:layout_width="match_parent"
-            android:layout_height="30dp"
-            android:textStyle="bold"
+            android:layout_height="wrap_content"
             android:textSize="20dp"
-            android:textColor="@color/black"
-            android:layout_marginTop="150dp"
+            android:layout_marginBottom="10dp"
+            android:text="tổng tiền "
+
             />
-        <TextView
-            android:id="@+id/tv_room"
-            android:layout_width="match_parent"
-            android:layout_height="30dp"
-            android:textStyle="bold"
-            android:textSize="20dp"
-            android:textColor="@color/black"
-            android:layout_marginTop="180dp"
-            />
-    </androidx.cardview.widget.CardView>
-</LinearLayout>
+
+    </LinearLayout>
+</androidx.cardview.widget.CardView>

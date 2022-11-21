@@ -23,6 +23,7 @@ public class PhongDao {
         values.put("name",phong.getName());
         values.put("room_type_id",phong.getRoom_type_id());
         values.put("price",phong.getPrice());
+        values.put("status",phong.getStatus());
         return db.insert("Rooms",null,values);
     }
 
@@ -40,7 +41,8 @@ public class PhongDao {
                 int d= c.getInt(1);
                 String b = c.getString(2);
                 int g=c.getInt(3);
-                list.add(new Phong(a,b,d,g));
+                int p = c.getInt(4);
+                list.add(new Phong(a,b,d,g,p));
                 c.moveToNext();
             }
             c.close();

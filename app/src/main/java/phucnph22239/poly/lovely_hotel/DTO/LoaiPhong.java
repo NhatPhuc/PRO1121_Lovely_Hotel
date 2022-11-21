@@ -1,13 +1,13 @@
 package phucnph22239.poly.lovely_hotel.DTO;
 
-public class loaiphong {
+public class LoaiPhong {
     private int id;
     private String name;
 
-    public loaiphong() {
+    public LoaiPhong() {
     }
 
-    public loaiphong(int id, String name) {
+    public LoaiPhong(int id, String name) {
         this.id = id;
         this.name = name;
     }
