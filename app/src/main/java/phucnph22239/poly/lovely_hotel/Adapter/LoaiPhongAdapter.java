@@ -10,22 +10,21 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import phucnph22239.poly.lovely_hotel.DAO.loaiphongDAO;
-import phucnph22239.poly.lovely_hotel.DTO.loaiphong;
+import phucnph22239.poly.lovely_hotel.DAO.LoaiPhongDAO;
+import phucnph22239.poly.lovely_hotel.DTO.LoaiPhong;
 import phucnph22239.poly.lovely_hotel.R;
 
-public class loaiphongAdapter extends RecyclerView.Adapter<loaiphongAdapter.viewholder> {
+public class LoaiPhongAdapter extends RecyclerView.Adapter<LoaiPhongAdapter.viewholder> {
     private Context context;
-    private List<loaiphong> list;
-    private loaiphongDAO loaiphongDAO;
+    private List<LoaiPhong> list;
+    private LoaiPhongDAO loaiphongDAO;
 
-    public loaiphongAdapter(Context context, List<loaiphong> list) {
+    public LoaiPhongAdapter(Context context, List<LoaiPhong> list) {
         this.context = context;
         this.list = list;
-        loaiphongDAO=new loaiphongDAO(context);
+        loaiphongDAO=new LoaiPhongDAO(context);
     }
 
     @NonNull
@@ -38,7 +37,7 @@ public class loaiphongAdapter extends RecyclerView.Adapter<loaiphongAdapter.view
 
     @Override
     public void onBindViewHolder(@NonNull viewholder holder, int position) {
-        loaiphong loaiphong=list.get(position);
+        LoaiPhong loaiphong=list.get(position);
         holder.tv_namelp.setText(""+loaiphong.getName());
     }
 

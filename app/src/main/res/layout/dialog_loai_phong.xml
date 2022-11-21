@@ -4,18 +4,18 @@
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     app:cardCornerRadius="10dp"
+    android:layout_margin="10dp"
     >
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:layout_margin="8dp"
         >
         <TextView
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:background="#80deea"
-            android:text="thêm loại phòng"
+            android:background="@color/teal_700"
+            android:text="Loại phòng"
             android:textSize="30dp"
             android:textStyle="bold"
             android:textColor="@color/white"
@@ -32,7 +32,7 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-
+                android:layout_margin="10dp"
                 />
         </com.google.android.material.textfield.TextInputLayout>
         <LinearLayout
@@ -47,7 +47,7 @@
                 android:layout_height="50dp"
                 android:text="thêm"
                 android:textStyle="bold"
-                android:backgroundTint="#80deea"
+                android:backgroundTint="@color/teal_700"
                 android:textSize="20dp"
                 />
             <Button
