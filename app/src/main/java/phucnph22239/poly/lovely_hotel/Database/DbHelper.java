@@ -48,14 +48,19 @@ public class DbHelper extends SQLiteOpenHelper {
                 "start_date DATE NOT NULL," +
                 "end_date DATE NOT NULL," +
                 "status INTEGER NOT NULL," +
-                "total INTEGER NOT NULL)";
+                "note TEXT ," +
+                "bill_date DATE NOT NULL," +
+                "lost_total INTEGER NOT NULL," +
+                "service_total INTERGER NOT NULL," +
+                "bill_total INTEGER NOT NULL)";
         db.execSQL(createTableBills);
 
-        String createTableBill_Details = "create table Bill_Details (" +
+        String createTableBill_Details = "create table Service_bills (" +
                 "id INTEGER PRIMARY KEY AUTOINCREMENT," +
                 "bill_id TEXT REFERENCES Bills(id)," +
                 "service_id INTEGER REFERENCES Services(id)," +
-                "service_quantity INTEGER NOT NULL)";
+                "service_quantity INTEGER NOT NULL," +
+                "total INTEGER NOT NULL)";
         db.execSQL(createTableBill_Details);
 
         String createTableServices = "create table Services (" +

@@ -1,21 +1,16 @@
 package phucnph22239.poly.lovely_hotel.DTO;
 
-public class Phong {
+public class LoaiDichVu {
     private int id;
     private String name;
-    private int room_type_id;
     private int price;
-    private int status;
-
-    public Phong() {
+    public LoaiDichVu() {
     }
 
-    public Phong(int id, String name, int room_type_id, int price, int status) {
+    public LoaiDichVu(int id, String name,int price) {
         this.id = id;
         this.name = name;
-        this.room_type_id = room_type_id;
         this.price = price;
-        this.status = status;
     }
 
     public int getId() {
@@ -34,14 +29,6 @@ public class Phong {
         this.name = name;
     }
 
-    public int getRoom_type_id() {
-        return room_type_id;
-    }
-
-    public void setRoom_type_id(int room_type_id) {
-        this.room_type_id = room_type_id;
-    }
-
     public int getPrice() {
         return price;
     }
@@ -49,15 +36,4 @@ public class Phong {
     public void setPrice(int price) {
         this.price = price;
     }
-
-    public int getStatus() {
-        return status;
-    }
-
-    public void setStatus(int status) {
-        this.status = status;
-    }
 }
-
-
-
