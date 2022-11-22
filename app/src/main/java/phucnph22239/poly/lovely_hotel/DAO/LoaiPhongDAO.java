@@ -45,14 +45,10 @@ public class LoaiPhongDAO {
         return getDaTa(sql);
     }
 
-
-    //DÙng hàm để lấy cái tham chiếu ra các bố ,:)))
     public LoaiPhong getID(String id){
-        String sql="select * from Room_Types where id=?";
+        String sql = "SELECT * FROM Room_Types WHERE id=?";
         List<LoaiPhong> list = getDaTa(sql,id);
         return list.get(0);
     }
-
-
 
 }
