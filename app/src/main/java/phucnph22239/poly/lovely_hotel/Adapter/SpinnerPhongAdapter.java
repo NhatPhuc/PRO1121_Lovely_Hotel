@@ -11,16 +11,18 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import java.util.ArrayList;
+import java.util.List;
 
-import phucnph22239.poly.lovely_hotel.DTO.LoaiPhong;
+import phucnph22239.poly.lovely_hotel.DTO.KhachHang;
+import phucnph22239.poly.lovely_hotel.DTO.Phong;
 import phucnph22239.poly.lovely_hotel.R;
 
-public class SpinnerLoaiPhongAdapter extends ArrayAdapter<LoaiPhong> {
+public class SpinnerPhongAdapter extends ArrayAdapter<Phong> {
     private Context context;
-    private ArrayList<LoaiPhong> objects;
-    TextView tvspnloaiphong;
+    private ArrayList<Phong> objects;
+    TextView tvspnphong;
 
-    public SpinnerLoaiPhongAdapter( Context context, ArrayList<LoaiPhong> objects) {
+    public SpinnerPhongAdapter(Context context, ArrayList<Phong> objects) {
         super(context, 0, objects);
         this.context = context;
         this.objects = objects;
@@ -32,14 +34,14 @@ public class SpinnerLoaiPhongAdapter extends ArrayAdapter<LoaiPhong> {
         if (holder==null){
             LayoutInflater inflater =(LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
-            holder = inflater.inflate(R.layout.item_loai_phong_spinner,null);
+            holder = inflater.inflate(R.layout.item_phong_spinner,null);
 
         }
-        final LoaiPhong obj = objects.get(position);
+        final Phong obj = objects.get(position);
         if (obj != null){
 
-            tvspnloaiphong = holder.findViewById(R.id.item_spn_loai_phong);
-            tvspnloaiphong.setText(obj.getName());
+            tvspnphong = holder.findViewById(R.id.item_spn_phong);
+            tvspnphong.setText(obj.getName());
         }
         return holder;
     }
@@ -50,14 +52,14 @@ public class SpinnerLoaiPhongAdapter extends ArrayAdapter<LoaiPhong> {
         if (holder==null){
             LayoutInflater inflater =(LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
-            holder = inflater.inflate(R.layout.item_loai_phong_spinner,null);
+            holder = inflater.inflate(R.layout.item_phong_spinner,null);
 
         }
-        final LoaiPhong obj = objects.get(position);
+        final Phong obj = objects.get(position);
         if (obj != null){
 
-            tvspnloaiphong = holder.findViewById(R.id.item_spn_loai_phong);
-            tvspnloaiphong.setText(obj.getName());
+            tvspnphong = holder.findViewById(R.id.item_spn_phong);
+            tvspnphong.setText(obj.getName());
         }
         return holder;
     }
