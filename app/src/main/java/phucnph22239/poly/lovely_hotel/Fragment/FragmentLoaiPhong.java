@@ -28,6 +28,7 @@ import phucnph22239.poly.lovely_hotel.Adapter.LoaiPhongAdapter;
 import phucnph22239.poly.lovely_hotel.DAO.LoaiPhongDAO;
 import phucnph22239.poly.lovely_hotel.DTO.LoaiPhong;
 import phucnph22239.poly.lovely_hotel.R;
+import phucnph22239.poly.lovely_hotel.click_interface.LoaiphongClick;
 
 
 public class FragmentLoaiPhong extends Fragment {
@@ -52,6 +53,46 @@ public class FragmentLoaiPhong extends Fragment {
             @Override
             public void onClick(View v) {
                 opendialog();
+            }
+        });
+        adapter.setLoaiphongClick(new LoaiphongClick() {
+            @Override
+            public void onClick(LoaiPhong loaiPhong) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+                View view1 = LayoutInflater.from(getContext()).inflate(R.layout.dialog_loai_phong, null);
+                builder.setView(view1);
+                Dialog dialog = builder.create();
+                dialog.show();
+                ed_loaiphong=view1.findViewById(R.id.ed_loaiphong);
+                btn_themlp=view1.findViewById(R.id.btn_themlp);
+                btn_themlp.setText("sửa");
+                btn_huylp=view1.findViewById(R.id.btn_huylp);
+                ed_loaiphong.getEditText().setText(loaiPhong.getName());
+                btn_themlp.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if (ed_loaiphong.getEditText().getText().length() == 0) {
+                            Toast.makeText(getContext(), "Không được để trống", Toast.LENGTH_SHORT).show();
+                        } else {
+                            loaiPhong.setName(ed_loaiphong.getEditText().getText().toString());
+                            if (loaiphongDAO.upate(loaiPhong) > 0) {
+                                Toast.makeText(getContext(), "Sửa loại sách thành công", Toast.LENGTH_SHORT).show();
+                                ed_loaiphong.getEditText().setText("");
+                                list.clear();
+                                list.addAll(loaiphongDAO.getAll());
+                                adapter.notifyDataSetChanged();
+                            } else {
+                                Toast.makeText(getContext(), "Sửa loại sách thất bại", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    }
+                });
+                btn_huylp.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        dialog.dismiss();
+                    }
+                });
             }
         });
         rcv_loai_phong.setLayoutManager(new LinearLayoutManager(getContext()));
