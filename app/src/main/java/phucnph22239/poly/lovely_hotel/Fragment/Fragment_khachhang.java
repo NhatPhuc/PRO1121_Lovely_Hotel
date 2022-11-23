@@ -12,7 +12,6 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.provider.ContactsContract;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -39,7 +38,7 @@ import phucnph22239.poly.lovely_hotel.DAO.KhachHangDAO;
 import phucnph22239.poly.lovely_hotel.DTO.KhachHang;
 import phucnph22239.poly.lovely_hotel.R;
 
-public class Fragment_khachhang extends Fragment {
+public class Fragment_khachhang extends Fragment  {
 
     public Fragment_khachhang() {
         // Required empty public constructor
@@ -143,6 +142,7 @@ public class Fragment_khachhang extends Fragment {
                 dialog.show();
             }
         });
+
     }
     public boolean isValidFormat(String format, String value) {
         Date date = null;
@@ -157,4 +157,7 @@ public class Fragment_khachhang extends Fragment {
         }
         return date != null;
     }
+
+
+
 }
