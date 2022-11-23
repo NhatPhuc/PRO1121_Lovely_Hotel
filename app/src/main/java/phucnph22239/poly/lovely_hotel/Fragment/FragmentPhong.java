@@ -13,10 +13,12 @@ import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.GridView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -60,7 +62,7 @@ public class FragmentPhong extends Fragment {
         phongDAO=new PhongDao(getContext());
         recyclerView=view.findViewById(R.id.rcv_phong);
         list=phongDAO.getAll();
-        adapter=new PhongAdapter(getContext(),list);
+
         button=view.findViewById(R.id.fab_add_phong);
 
         listLoaiPhong = new ArrayList<>();
@@ -73,7 +75,9 @@ public class FragmentPhong extends Fragment {
                 opendialog();
             }
         });
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        GridLayoutManager gridLayoutManager=new GridLayoutManager(getContext(),2);
+        recyclerView.setLayoutManager(gridLayoutManager);
+        adapter=new PhongAdapter(getContext(),list);
         recyclerView.setAdapter(adapter);
         return view;
     }
