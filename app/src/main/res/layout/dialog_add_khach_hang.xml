@@ -19,6 +19,7 @@
             android:textColor="@color/white"
             android:text="Khách hàng"
             android:layout_width="match_parent"
+            android:id="@+id/txtTitel"
             android:layout_height="wrap_content" />
         <LinearLayout
             android:padding="16dp"

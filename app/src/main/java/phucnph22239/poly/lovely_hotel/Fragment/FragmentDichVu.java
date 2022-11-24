@@ -33,29 +33,18 @@ public class FragmentDichVu extends Fragment {
     private RecyclerView recyclerView;
     private List<LoaiDichVu> list = new ArrayList<>();
     private LoaiDichVuAdapter adapter;
-    public FragmentDichVu() {
-        // Required empty public constructor
-    }
 
 
-    public static FragmentDichVu newInstance(String param1, String param2) {
-        FragmentDichVu fragment = new FragmentDichVu();
 
-        return fragment;
-    }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-    }
-
-    @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-        this.button = view.findViewById(R.id.btn_add_dich_vu);
-        this.recyclerView = view.findViewById(R.id.rcv_dich_vu);
-        this.adapter = new LoaiDichVuAdapter(getContext());
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        // Inflate the layout for this fragment
+        View view = inflater.inflate(R.layout.fragment_dich_vu, container, false);
+       button = view.findViewById(R.id.btn_add_dich_vu);
+       recyclerView = view.findViewById(R.id.rcv_loai_dich_vu);
+       adapter = new LoaiDichVuAdapter(getActivity());
 
         LoaiDichVuDao dichVuDao = new LoaiDichVuDao(getContext());
         list = dichVuDao.getAll();
@@ -70,15 +59,7 @@ public class FragmentDichVu extends Fragment {
                 opendialog();
             }
         });
-    }
-
-
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_dich_vu, container, false);
+        return view;
     }
 
     private void opendialog(){
@@ -109,7 +90,7 @@ public class FragmentDichVu extends Fragment {
                         list.addAll(loaiDichVuDao.getAll());
                         adapter.notifyDataSetChanged();
                     } else {
-                        Toast.makeText(getContext(), "Thêm loại sách thất bại", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getContext(), "Thêm loại dịch vụ thất bại", Toast.LENGTH_SHORT).show();
                     }
                 }
             }
