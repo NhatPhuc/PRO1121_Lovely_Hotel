@@ -26,6 +26,15 @@ public class PhongDao {
         values.put("status",phong.getStatus());
         return db.insert("Rooms",null,values);
     }
+    public long update(Phong phong) {
+        ContentValues values = new ContentValues();
+        values.put("name", phong.getName());
+        values.put("room_type_id", phong.getRoom_type_id());
+        values.put("price", phong.getPrice());
+        values.put("status", phong.getStatus());
+        return db.update("Rooms", values,"id= ?",new String[]{phong.getId()+""});
+    }
+
 
 
 
@@ -58,7 +67,17 @@ public class PhongDao {
         List<Phong> list=getDaTa(sql,id);
         return list.get(0);
     }
-
+    public int delete(int id){
+        Cursor cursor = db.rawQuery("SELECT * FROM Bills WHERE room_id=?",new String[]{String.valueOf(id)});
+        if (cursor.getCount()!=0){
+            return -1 ;
+        }
+        long  check = db.delete("Rooms","id=?",new String[]{String.valueOf(id)});
+        if(check==-1){
+            return  0 ;
+        }
+        return 1 ;
+    }
 
 
 
