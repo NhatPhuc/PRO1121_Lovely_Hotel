@@ -24,11 +24,15 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
+import org.w3c.dom.Text;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -98,10 +102,16 @@ public class FragmentHoaDon extends Fragment {
     List<Phong> listPhong;
     PhongDao phongDao;
     SpinnerPhongAdapter spinnerPhongAdapter;
+    Phong phong;
 
     int mYear,mMonth,mDay;
     Calendar c = Calendar.getInstance();
 
+    TextView tv_tienPhong,tv_tienDV,tv_tongTien;
+
+    int tienPhong,tienDV,tienDenBu,tongTien;
+
+    ImageButton btn_refresh;
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
@@ -111,11 +121,9 @@ public class FragmentHoaDon extends Fragment {
 
         listKhachHang = new ArrayList<>();
         khachHangDAO = new KhachHangDAO(getActivity());
-        listKhachHang = khachHangDAO.getAll();
 
         listPhong  = new ArrayList<>();
         phongDao = new PhongDao(getActivity());
-        listPhong = phongDao.getAll();
 
         loadTable();
 
@@ -180,11 +188,17 @@ public class FragmentHoaDon extends Fragment {
         chkTrangThai = dialog.findViewById(R.id.chk_bill_status);
         edGhiChu = dialog.findViewById(R.id.tv_bill_note);
 
+        tv_tienPhong = dialog.findViewById(R.id.tv_bill_room_total);
+        tv_tienDV = dialog.findViewById(R.id.tv_bill_service_total);
+        tv_tongTien = dialog.findViewById(R.id.tv_bill_total);
+        btn_refresh = dialog.findViewById(R.id.btn_refresh);
+
         spinnerKhachHangAdapter = new SpinnerKhachHangAdapter(getContext(),khachHangDAO.getAll());
         spnKhachHang.setAdapter(spinnerKhachHangAdapter);
         spnKhachHang.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                listKhachHang = khachHangDAO.getAll();
                 maKhacHang = String.valueOf(listKhachHang.get(position).getId());
             }
 
@@ -199,7 +213,17 @@ public class FragmentHoaDon extends Fragment {
         spnPhong.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                listPhong = phongDao.getAll();
                 maPhong = String.valueOf(listPhong.get(position).getId());
+                phong = phongDao.getAll().get(position);
+                tienPhong = phong.getPrice();
+                tv_tienPhong.setText(tienPhong+" VNĐ");
+
+                tienDV = 0;
+                tv_tienDV.setText("Tiền dịch vụ: "+tienDV+" VNĐ");
+
+                tongTien = tienPhong+tienDV;
+                tv_tongTien.setText("Tổng tiền hóa đơn: "+tongTien+" VNĐ");
             }
 
             @Override
@@ -237,9 +261,24 @@ public class FragmentHoaDon extends Fragment {
         String datetime = sdf.format(c.getTime());
 
         listHoaDon = hoaDonDAO.getAll();
-        if (listHoaDon.size()==0){
 
-        }
+
+
+
+//        tienDenBu = Integer.parseInt(String.valueOf(edTienMat.getText()));
+        btn_refresh.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                try {
+                    tienDenBu = Integer.parseInt(String.valueOf(edTienMat.getText()));
+                }catch (Exception e){
+                    Toast.makeText(context,"Nhập tiền đền bù (Nếu có)",Toast.LENGTH_LONG).show();
+                }
+                tongTien = tienPhong+tienDV+tienDenBu;
+                tv_tongTien.setText("Tổng tiền hóa đơn: "+tongTien+" VNĐ");
+            }
+        });
+
 
         btnAdd.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -253,7 +292,8 @@ public class FragmentHoaDon extends Fragment {
                     hoaDon.setRoom_id(Integer.parseInt(maPhong));
                     hoaDon.setStart_date(edTuNgayHD.getText().toString());
                     hoaDon.setEnd_date(edDenNgayHD.getText().toString());
-                    hoaDon.setService_total(0);
+                    hoaDon.setService_total(tienDV);
+                    hoaDon.setRoom_total(tienPhong);
                     hoaDon.setLost_total(Integer.parseInt(String.valueOf(edTienMat.getText())));
                     if (chkTrangThai.isChecked()){
                         hoaDon.setStatus(1);
@@ -262,7 +302,7 @@ public class FragmentHoaDon extends Fragment {
                     }
                     hoaDon.setNote(String.valueOf(edGhiChu));
                     hoaDon.setBill_date(datetime);
-                    hoaDon.setBill_total(0);
+                    hoaDon.setBill_total(tongTien);
 
                     if (hoaDonDAO.insert(hoaDon)>0){
                         Toast.makeText(getActivity(), "Thêm thành công", Toast.LENGTH_LONG).show();

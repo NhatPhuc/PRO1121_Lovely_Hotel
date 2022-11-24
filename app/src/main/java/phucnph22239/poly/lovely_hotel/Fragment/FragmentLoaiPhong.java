@@ -75,7 +75,7 @@ public class FragmentLoaiPhong extends Fragment {
                             Toast.makeText(getContext(), "Không được để trống", Toast.LENGTH_SHORT).show();
                         } else {
                             loaiPhong.setName(ed_loaiphong.getEditText().getText().toString());
-                            if (loaiphongDAO.upate(loaiPhong) > 0) {
+                            if (loaiphongDAO.update(loaiPhong) > 0) {
                                 Toast.makeText(getContext(), "Sửa loại sách thành công", Toast.LENGTH_SHORT).show();
                                 ed_loaiphong.getEditText().setText("");
                                 list.clear();
@@ -125,7 +125,6 @@ public class FragmentLoaiPhong extends Fragment {
                     loaiphong.setName(ed_loaiphong.getEditText().getText().toString());
                     if (loaiphongDAO.insert(loaiphong) > 0) {
                         Toast.makeText(getContext(), "Thêm loại phòng thành công", Toast.LENGTH_SHORT).show();
-                        ed_loaiphong.getEditText().setText("");
                         list.clear();
                         list.addAll(loaiphongDAO.getAll());
                         adapter.notifyDataSetChanged();

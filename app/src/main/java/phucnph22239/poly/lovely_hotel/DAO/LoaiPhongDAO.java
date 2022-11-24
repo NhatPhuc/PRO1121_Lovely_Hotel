@@ -25,7 +25,7 @@ public class LoaiPhongDAO {
         values.put("name",loaiphong.getName());
         return db.insert("Room_Types",null,values);
     }
-    public int upate(LoaiPhong loaiPhong){
+    public int update(LoaiPhong loaiPhong){
         ContentValues values=new ContentValues();
         values.put("name",loaiPhong.getName());
         return db.update("Room_Types",values,"id=?",new String[]{loaiPhong.getId()+""});

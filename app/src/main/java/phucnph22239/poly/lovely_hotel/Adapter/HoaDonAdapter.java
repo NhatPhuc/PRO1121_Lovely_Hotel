@@ -46,10 +46,12 @@ public class HoaDonAdapter extends RecyclerView.Adapter<HoaDonAdapter.HoaDonView
         PhongDao phongDao = new PhongDao(context);
         Phong phong = phongDao.getID(String.valueOf(hoaDon.getRoom_id()));
         holder.tv_tenPhong.setText("Phòng: "+phong.getName());
+        holder.tv_tienPhong.setText("Tiền phòng: "+phong.getPrice()+" VNĐ");
 
         holder.tv_ngayBD.setText("Từ: "+ hoaDon.getStart_date());
         holder.tv_ngayKT.setText("Đến: "+hoaDon.getEnd_date());
         holder.tv_ngayHD.setText("Ngày tạo hóa đơn: "+hoaDon.getBill_date());
+
 
         if (hoaDon.getStatus()==1){
             holder.tv_trangThai.setText("Đã trả phòng");
@@ -57,10 +59,10 @@ public class HoaDonAdapter extends RecyclerView.Adapter<HoaDonAdapter.HoaDonView
             holder.tv_trangThai.setText("Chưa Trả Phòng");
         }
 
-        holder.tv_tienMat.setText("Tiền đền bù: \n"+hoaDon.getLost_total()+"VNĐ");
-        holder.tv_tienDV.setText("Tiền dịch vụ: \n"+hoaDon.getService_total()+"VNĐ");
+        holder.tv_tienMat.setText("Tiền đền bù: \n"+hoaDon.getLost_total()+" VNĐ");
+        holder.tv_tienDV.setText("Tiền dịch vụ: \n"+hoaDon.getService_total()+" VNĐ");
         holder.tv_ghiChu.setText("Ghi chú: "+hoaDon.getNote());
-        holder.tv_tongTien.setText("Tổng tiền hóa đơn: "+hoaDon.getBill_total()+"VNĐ");
+        holder.tv_tongTien.setText("Tổng tiền hóa đơn: "+hoaDon.getBill_total()+" VNĐ");
 
     }
 
@@ -71,7 +73,7 @@ public class HoaDonAdapter extends RecyclerView.Adapter<HoaDonAdapter.HoaDonView
 
     public class HoaDonViewHolder extends RecyclerView.ViewHolder{
         TextView tv_tenPhong,tv_tenKhach,tv_ngayBD,tv_ngayKT,tv_ngayHD,
-                tv_trangThai,tv_tienMat,tv_tienDV,tv_ghiChu,tv_tongTien;
+                tv_trangThai,tv_tienMat,tv_tienDV,tv_tienPhong,tv_ghiChu,tv_tongTien;
         public HoaDonViewHolder(@NonNull View itemView) {
             super(itemView);
             tv_tenPhong = itemView.findViewById(R.id.tv_bill_room);
@@ -80,6 +82,7 @@ public class HoaDonAdapter extends RecyclerView.Adapter<HoaDonAdapter.HoaDonView
             tv_ngayKT = itemView.findViewById(R.id.tv_bill_end_date);
             tv_ngayHD = itemView.findViewById(R.id.tv_bill_date);
             tv_trangThai = itemView.findViewById(R.id.tv_bill_status);
+            tv_tienPhong = itemView.findViewById(R.id.tv_room_total);
             tv_tienMat = itemView.findViewById(R.id.tv_bill_lost_total);
             tv_tienDV = itemView.findViewById(R.id.tv_bill_service_total);
             tv_ghiChu = itemView.findViewById(R.id.tv_bill_note);

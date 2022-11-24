@@ -28,7 +28,7 @@
             <ImageView
                 android:layout_width="50dp"
                 android:layout_height="50dp"
-                android:src="@drawable/img_3"
+                android:src="@drawable/ic_delete"
                 android:id="@+id/btn_delete"
                 />
         </LinearLayout>

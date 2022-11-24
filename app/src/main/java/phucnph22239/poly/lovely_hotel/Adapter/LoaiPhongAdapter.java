@@ -1,5 +1,6 @@
 package phucnph22239.poly.lovely_hotel.Adapter;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -44,7 +45,7 @@ public class LoaiPhongAdapter extends RecyclerView.Adapter<LoaiPhongAdapter.view
     }
 
     @Override
-    public void onBindViewHolder(@NonNull viewholder holder, int position) {
+    public void onBindViewHolder(@NonNull viewholder holder, @SuppressLint("RecyclerView") int position) {
         LoaiPhong loaiphong=list.get(position);
         holder.tv_namelp.setText(""+loaiphong.getName());
         holder.itemView.setOnClickListener(new View.OnClickListener() {
