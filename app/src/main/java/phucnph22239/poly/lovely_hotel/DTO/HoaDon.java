@@ -11,12 +11,12 @@ public class HoaDon {
     private int status;
     private String note;
     private String bill_date;
-    private int lost_total,service_total,bill_total;
+    private int lost_total,service_total,room_total,bill_total;
 
     public HoaDon() {
     }
 
-    public HoaDon(int id, String manager_id, int guest_id, int room_id, String start_date, String end_date, int status, String note, String bill_date, int lost_total, int service_total, int bill_total) {
+    public HoaDon(int id, String manager_id, int guest_id, int room_id, String start_date, String end_date, int status, String note, String bill_date, int lost_total, int service_total, int room_total, int bill_total) {
         this.id = id;
         this.manager_id = manager_id;
         this.guest_id = guest_id;
@@ -28,6 +28,7 @@ public class HoaDon {
         this.bill_date = bill_date;
         this.lost_total = lost_total;
         this.service_total = service_total;
+        this.room_total = room_total;
         this.bill_total = bill_total;
     }
 
@@ -125,5 +126,13 @@ public class HoaDon {
 
     public void setBill_total(int bill_total) {
         this.bill_total = bill_total;
+    }
+
+    public int getRoom_total() {
+        return room_total;
+    }
+
+    public void setRoom_total(int room_total) {
+        this.room_total = room_total;
     }
 }

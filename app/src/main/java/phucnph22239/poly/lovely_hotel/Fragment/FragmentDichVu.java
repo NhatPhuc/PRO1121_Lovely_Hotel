@@ -89,6 +89,7 @@ public class FragmentDichVu extends Fragment {
                         list.clear();
                         list.addAll(loaiDichVuDao.getAll());
                         adapter.notifyDataSetChanged();
+                        dialog.dismiss();
                     } else {
                         Toast.makeText(getContext(), "Thêm loại dịch vụ thất bại", Toast.LENGTH_SHORT).show();
                     }

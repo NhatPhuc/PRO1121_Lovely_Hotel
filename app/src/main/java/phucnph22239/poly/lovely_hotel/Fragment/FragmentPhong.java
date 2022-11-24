@@ -5,6 +5,7 @@ import android.app.Dialog;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -39,6 +40,7 @@ import phucnph22239.poly.lovely_hotel.R;
 
 
 public class FragmentPhong extends Fragment {
+    static final String TAG ="zzzzz";
     private RecyclerView recyclerView;
     private PhongDao phongDAO;
     private LoaiPhongDAO loaiphongDAO;
@@ -52,7 +54,6 @@ public class FragmentPhong extends Fragment {
     int loaiPhong;
     List<LoaiPhong> listLoaiPhong;
     SpinnerLoaiPhongAdapter spinnerLoaiPhongAdapter;
-
     Phong phong ;
 
     @Override
@@ -67,7 +68,6 @@ public class FragmentPhong extends Fragment {
 
         listLoaiPhong = new ArrayList<>();
         loaiphongDAO = new LoaiPhongDAO(getActivity());
-        listLoaiPhong = loaiphongDAO.getAll();
 
         button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -104,7 +104,10 @@ public class FragmentPhong extends Fragment {
         dialog_spn_loaiphong.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                listLoaiPhong = loaiphongDAO.getAll();
                 loaiPhong = listLoaiPhong.get(position).getId();
+
+
             }
 
             @Override
