@@ -8,10 +8,12 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.provider.ContactsContract;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -32,21 +34,17 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.List;
 
 import phucnph22239.poly.lovely_hotel.Adapter.KhachHangAdapter;
 import phucnph22239.poly.lovely_hotel.DAO.KhachHangDAO;
 import phucnph22239.poly.lovely_hotel.DTO.KhachHang;
 import phucnph22239.poly.lovely_hotel.R;
 
-public class Fragment_khachhang extends Fragment  {
-
-    public Fragment_khachhang() {
-        // Required empty public constructor
-    }
+public class Fragment_khachhang extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_khachhang, container, false);
     }
     RecyclerView rcv_kh ;
@@ -56,6 +54,7 @@ public class Fragment_khachhang extends Fragment  {
     ArrayList<KhachHang> list ;
     FloatingActionButton btnADD;
     SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+    private SearchView searchView;
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -64,6 +63,20 @@ public class Fragment_khachhang extends Fragment  {
         rcv_kh.setLayoutManager(linearLayoutManager);
         dao = new KhachHangDAO(getContext());
         list = dao.getAll();
+        searchView=view.findViewById(R.id.sv_tim_kh);
+        searchView.clearFocus();
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                FinterList(newText);
+                return true;
+            }
+        });
         adapter = new KhachHangAdapter(getContext(),list);
         rcv_kh.setAdapter(adapter);
         btnADD = view.findViewById(R.id.btn_add_khach_hang);
@@ -142,7 +155,6 @@ public class Fragment_khachhang extends Fragment  {
                 dialog.show();
             }
         });
-
     }
     public boolean isValidFormat(String format, String value) {
         Date date = null;
@@ -157,7 +169,21 @@ public class Fragment_khachhang extends Fragment  {
         }
         return date != null;
     }
+    private void FinterList(String text) {
+        ArrayList<KhachHang> filteredList=new ArrayList<>();
+//        list=dao.getAll();
 
+        for (KhachHang khachHang: list){
+            if (khachHang.getName().toLowerCase().contains(text.toLowerCase())){
+                filteredList.add(khachHang);
+            }
 
+        }
+        if (filteredList.isEmpty()){
+            Toast.makeText(this.getContext(), "no data", Toast.LENGTH_SHORT).show();
+        }else {
+            adapter.setFilteredList(filteredList);
+        }
 
+    }
 }
