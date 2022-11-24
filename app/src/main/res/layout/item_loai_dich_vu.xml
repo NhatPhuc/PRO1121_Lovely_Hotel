@@ -53,7 +53,7 @@
                 android:layout_marginEnd="10dp"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
-                android:src="@drawable/ic_baseline_delete_24"
+                android:src="@drawable/ic_delete"
                 android:id="@+id/item_dich_vu_rcy_btn_delete"
                 />
         </LinearLayout>
