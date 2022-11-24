@@ -6,6 +6,8 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
+import com.google.android.material.shape.CutCornerTreatment;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,6 +28,25 @@ public class KhachHangDAO {
         contentValues.put("birthday",String.valueOf(khachHang.getBirthday()));
         long res = db.insert("Guests",null,contentValues);
         return res ;
+    }
+    public long update(KhachHang khachHang){
+        ContentValues contentValues = new ContentValues();
+        contentValues.put("name",khachHang.getName());
+        contentValues.put("phone_number",khachHang.getPhone());
+        contentValues.put("birthday",String.valueOf(khachHang.getBirthday()));
+        long res = db.update("Guests",contentValues,"id=?",new String[]{khachHang.getId()+""});
+        return res ;
+    }
+    public int delete(int id){
+        Cursor cursor = db.rawQuery("SELECT * FROM Bills WHERE guest_id = ?",new String[]{String.valueOf(id)});
+        if (cursor.getCount()!=0){
+            return -1 ;
+        }
+        long  check = db.delete("Guests","id=?",new String[]{String.valueOf(id)});
+        if(check==-1){
+            return  0 ;
+        }
+        return 1 ;
     }
     public ArrayList<KhachHang> getAll(){
 //        ArrayList<KhachHang> list = new ArrayList<>();
