@@ -44,12 +44,6 @@
            </LinearLayout>
        </LinearLayout>
         <ImageView
-            android:id="@+id/imgUp"
-            android:layout_gravity="center_vertical"
-            android:src="@drawable/ic_update"
-            android:layout_width="30dp"
-            android:layout_height="30dp"/>
-        <ImageView
             android:id="@+id/imgdel"
             android:layout_gravity="center_vertical"
             android:src="@drawable/ic_delete"
