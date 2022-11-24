@@ -56,12 +56,12 @@ public class KhachHangAdapter extends RecyclerView.Adapter<KhachHangAdapter.Khac
     public void onBindViewHolder(@NonNull KhachHangViewHolder holder, int position) {
         KhachHang khachHang = list.get(position);
         holder.txtName.setText("Khách hàng : "+list.get(position).getName());
-        holder.txtPhone.setText("SĐT : "+list.get(position).getPhone());
+        holder.txtPhone.setText("SĐT :"+list.get(position).getPhone());
         holder.txtBirtday.setText("Ngày sinh : "+list.get(position).getBirthday());
         Calendar calendar =Calendar.getInstance();
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
         KhachHangDAO dao = new KhachHangDAO(context);
-        holder.imgUp.setOnClickListener(new View.OnClickListener() {
+        holder.txtName.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Dialog dialog = new Dialog(context);
@@ -193,7 +193,7 @@ public class KhachHangAdapter extends RecyclerView.Adapter<KhachHangAdapter.Khac
             txtName = itemView.findViewById(R.id.txtName);
             txtPhone = itemView.findViewById(R.id.txtPhone);
             txtBirtday = itemView.findViewById(R.id.txtBirthday);
-            imgUp = itemView.findViewById(R.id.imgUp);
+
             imgDel = itemView.findViewById(R.id.imgdel);
         }
     }
