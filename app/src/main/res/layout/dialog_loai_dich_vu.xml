@@ -12,6 +12,7 @@
         android:layout_margin="8dp"
         >
         <TextView
+            android:id="@+id/dialog_loai_dich_vu_title"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:background="#80deea"
@@ -29,11 +30,11 @@
             android:id="@+id/ed_loaidichvu"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             >
-            <com.google.android.material.textfield.TextInputEditText
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
 
-                />
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/dialog_loai_dich_vu_edt_ten"
+                android:layout_width="match_parent"
+                android:layout_height="50dp" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -44,11 +45,13 @@
             android:id="@+id/ed_loaidichvuPrice"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             >
+
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/dialog_loai_dich_vu_edt_gia"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
 
-                />
+                android:inputType="number" />
         </com.google.android.material.textfield.TextInputLayout>
         <LinearLayout
             android:layout_width="match_parent"

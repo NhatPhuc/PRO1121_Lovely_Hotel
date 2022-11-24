@@ -25,6 +25,15 @@ public class LoaiDichVuDao {
         values.put("price",loaiDichVu.getPrice());
         return db.insert("Services",null,values);
     }
+    public long Update(LoaiDichVu loaiDichVu){
+        ContentValues values=new ContentValues();
+        values.put("name",loaiDichVu.getName());
+        values.put("price",loaiDichVu.getPrice());
+        return db.update("Services",values,"id=?",new String[]{String.valueOf(loaiDichVu.getId())});
+    }
+    public long Delete(String id){
+        return db.delete("Services","id=?",new String[]{id});
+    }
     public List<LoaiDichVu> getDaTa(String sql, String...selectionArgs){
         List<LoaiDichVu> list=new ArrayList<>();
         Cursor c=db.rawQuery(sql,selectionArgs);
@@ -46,7 +55,6 @@ public class LoaiDichVuDao {
         return getDaTa(sql);
     }
 
-    //DÙng hàm để lấy cái tham chiếu ra các bố ,:)))
     public LoaiDichVu getID(String id){
         String sql="select * from Services where id=?";
         List<LoaiDichVu> list = getDaTa(sql,id);
