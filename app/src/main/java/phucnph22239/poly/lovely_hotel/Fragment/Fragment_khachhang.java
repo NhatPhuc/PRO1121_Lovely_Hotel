@@ -114,6 +114,8 @@ public class Fragment_khachhang extends Fragment  {
                             Toast.makeText(getContext(),"Không được để trống",Toast.LENGTH_SHORT).show();
                         }else if(!(isValidFormat("dd/MM/yyyy",ed_birthday.getText().toString()))){
                             Toast.makeText(getContext(),"Không đúng định dạng ngày",Toast.LENGTH_SHORT).show();
+                        }else  if(!(checkPhone(ed_phone.getText().toString()))){
+                            Toast.makeText(getContext(),"Không đúng định dạng điện thoại",Toast.LENGTH_SHORT).show();
                         }
                         else {
                             KhachHang khachHang = new KhachHang();
@@ -158,6 +160,18 @@ public class Fragment_khachhang extends Fragment  {
         return date != null;
     }
 
+    public boolean checkPhone(String str){
+        // Bieu thuc chinh quy mo ta dinh dang so dien thoai
+        String reg = "^(0|\\+84)(\\s|\\.)?((3[2-9])|(5[689])|(7[06-9])|(8[1-689])|(9[0-46-9]))(\\d)(\\s|\\.)?(\\d{3})(\\s|\\.)?(\\d{3})$";
 
+        // Kiem tra dinh dang
+        boolean kt = str.matches(reg);
+
+        if (kt == false) {
+            return  false ;
+        } else {
+            return  true ;
+        }
+    }
 
 }
