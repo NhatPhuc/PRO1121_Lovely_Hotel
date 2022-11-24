@@ -187,7 +187,7 @@ public class Fragment_khachhang extends Fragment {
         }else {
             adapter.setFilteredList(filteredList);
         }
-
+    }
     public boolean checkPhone(String str){
         // Bieu thuc chinh quy mo ta dinh dang so dien thoai
         String reg = "^(0|\\+84)(\\s|\\.)?((3[2-9])|(5[689])|(7[06-9])|(8[1-689])|(9[0-46-9]))(\\d)(\\s|\\.)?(\\d{3})(\\s|\\.)?(\\d{3})$";
@@ -200,8 +200,5 @@ public class Fragment_khachhang extends Fragment {
         } else {
             return  true ;
         }
-    }
-
-
     }
 }
