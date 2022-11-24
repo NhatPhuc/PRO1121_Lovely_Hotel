@@ -30,6 +30,7 @@ public class HoaDonDAO {
         values.put("end_date",String.valueOf(hoaDon.getEnd_date()));
         values.put("status",hoaDon.getStatus());
         values.put("note",hoaDon.getNote());
+        values.put("room_total",hoaDon.getRoom_total());
         values.put("bill_date",String.valueOf(hoaDon.getBill_date()));
         values.put("lost_total",hoaDon.getLost_total());
         values.put("service_total",hoaDon.getService_total());
@@ -47,6 +48,7 @@ public class HoaDonDAO {
         values.put("status",hoaDon.getStatus());
         values.put("note",hoaDon.getNote());
         values.put("bill_date",String.valueOf(hoaDon.getBill_date()));
+        values.put("room_total",hoaDon.getRoom_total());
         values.put("lost_total",hoaDon.getLost_total());
         values.put("service_total",hoaDon.getService_total());
         values.put("bill_total",hoaDon.getBill_total());
@@ -57,6 +59,12 @@ public class HoaDonDAO {
         String sql = "SELECT * FROM Bills";
         return getData(sql);
     }
+    public List<HoaDon> getId(){
+        String sql = "SELECT * FROM Bills WHERE id=?";
+        return getData(sql);
+    }
+
+
 
     @SuppressLint("Range")
     private List<HoaDon> getData(String sql, String...selectionArgs) {
@@ -74,6 +82,7 @@ public class HoaDonDAO {
             hoaDon.setStatus(Integer.parseInt(c.getString(c.getColumnIndex("status"))));
             hoaDon.setNote(c.getString(c.getColumnIndex("note")));
             hoaDon.setBill_date(c.getString(c.getColumnIndex("bill_date")));
+            hoaDon.setRoom_total(Integer.parseInt(c.getString(c.getColumnIndex("room_total"))));
             hoaDon.setLost_total(Integer.parseInt(c.getString(c.getColumnIndex("lost_total"))));
             hoaDon.setService_total(Integer.parseInt(c.getString(c.getColumnIndex("service_total"))));
             hoaDon.setBill_total(Integer.parseInt(c.getString(c.getColumnIndex("bill_total"))));

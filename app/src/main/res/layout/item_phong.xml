@@ -35,14 +35,7 @@
             android:text="Giá phòng"
             android:textSize="18dp"/>
 
-        <TextView
-            android:id="@+id/item_phong_trangthai"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textAlignment="center"
-            android:text="Trạng thái phòng"
-            android:textSize="20dp"
-            android:textStyle="bold"/>
+
         <ImageView
             android:id="@+id/id_delete"
             android:layout_width="wrap_content"
