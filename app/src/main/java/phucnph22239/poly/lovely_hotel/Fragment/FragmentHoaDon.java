@@ -10,10 +10,12 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -103,6 +105,7 @@ public class FragmentHoaDon extends Fragment {
     PhongDao phongDao;
     SpinnerPhongAdapter spinnerPhongAdapter;
     Phong phong;
+    SearchView searchView;
 
     int mYear,mMonth,mDay;
     Calendar c = Calendar.getInstance();
@@ -118,7 +121,20 @@ public class FragmentHoaDon extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         recyclerView = view.findViewById(R.id.rcv_hoa_don);
         fabAdd = view.findViewById(R.id.btn_add_hoa_don);
+        searchView=view.findViewById(R.id.sv_tim_hoa_don);
+        searchView.clearFocus();
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
 
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                FinterList(newText);
+                return true;
+            }
+        });
         listKhachHang = new ArrayList<>();
         khachHangDAO = new KhachHangDAO(getActivity());
 
@@ -306,6 +322,7 @@ public class FragmentHoaDon extends Fragment {
 
                     if (hoaDonDAO.insert(hoaDon)>0){
                         Toast.makeText(getActivity(), "Thêm thành công", Toast.LENGTH_LONG).show();
+                        Log.d("zzzzzzzz", hoaDon.getManager_id());
                         dialog.dismiss();
                         loadTable();
                     }else{
@@ -325,6 +342,21 @@ public class FragmentHoaDon extends Fragment {
 
         dialog.show();
     }
+    private void FinterList(String text) {
+        List<HoaDon> filteredList=new ArrayList<>();
+        for (HoaDon hoaDon: listHoaDon){
+            if (hoaDon.getStart_date().toLowerCase().contains(text.toLowerCase())){
+                filteredList.add(hoaDon);
+            }
+
+        }
+        if (filteredList.isEmpty()){
+            Toast.makeText(this.getContext(), "no data", Toast.LENGTH_SHORT).show();
+        }else {
+            hoaDonAdapter.setFilteredList(filteredList);
+        }
+    }
+
     public int validate(){
         int check =1;
         if (edTuNgayHD.getText().length()==0 || edDenNgayHD.getText().length()==0||edTienMat.getText().length()==0){

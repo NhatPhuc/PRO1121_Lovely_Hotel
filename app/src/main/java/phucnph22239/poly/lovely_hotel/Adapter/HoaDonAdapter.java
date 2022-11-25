@@ -11,6 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import phucnph22239.poly.lovely_hotel.DAO.KhachHangDAO;
 import phucnph22239.poly.lovely_hotel.DAO.PhongDao;
@@ -21,11 +22,15 @@ import phucnph22239.poly.lovely_hotel.R;
 
 public class HoaDonAdapter extends RecyclerView.Adapter<HoaDonAdapter.HoaDonViewHolder>{
     private Context context;
-    private ArrayList<HoaDon> list;
+    private List<HoaDon> list;
 
-    public HoaDonAdapter(Context context,ArrayList<HoaDon> list){
+    public HoaDonAdapter(Context context,List<HoaDon> list){
         this.context= context;
         this.list = list;
+    }
+    public void setFilteredList(List<HoaDon> filteredList){
+        this.list=filteredList;
+        notifyDataSetChanged();
     }
 
     @NonNull
