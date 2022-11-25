@@ -29,6 +29,7 @@ import java.util.List;
 
 import phucnph22239.poly.lovely_hotel.DAO.LoaiPhongDAO;
 import phucnph22239.poly.lovely_hotel.DAO.PhongDao;
+import phucnph22239.poly.lovely_hotel.DTO.KhachHang;
 import phucnph22239.poly.lovely_hotel.DTO.LoaiPhong;
 import phucnph22239.poly.lovely_hotel.DTO.Phong;
 import phucnph22239.poly.lovely_hotel.R;
@@ -48,6 +49,10 @@ public class PhongAdapter extends RecyclerView.Adapter<PhongAdapter.phongViewHol
         this.list = list;
         phongDAO=new PhongDao(context);
         loaiphongDAO=new LoaiPhongDAO(context);
+    }
+    public void setFilteredList(ArrayList<Phong> filteredList){
+        this.list=filteredList;
+        notifyDataSetChanged();
     }
     @NonNull
     @Override

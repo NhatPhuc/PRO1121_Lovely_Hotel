@@ -36,7 +36,7 @@
         android:orientation="vertical"
 
         >
-        <SearchView
+        <androidx.appcompat.widget.SearchView
             android:layout_margin="10dp"
             android:id="@+id/sv_tim_phong"
             android:layout_width="match_parent"

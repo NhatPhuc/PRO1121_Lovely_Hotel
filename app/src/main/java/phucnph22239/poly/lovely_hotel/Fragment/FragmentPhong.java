@@ -18,6 +18,7 @@ import android.widget.GridView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -34,6 +35,7 @@ import phucnph22239.poly.lovely_hotel.Adapter.PhongAdapter;
 import phucnph22239.poly.lovely_hotel.Adapter.SpinnerLoaiPhongAdapter;
 import phucnph22239.poly.lovely_hotel.DAO.PhongDao;
 import phucnph22239.poly.lovely_hotel.DAO.LoaiPhongDAO;
+import phucnph22239.poly.lovely_hotel.DTO.KhachHang;
 import phucnph22239.poly.lovely_hotel.DTO.Phong;
 import phucnph22239.poly.lovely_hotel.DTO.LoaiPhong;
 import phucnph22239.poly.lovely_hotel.R;
@@ -50,6 +52,7 @@ public class FragmentPhong extends Fragment {
     private TextInputEditText dialog_ed_tenphong,dialog_ed_giaphong;
     private Spinner dialog_spn_loaiphong;
     Button dialog_btn_themphong,dialog_btn_huythemphong;
+    private SearchView searchView;
 
     int loaiPhong;
     List<LoaiPhong> listLoaiPhong;
@@ -68,6 +71,20 @@ public class FragmentPhong extends Fragment {
 
         listLoaiPhong = new ArrayList<>();
         loaiphongDAO = new LoaiPhongDAO(getActivity());
+        searchView=view.findViewById(R.id.sv_tim_phong);
+        searchView.clearFocus();
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                FinterList(newText);
+                return true;
+            }
+        });
 
         button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -147,6 +164,23 @@ public class FragmentPhong extends Fragment {
             }
         });
 
+    }
+    private void FinterList(String text) {
+        ArrayList<Phong> filteredList=new ArrayList<>();
+//        list=dao.getAll();
+
+
+        for (Phong phong: list){
+            if (phong.getName().toLowerCase().contains(text.toLowerCase())){
+                filteredList.add(phong);
+            }
+
+        }
+        if (filteredList.isEmpty()){
+            Toast.makeText(this.getContext(), "no data", Toast.LENGTH_SHORT).show();
+        }else {
+            adapter.setFilteredList(filteredList);
+        }
     }
 
 }
