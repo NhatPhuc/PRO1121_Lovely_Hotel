@@ -1,11 +1,13 @@
 package phucnph22239.poly.lovely_hotel.Adapter;
 
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -63,13 +65,18 @@ public class PhongAdapter extends RecyclerView.Adapter<PhongAdapter.phongViewHol
     int loaiPhong;
     List<LoaiPhong> listLoaiPhong;
 
+    @SuppressLint("RecyclerView")
     @Override
     public void onBindViewHolder(@NonNull phongViewHolder holder, int position) {
         Phong phong=list.get(position);
         holder.item_phong_ten.setText("Phòng: "+phong.getName());
 
         loaiphongDAO =new LoaiPhongDAO(context);
-        loaiphong = loaiphongDAO.getID(String.valueOf(phong.getRoom_type_id()));
+        try {
+            loaiphong = loaiphongDAO.getID(String.valueOf(phong.getRoom_type_id()));
+        }catch (Exception e){
+            Log.d("zzzz", "onBindViewHolder phong adapter");
+        }
         holder.item_phong_loaiphong.setText("Loại phòng: \n"+loaiphong.getName());
 
         holder.item_phong_giaphong.setText("Giá phòng: \n"+phong.getPrice()+" VNĐ");
@@ -139,6 +146,11 @@ public class PhongAdapter extends RecyclerView.Adapter<PhongAdapter.phongViewHol
 
                 spinnerLoaiPhongAdapter = new SpinnerLoaiPhongAdapter(context, (ArrayList<LoaiPhong>) loaiphongDAO.getAll());
                 dialog_spn_loaiphong.setAdapter(spinnerLoaiPhongAdapter);
+//                for (int i=0;i<dialog_spn_loaiphong.getCount();i++){
+//                    if (list.get(position).getId() == listLoaiPhong.get(i).getId()){
+//                        dialog_spn_loaiphong.setSelection(i);
+//                    }
+//                }
 
                 dialog_spn_loaiphong.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                     @Override

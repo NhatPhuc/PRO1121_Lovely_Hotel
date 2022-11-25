@@ -13,6 +13,7 @@ import androidx.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 
+import phucnph22239.poly.lovely_hotel.DAO.LoaiPhongDAO;
 import phucnph22239.poly.lovely_hotel.DTO.KhachHang;
 import phucnph22239.poly.lovely_hotel.DTO.Phong;
 import phucnph22239.poly.lovely_hotel.R;
@@ -20,7 +21,7 @@ import phucnph22239.poly.lovely_hotel.R;
 public class SpinnerPhongAdapter extends ArrayAdapter<Phong> {
     private Context context;
     private ArrayList<Phong> objects;
-    TextView tvspnphong;
+    TextView tvspnphong,tvspnlp;
 
     public SpinnerPhongAdapter(Context context, ArrayList<Phong> objects) {
         super(context, 0, objects);
@@ -39,9 +40,13 @@ public class SpinnerPhongAdapter extends ArrayAdapter<Phong> {
         }
         final Phong obj = objects.get(position);
         if (obj != null){
-
             tvspnphong = holder.findViewById(R.id.item_spn_phong);
-            tvspnphong.setText(obj.getName());
+            tvspnlp = holder.findViewById(R.id.item_spn_phong_loai_phong);
+
+            tvspnphong.setText("Tên phòng: "+obj.getName());
+
+            LoaiPhongDAO loaiPhongDAO = new LoaiPhongDAO(context);
+            tvspnlp.setText("Loại phòng: "+loaiPhongDAO.getID(String.valueOf(obj.getRoom_type_id())).getName());
         }
         return holder;
     }
@@ -59,7 +64,12 @@ public class SpinnerPhongAdapter extends ArrayAdapter<Phong> {
         if (obj != null){
 
             tvspnphong = holder.findViewById(R.id.item_spn_phong);
-            tvspnphong.setText(obj.getName());
+            tvspnlp = holder.findViewById(R.id.item_spn_phong_loai_phong);
+
+            tvspnphong.setText("Tên phòng: "+obj.getName());
+
+            LoaiPhongDAO loaiPhongDAO = new LoaiPhongDAO(context);
+            tvspnlp.setText("Loại phòng: "+loaiPhongDAO.getID(String.valueOf(obj.getRoom_type_id())).getName());
         }
         return holder;
     }

@@ -133,7 +133,7 @@ public class Fragment_khachhang extends Fragment {
                         else {
                             KhachHang khachHang = new KhachHang();
                             khachHang.setName(ed_name.getText().toString());
-                            khachHang.setPhone(Integer.parseInt(ed_phone.getText().toString()));
+                            khachHang.setPhone(ed_phone.getText().toString());
                             khachHang.setBirthday(ed_birthday.getText().toString());
                             long res = dao.insert(khachHang);
                             if (res>0){

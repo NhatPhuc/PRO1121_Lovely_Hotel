@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import phucnph22239.poly.lovely_hotel.DTO.HoaDon;
+import phucnph22239.poly.lovely_hotel.DTO.Phong;
 import phucnph22239.poly.lovely_hotel.Database.DbHelper;
 
 public class HoaDonDAO {
@@ -59,9 +60,10 @@ public class HoaDonDAO {
         String sql = "SELECT * FROM Bills";
         return getData(sql);
     }
-    public List<HoaDon> getId(){
+    public HoaDon getId(String id){
         String sql = "SELECT * FROM Bills WHERE id=?";
-        return getData(sql);
+        List<HoaDon> list=getData(sql,id);
+        return list.get(0);
     }
 
 

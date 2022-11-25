@@ -22,7 +22,7 @@ public class DbHelper extends SQLiteOpenHelper {
         String createTableGuests = "create table Guests (" +
                 "id INTEGER PRIMARY KEY AUTOINCREMENT," +
                 "name TEXT NOT NULL," +
-                "phone_number INTERGER NOT NULL," +
+                "phone_number TEXT NOT NULL," +
                 "birthday DATE NOT NULL )";
         db.execSQL(createTableGuests);
 

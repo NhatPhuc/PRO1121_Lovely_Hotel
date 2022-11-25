@@ -3,13 +3,13 @@ package phucnph22239.poly.lovely_hotel.DTO;
 public class KhachHang {
     private int id ;
     private String name ;
-    private int phone ;
+    private String phone ;
     private String birthday ;
 
     public KhachHang() {
     }
 
-    public KhachHang(int id, String name, int phone, String birthday) {
+    public KhachHang(int id, String name, String phone, String birthday) {
         this.id = id;
         this.name = name;
         this.phone = phone;
@@ -32,11 +32,11 @@ public class KhachHang {
         this.name = name;
     }
 
-    public int getPhone() {
+    public String getPhone() {
         return phone;
     }
 
-    public void setPhone(int phone) {
+    public void setPhone(String phone) {
         this.phone = phone;
     }
 

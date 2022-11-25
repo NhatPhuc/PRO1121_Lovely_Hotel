@@ -21,47 +21,13 @@
             android:textColor="@color/white"
             />
 
+
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:padding="10dp">
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:padding="5dp">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Khách hàng "
-                    android:textSize="15dp"
-                    android:textColor="@color/black"
-                    />
-                <Spinner
-                    android:id="@+id/spn_guest"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    />
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:padding="5dp">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Phòng "
-                    android:textSize="15dp"
-                    android:textColor="@color/black"
-                    />
-                <Spinner
-                    android:id="@+id/spn_room"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    />
-            </LinearLayout>
 
             <LinearLayout
                 android:layout_marginTop="6dp"
@@ -104,6 +70,45 @@
                     android:layout_height="40dp"
                     android:textSize="15dp"/>
             </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="5dp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Khách hàng "
+                    android:textSize="15dp"
+                    android:textColor="@color/black"
+                    />
+                <Spinner
+                    android:id="@+id/spn_guest"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="5dp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Phòng "
+                    android:textSize="15dp"
+                    android:textColor="@color/black"
+                    />
+                <Spinner
+                    android:id="@+id/spn_room"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    />
+            </LinearLayout>
+
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -175,6 +180,7 @@
                 android:textSize="17dp"
                 android:textColor="@color/black"/>
             <EditText
+                android:id="@+id/ed_bill_note"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="10dp"

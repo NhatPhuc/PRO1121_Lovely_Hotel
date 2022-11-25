@@ -14,6 +14,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -186,7 +187,7 @@ public class FragmentHoaDon extends Fragment {
         spnKhachHang = dialog.findViewById(R.id.spn_guest);
         spnPhong = dialog.findViewById(R.id.spn_room);
         chkTrangThai = dialog.findViewById(R.id.chk_bill_status);
-        edGhiChu = dialog.findViewById(R.id.tv_bill_note);
+        edGhiChu = dialog.findViewById(R.id.ed_bill_note);
 
         tv_tienPhong = dialog.findViewById(R.id.tv_bill_room_total);
         tv_tienDV = dialog.findViewById(R.id.tv_bill_service_total);
@@ -216,6 +217,7 @@ public class FragmentHoaDon extends Fragment {
                 listPhong = phongDao.getAll();
                 maPhong = String.valueOf(listPhong.get(position).getId());
                 phong = phongDao.getAll().get(position);
+
                 tienPhong = phong.getPrice();
                 tv_tienPhong.setText(tienPhong+" VNĐ");
 
@@ -252,8 +254,11 @@ public class FragmentHoaDon extends Fragment {
                 mDay = c.get(Calendar.DAY_OF_MONTH);
                 DatePickerDialog d = new DatePickerDialog(getActivity(),0,mDateDenNDen,mYear,mMonth,mDay);
                 d.show();
+
             }
         });
+
+
 
         Intent intent = getActivity().getIntent();
         String user = intent.getStringExtra("user");
@@ -261,8 +266,6 @@ public class FragmentHoaDon extends Fragment {
         String datetime = sdf.format(c.getTime());
 
         listHoaDon = hoaDonDAO.getAll();
-
-
 
 
 //        tienDenBu = Integer.parseInt(String.valueOf(edTienMat.getText()));
@@ -283,7 +286,10 @@ public class FragmentHoaDon extends Fragment {
         btnAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                Toast.makeText(getContext(),"Bấm add",Toast.LENGTH_SHORT).show();
+
+                tienDenBu = Integer.parseInt(String.valueOf(edTienMat.getText()));
+                tongTien = tienPhong+tienDV+tienDenBu;
+                tv_tongTien.setText("Tổng tiền hóa đơn: "+tongTien+" VNĐ");
 
                 if (validate()>0){
                     hoaDon = new HoaDon();
@@ -300,9 +306,10 @@ public class FragmentHoaDon extends Fragment {
                     }else{
                         hoaDon.setStatus(0);
                     }
-                    hoaDon.setNote(String.valueOf(edGhiChu));
+                    hoaDon.setNote(String.valueOf(edGhiChu.getText()));
                     hoaDon.setBill_date(datetime);
                     hoaDon.setBill_total(tongTien);
+                    tv_tongTien.setText("");
 
                     if (hoaDonDAO.insert(hoaDon)>0){
                         Toast.makeText(getActivity(), "Thêm thành công", Toast.LENGTH_LONG).show();
