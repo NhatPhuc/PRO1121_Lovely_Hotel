@@ -79,7 +79,7 @@ public class KhachHangDAO {
             KhachHang obj = new KhachHang();
             obj.setId(Integer.parseInt(c.getString(c.getColumnIndex("id"))));
             obj.setName(c.getString(c.getColumnIndex("name")));
-            obj.setPhone(Integer.parseInt(c.getString(c.getColumnIndex("phone_number"))));
+            obj.setPhone(c.getString(c.getColumnIndex("phone_number")));
             obj.setBirthday(c.getString(c.getColumnIndex("birthday")));
 
             list.add(obj);

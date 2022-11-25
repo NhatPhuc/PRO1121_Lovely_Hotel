@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import phucnph22239.poly.lovely_hotel.DAO.HoaDonDAO;
+import phucnph22239.poly.lovely_hotel.DAO.KhachHangDAO;
 import phucnph22239.poly.lovely_hotel.DAO.PhongDao;
 import phucnph22239.poly.lovely_hotel.DTO.HoaDon;
 import phucnph22239.poly.lovely_hotel.DTO.KhachHang;
@@ -25,7 +26,7 @@ public class SpinnerHoaDonAdapter extends ArrayAdapter<HoaDon> {
     private ArrayList<HoaDon> objects;
 
 
-    TextView tvspntenphong;
+    TextView tvspntenphong,tvspntenkhachhang;
     public SpinnerHoaDonAdapter(@NonNull Context context, ArrayList<HoaDon> objects) {
         super(context, 0, objects);
         this.context = context;
@@ -44,8 +45,15 @@ public class SpinnerHoaDonAdapter extends ArrayAdapter<HoaDon> {
         final HoaDon obj = objects.get(position);
         if (obj != null){
             tvspntenphong = holder.findViewById(R.id.item_spn_hoa_don_ten_phong);
+            tvspntenkhachhang = holder.findViewById(R.id.item_spn_hoa_don_ten_khach_hang);
+
             PhongDao phongDao = new PhongDao(context);
-            tvspntenphong.setText(phongDao.getID(String.valueOf(obj.getRoom_id())).getName()) ;
+            tvspntenphong.setText("Phòng: "+phongDao.getID(String.valueOf(obj.getRoom_id())).getName()) ;
+
+            KhachHangDAO khachHangDAO = new KhachHangDAO(context);
+            tvspntenkhachhang.setText("Khách hàng: "+khachHangDAO.getID(String.valueOf(obj.getGuest_id())).getName());
+
+
         }
         return holder;
     }
@@ -62,8 +70,14 @@ public class SpinnerHoaDonAdapter extends ArrayAdapter<HoaDon> {
         final HoaDon obj = objects.get(position);
         if (obj != null){
             tvspntenphong = holder.findViewById(R.id.item_spn_hoa_don_ten_phong);
+            tvspntenkhachhang = holder.findViewById(R.id.item_spn_hoa_don_ten_khach_hang);
+
             PhongDao phongDao = new PhongDao(context);
-            tvspntenphong.setText(phongDao.getID(String.valueOf(obj.getRoom_id())).getName()) ;
+            tvspntenphong.setText("Phòng: "+phongDao.getID(String.valueOf(obj.getRoom_id())).getName()) ;
+
+            KhachHangDAO khachHangDAO = new KhachHangDAO(context);
+            tvspntenkhachhang.setText("Khách hàng: "+khachHangDAO.getID(String.valueOf(obj.getGuest_id())).getName());
+
         }
         return holder;
     }

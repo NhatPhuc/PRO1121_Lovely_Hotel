@@ -65,7 +65,7 @@ public class LoaiDichVuAdapter extends RecyclerView.Adapter<LoaiDichVuAdapter.Lo
             return;
         }
         holder.e1.setText("Tên dịch vụ : " + loaiDichVu.getName());
-        holder.e2.setText("Giá : " + loaiDichVu.getPrice());
+        holder.e2.setText("Giá : " + loaiDichVu.getPrice()+" VNĐ");
 
         holder.btn_xoa.setOnClickListener(new View.OnClickListener() {
             @Override

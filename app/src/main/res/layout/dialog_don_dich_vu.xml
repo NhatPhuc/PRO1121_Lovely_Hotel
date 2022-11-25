@@ -28,7 +28,8 @@
             android:text="Ngày tạo: "
             android:layout_marginLeft="10dp"
             android:textSize="20dp"
-            android:layout_marginTop="10dp"/>
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"/>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -37,13 +38,14 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Phòng: "
+                android:text="Hóa đơn của: "
                 android:textSize="20dp"
-                android:layout_margin="10dp"/>
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="20dp"/>
             <Spinner
                 android:id="@+id/dialog_spn_hoa_don"
                 android:layout_width="match_parent"
-                android:layout_height="40dp"
+                android:layout_height="60dp"
                 android:layout_marginRight="10dp"
                 android:layout_marginLeft="10dp"/>
         </LinearLayout>
@@ -67,21 +69,47 @@
         </LinearLayout>
 
 
-        <EditText
-            android:id="@+id/ed_so_luong_dv"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:hint="Số lượng dịch vụ"
-            android:padding="10dp"
-            android:layout_margin="10dp"/>
-        <TextView
-            android:id="@+id/dialog_tv_tong_tien_don_dv"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Số lượng dịch vụ: "
+                android:textSize="20dp"
+                android:layout_margin="10dp"/>
+            <EditText
+                android:id="@+id/ed_so_luong_dv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:padding="10dp"
+                android:layout_margin="10dp"/>
+        </LinearLayout>
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Tổng tiền: "
-            android:layout_marginLeft="10dp"
-            android:textSize="20dp"/>
+            android:orientation="horizontal"
+            android:weightSum="10">
+            <TextView
+                android:id="@+id/dialog_tv_tong_tien_don_dv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Tổng tiền: "
+                android:layout_marginLeft="10dp"
+                android:textSize="20dp"
+                android:layout_weight="9"
+                android:layout_margin="10dp"/>
+            <ImageButton
+                android:id="@+id/btn_refresh_don_dv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_baseline_refresh_24"
+                android:layout_weight="1"/>
+        </LinearLayout>
+
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -90,14 +118,14 @@
             android:layout_margin="10dp"
             android:weightSum="2">
             <Button
-                android:id="@+id/dialog_btn_themphong"
+                android:id="@+id/dialog_btn_them_don_dv"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:layout_marginRight="10dp"
                 android:text="Thêm"/>
             <Button
-                android:id="@+id/dialog_btn_huythemphong"
+                android:id="@+id/dialog_btn_huy_don_dv"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
