@@ -131,7 +131,7 @@ public class FragmentHoaDon extends Fragment {
         fabAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                openDialog(getActivity(),0);
+                openDialogHN(getActivity(),0);
             }
         });
     }
@@ -166,7 +166,7 @@ public class FragmentHoaDon extends Fragment {
         }
     };
 
-    private void openDialog(final Context context, final int type){
+    public void openDialogHN(final Context context, final int type){
         Dialog dialog = new Dialog(getContext());
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setContentView(R.layout.dialog_them_hoa_don);

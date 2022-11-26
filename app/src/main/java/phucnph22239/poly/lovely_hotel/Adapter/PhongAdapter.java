@@ -22,7 +22,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.material.textfield.TextInputEditText;
 
@@ -33,6 +35,9 @@ import phucnph22239.poly.lovely_hotel.DAO.LoaiPhongDAO;
 import phucnph22239.poly.lovely_hotel.DAO.PhongDao;
 import phucnph22239.poly.lovely_hotel.DTO.LoaiPhong;
 import phucnph22239.poly.lovely_hotel.DTO.Phong;
+import phucnph22239.poly.lovely_hotel.Fragment.FragmentHoaDon;
+import phucnph22239.poly.lovely_hotel.Fragment.FragmentPhong;
+import phucnph22239.poly.lovely_hotel.MainActivity;
 import phucnph22239.poly.lovely_hotel.R;
 
 
@@ -40,10 +45,10 @@ public class PhongAdapter extends RecyclerView.Adapter<PhongAdapter.phongViewHol
     private Context context;
     private List<Phong> list;
     private PhongDao phongDAO;
+    private ViewPager viewPager;
 
     private LoaiPhong loaiphong;
     private LoaiPhongDAO loaiphongDAO;
-
 
     public PhongAdapter(Context context, List<Phong> list) {
         this.context = context;
@@ -120,7 +125,12 @@ public class PhongAdapter extends RecyclerView.Adapter<PhongAdapter.phongViewHol
             }
         });
 
+        holder.btn_datphong.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
+            }
+        });
         holder.item_phong_ten.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -180,13 +190,13 @@ public class PhongAdapter extends RecyclerView.Adapter<PhongAdapter.phongViewHol
                             phong.setPrice(Integer.parseInt(dialog_ed_giaphong.getText().toString()));
                             phong.setStatus(0);
                             if (dao.update(phong) > 0) {
-                                Toast.makeText(context, "Thêm phòng thành công", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(context, "sửa phòng thành công", Toast.LENGTH_SHORT).show();
                                 list.clear();
                                 list.addAll(dao.getAll());
                                 notifyDataSetChanged();
                                 dialog.dismiss();
                             } else {
-                                Toast.makeText(context, "Thêm phòng thất bại", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(context, "sửa phòng thất bại", Toast.LENGTH_SHORT).show();
                             }
                         }
                     }
@@ -210,12 +220,14 @@ public class PhongAdapter extends RecyclerView.Adapter<PhongAdapter.phongViewHol
     public class phongViewHolder extends RecyclerView.ViewHolder{
         ImageView imageView;
         TextView item_phong_ten,item_phong_loaiphong,item_phong_giaphong,item_phong_trangthai;
+        Button btn_datphong;
         public phongViewHolder(@NonNull View itemView) {
             super(itemView);
             item_phong_ten=itemView.findViewById(R.id.item_phong_ten);
             item_phong_giaphong=itemView.findViewById(R.id.item_phong_giaphong);
             item_phong_loaiphong=itemView.findViewById(R.id.item_phong_loaiphong);
             imageView = itemView.findViewById(R.id.id_delete);
+            btn_datphong=itemView.findViewById(R.id.btn_datphong);
         }
     }
 }

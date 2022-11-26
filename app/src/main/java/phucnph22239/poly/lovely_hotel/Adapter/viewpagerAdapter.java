@@ -37,7 +37,6 @@ public class viewpagerAdapter extends FragmentStatePagerAdapter {
         }
         return fragment;
     }
-
     @Override
     public int getCount() {
         return 5;
