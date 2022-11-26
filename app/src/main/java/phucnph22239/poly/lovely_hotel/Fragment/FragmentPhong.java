@@ -2,6 +2,7 @@ package phucnph22239.poly.lovely_hotel.Fragment;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -19,9 +20,11 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentStatePagerAdapter;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.textfield.TextInputEditText;
@@ -32,6 +35,7 @@ import java.util.List;
 import phucnph22239.poly.lovely_hotel.Adapter.LoaiPhongAdapter;
 import phucnph22239.poly.lovely_hotel.Adapter.PhongAdapter;
 import phucnph22239.poly.lovely_hotel.Adapter.SpinnerLoaiPhongAdapter;
+import phucnph22239.poly.lovely_hotel.Adapter.viewpagerAdapter;
 import phucnph22239.poly.lovely_hotel.DAO.PhongDao;
 import phucnph22239.poly.lovely_hotel.DAO.LoaiPhongDAO;
 import phucnph22239.poly.lovely_hotel.DTO.Phong;
@@ -49,7 +53,7 @@ public class FragmentPhong extends Fragment {
     private FloatingActionButton button;
     private TextInputEditText dialog_ed_tenphong,dialog_ed_giaphong;
     private Spinner dialog_spn_loaiphong;
-    Button dialog_btn_themphong,dialog_btn_huythemphong;
+    private Button dialog_btn_themphong,dialog_btn_huythemphong;
 
     int loaiPhong;
     List<LoaiPhong> listLoaiPhong;
@@ -63,12 +67,9 @@ public class FragmentPhong extends Fragment {
         phongDAO=new PhongDao(getContext());
         recyclerView=view.findViewById(R.id.rcv_phong);
         list=phongDAO.getAll();
-
         button=view.findViewById(R.id.fab_add_phong);
-
         listLoaiPhong = new ArrayList<>();
         loaiphongDAO = new LoaiPhongDAO(getActivity());
-
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

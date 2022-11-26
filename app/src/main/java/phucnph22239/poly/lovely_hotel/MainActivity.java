@@ -2,7 +2,10 @@ package phucnph22239.poly.lovely_hotel;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentStatePagerAdapter;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.viewpager.widget.ViewPager;
 
 import android.os.Bundle;
@@ -81,4 +84,5 @@ public class  MainActivity extends AppCompatActivity {
             }
         });
     }
+
 }
