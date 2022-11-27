@@ -9,13 +9,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:layout_margin="8dp"
         >
         <TextView
             android:id="@+id/dialog_loai_dich_vu_title"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:background="#80deea"
+            android:background="@color/teal_700"
             android:text="thêm loại dịch vụ"
             android:textSize="30dp"
             android:textStyle="bold"
@@ -65,7 +64,7 @@
                 android:layout_height="50dp"
                 android:text="thêm"
                 android:textStyle="bold"
-                android:backgroundTint="#80deea"
+                android:backgroundTint="@color/teal_700"
                 android:textSize="20dp"
                 />
             <Button
