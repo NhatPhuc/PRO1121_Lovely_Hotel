@@ -67,6 +67,11 @@ public class PhongDao {
         List<Phong> list=getDaTa(sql,id);
         return list.get(0);
     }
+    public List<Phong> getAllstatus(){
+        String sql="select * from Rooms WHERE ";
+        return getDaTa(sql);
+    }
+
     public int delete(int id){
         Cursor cursor = db.rawQuery("SELECT * FROM Bills WHERE room_id=?",new String[]{String.valueOf(id)});
         if (cursor.getCount()!=0){

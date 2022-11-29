@@ -1,10 +1,17 @@
 package phucnph22239.poly.lovely_hotel.Adapter;
 
 import android.app.Activity;
+import android.app.Dialog;
 import android.content.Context;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -12,20 +19,28 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
+import phucnph22239.poly.lovely_hotel.DAO.HoaDonDAO;
 import phucnph22239.poly.lovely_hotel.DAO.KhachHangDAO;
 import phucnph22239.poly.lovely_hotel.DAO.PhongDao;
 import phucnph22239.poly.lovely_hotel.DTO.HoaDon;
 import phucnph22239.poly.lovely_hotel.DTO.KhachHang;
 import phucnph22239.poly.lovely_hotel.DTO.Phong;
+import phucnph22239.poly.lovely_hotel.Fragment.FragmentHoaDon;
 import phucnph22239.poly.lovely_hotel.R;
+import phucnph22239.poly.lovely_hotel.click_interface.HoaDonClick;
 
 public class HoaDonAdapter extends RecyclerView.Adapter<HoaDonAdapter.HoaDonViewHolder>{
     private Context context;
     private ArrayList<HoaDon> list;
+    private HoaDonClick hoaDonClick;
 
     public HoaDonAdapter(Context context,ArrayList<HoaDon> list){
         this.context= context;
         this.list = list;
+    }
+
+    public void setHoaDonClick(HoaDonClick hoaDonClick) {
+        this.hoaDonClick = hoaDonClick;
     }
 
     @NonNull
@@ -46,8 +61,8 @@ public class HoaDonAdapter extends RecyclerView.Adapter<HoaDonAdapter.HoaDonView
         PhongDao phongDao = new PhongDao(context);
         Phong phong = phongDao.getID(String.valueOf(hoaDon.getRoom_id()));
         holder.tv_tenPhong.setText("Phòng: "+phong.getName());
-        holder.tv_tienPhong.setText("Tiền phòng: "+phong.getPrice()+" VNĐ");
 
+        holder.tv_tienPhong.setText("Tiền phòng: "+hoaDon.getRoom_total()+" VNĐ");
         holder.tv_ngayBD.setText("Từ: "+ hoaDon.getStart_date());
         holder.tv_ngayKT.setText("Đến: "+hoaDon.getEnd_date());
         holder.tv_ngayHD.setText("Ngày tạo hóa đơn: "+hoaDon.getBill_date());
@@ -55,14 +70,23 @@ public class HoaDonAdapter extends RecyclerView.Adapter<HoaDonAdapter.HoaDonView
 
         if (hoaDon.getStatus()==1){
             holder.tv_trangThai.setText("Đã trả phòng");
+            holder.tv_trangThai.setTextColor(Color.GREEN);
         }else{
             holder.tv_trangThai.setText("Chưa Trả Phòng");
+            holder.tv_trangThai.setTextColor(Color.RED);
         }
 
         holder.tv_tienMat.setText("Tiền đền bù: \n"+hoaDon.getLost_total()+" VNĐ");
         holder.tv_tienDV.setText("Tiền dịch vụ: \n"+hoaDon.getService_total()+" VNĐ");
         holder.tv_ghiChu.setText("Ghi chú: "+hoaDon.getNote());
         holder.tv_tongTien.setText("Tổng tiền hóa đơn: "+hoaDon.getBill_total()+" VNĐ");
+
+//        holder.itemView.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//
+//            }
+//        });
 
     }
 
@@ -71,7 +95,7 @@ public class HoaDonAdapter extends RecyclerView.Adapter<HoaDonAdapter.HoaDonView
         return list.size();
     }
 
-    public class HoaDonViewHolder extends RecyclerView.ViewHolder{
+    public class HoaDonViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         TextView tv_tenPhong,tv_tenKhach,tv_ngayBD,tv_ngayKT,tv_ngayHD,
                 tv_trangThai,tv_tienMat,tv_tienDV,tv_tienPhong,tv_ghiChu,tv_tongTien;
         public HoaDonViewHolder(@NonNull View itemView) {
@@ -87,7 +111,13 @@ public class HoaDonAdapter extends RecyclerView.Adapter<HoaDonAdapter.HoaDonView
             tv_tienDV = itemView.findViewById(R.id.tv_bill_service_total);
             tv_ghiChu = itemView.findViewById(R.id.tv_bill_note);
             tv_tongTien = itemView.findViewById(R.id.tv_bill_total);
+            itemView.setOnClickListener(this::onClick);
+        }
 
+
+        @Override
+        public void onClick(View v) {
+            hoaDonClick.onClick(v,getAdapterPosition());
         }
     }
 }

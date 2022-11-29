@@ -60,6 +60,7 @@ public class FragmentPhong extends Fragment {
     SpinnerLoaiPhongAdapter spinnerLoaiPhongAdapter;
     Phong phong ;
 
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -81,6 +82,7 @@ public class FragmentPhong extends Fragment {
         adapter=new PhongAdapter(getContext(),list);
         recyclerView.setAdapter(adapter);
         return view;
+
     }
     private void opendialog(){
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());

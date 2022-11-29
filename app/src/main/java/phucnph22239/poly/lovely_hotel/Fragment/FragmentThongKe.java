@@ -2,6 +2,7 @@ package phucnph22239.poly.lovely_hotel.Fragment;
 
 import android.app.DatePickerDialog;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,6 +21,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
+import phucnph22239.poly.lovely_hotel.DAO.ThongKeDAO;
 import phucnph22239.poly.lovely_hotel.R;
 
 public class FragmentThongKe extends Fragment {
@@ -29,7 +31,7 @@ public class FragmentThongKe extends Fragment {
     EditText edtTuNgay,edtDenNgay;
     SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
     int mYear,mMonth,mDay;
-    TextView tv;
+    TextView tv_doanhThuTong,tv_doanhThuDV,tv_tongTienDenBu;
     int temp=0;
 
     @Nullable
@@ -51,8 +53,9 @@ public class FragmentThongKe extends Fragment {
         edtTuNgay = view.findViewById(R.id.doanhthu_edt_tungay);
         edtDenNgay = view.findViewById(R.id.doanhthu_edt_denngay);
 
-
-        tv = view.findViewById(R.id.doanhthu_tv_doanhthu);
+        tv_doanhThuTong = view.findViewById(R.id.doanhthu_tv_doanhthutong);
+        tv_doanhThuDV = view.findViewById(R.id.doanhthu_tv_doanhthuDV);
+        tv_tongTienDenBu = view.findViewById(R.id.doanhthu_tv_doanhthuDenBu);
 
         btnTuNgay.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -81,6 +84,43 @@ public class FragmentThongKe extends Fragment {
         btnDoanhThu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                String tuNgay = edtTuNgay.getText().toString();
+                String denNgay = edtDenNgay.getText().toString();
+                if (tuNgay.isEmpty()||denNgay.isEmpty()){
+                    Toast.makeText(getActivity(), "Không được để trống", Toast.LENGTH_SHORT).show();
+                    temp++;
+                }else {
+                    String[] temptungay = tuNgay.split("/");
+                    String[] tempdenngay = denNgay.split("/");
+
+                    String newTungay = "";
+                    String newdenngay = "";
+
+                    int inttungay = Integer.parseInt(newTungay.concat(temptungay[0]).concat(temptungay[1]).concat(temptungay[2]));
+                    int intdenngay = Integer.parseInt(newdenngay.concat(tempdenngay[0]).concat(tempdenngay[1]).concat(tempdenngay[2]));
+
+//                    int inttungay = Integer.parseInt(newTungay.concat(temptungay[0]));
+//                    int intdenngay = Integer.parseInt(newdenngay.concat(tempdenngay[0]));
+//                    Tính số ngày
+                    Log.d("zzzzz", "số ngày: "+(intdenngay - inttungay));
+
+                    if (inttungay > intdenngay) {
+                        Toast.makeText(getActivity(), "Lỗi, từ ngày phải bé hơn đến ngày", Toast.LENGTH_SHORT).show();
+                        temp++;
+                    }
+                }
+
+                if (temp==0){
+                    ThongKeDAO dao = new ThongKeDAO(getActivity());
+                    Log.d("zzzz", "onClick: "+dao.getDoanhThuTongTien(tuNgay,denNgay));
+
+                    tv_doanhThuTong.setText("Doanh thu tổng: "+dao.getDoanhThuTongTien(tuNgay,denNgay)+" VNĐ");
+                    tv_doanhThuDV.setText("Doanh thu dịch vụ: "+dao.getDoanhThuTongTienDichVu(tuNgay,denNgay)+" VNĐ");
+                    tv_tongTienDenBu.setText("Tổng đền bù: "+dao.getDoanhThuTongTienDenBu(tuNgay,denNgay)+" VNĐ");
+
+                }else {
+                    temp=0;
+                }
 
             }
         });

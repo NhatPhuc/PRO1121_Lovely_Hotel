@@ -13,7 +13,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:background="@color/teal_700"
+            android:background="@color/orange"
             android:text="Hóa Đơn"
             android:textStyle="bold"
             android:textSize="30dp"
@@ -134,7 +134,7 @@
 
 
             <TextView
-                android:id="@+id/tv_bill_service_total"
+                android:id="@+id/dialog_tv_bill_service_total"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Tiền dịch vụ:"
@@ -156,10 +156,16 @@
 
                 <EditText
                     android:id="@+id/ed_lost_total"
-                    android:layout_width="match_parent"
+                    android:layout_width="200dp"
                     android:layout_height="wrap_content"
                     android:inputType="number"
                     />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="VNĐ"
+                    android:layout_marginLeft="15dp"
+                    android:textColor="@color/black"/>
             </LinearLayout>
 
 
@@ -191,7 +197,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
                 <TextView
-                    android:id="@+id/tv_bill_total"
+                    android:id="@+id/dialog_tv_bill_total"
                     android:layout_width="300dp"
                     android:layout_height="wrap_content"
                     android:text="Tổng tiền hóa đơn:"
@@ -221,7 +227,7 @@
                     android:layout_height="50dp"
                     android:text="thêm"
                     android:textStyle="bold"
-                    android:backgroundTint="@color/teal_700"
+                    android:backgroundTint="@color/orange"
                     android:textSize="20dp"
                     android:layout_gravity="left"
                     />

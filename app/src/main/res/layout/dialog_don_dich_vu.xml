@@ -19,7 +19,8 @@
             android:textAlignment="center"
             android:textSize="40dp"
             android:textColor="@color/white"
-            android:background="@color/teal_700"/>
+            android:background="@color/orange"
+            />
 
         <TextView
             android:id="@+id/dialog_tv_ngay_tao_don_dv"
