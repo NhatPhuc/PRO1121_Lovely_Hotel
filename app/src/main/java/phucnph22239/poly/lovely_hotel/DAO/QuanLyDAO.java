@@ -55,6 +55,17 @@ public class QuanLyDAO {
         return list.get(0);
     }
 
+    public Boolean checkUsername(String id){
+        String sql = "SELECT * FROM Managers WHERE id =? ";
+        List<QuanLy> list = getData(sql, id);
+
+        if (list.size() == 0)
+            return false;
+        else
+            return true;
+
+    }
+
     @SuppressLint("Range")
     private List<QuanLy> getData(String sql, String...selectionArgs){
         List<QuanLy> list = new ArrayList<QuanLy>();

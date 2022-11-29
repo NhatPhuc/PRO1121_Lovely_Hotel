@@ -26,7 +26,7 @@ public class SpinnerHoaDonAdapter extends ArrayAdapter<HoaDon> {
     private ArrayList<HoaDon> objects;
 
 
-    TextView tvspntenphong,tvspntenkhachhang;
+    TextView tvspntenphong,tvspntenkhachhang,tvtungay,tvdenngay;
     public SpinnerHoaDonAdapter(@NonNull Context context, ArrayList<HoaDon> objects) {
         super(context, 0, objects);
         this.context = context;
@@ -46,12 +46,18 @@ public class SpinnerHoaDonAdapter extends ArrayAdapter<HoaDon> {
         if (obj != null){
             tvspntenphong = holder.findViewById(R.id.item_spn_hoa_don_ten_phong);
             tvspntenkhachhang = holder.findViewById(R.id.item_spn_hoa_don_ten_khach_hang);
+            tvtungay = holder.findViewById(R.id.item_spn_hoa_don_tu_ngay);
+            tvdenngay = holder.findViewById(R.id.item_spn_hoa_don_den_ngay);
+            HoaDonDAO hoaDonDAO = new HoaDonDAO(context);
 
             PhongDao phongDao = new PhongDao(context);
             tvspntenphong.setText("Phòng: "+phongDao.getID(String.valueOf(obj.getRoom_id())).getName()) ;
 
             KhachHangDAO khachHangDAO = new KhachHangDAO(context);
             tvspntenkhachhang.setText("Khách hàng: "+khachHangDAO.getID(String.valueOf(obj.getGuest_id())).getName());
+
+            tvtungay.setText("Từ ngày: "+obj.getStart_date());
+            tvdenngay.setText("Đến ngày: "+obj.getEnd_date());
 
 
         }
@@ -71,13 +77,16 @@ public class SpinnerHoaDonAdapter extends ArrayAdapter<HoaDon> {
         if (obj != null){
             tvspntenphong = holder.findViewById(R.id.item_spn_hoa_don_ten_phong);
             tvspntenkhachhang = holder.findViewById(R.id.item_spn_hoa_don_ten_khach_hang);
+            HoaDonDAO hoaDonDAO = new HoaDonDAO(context);
 
             PhongDao phongDao = new PhongDao(context);
-            tvspntenphong.setText("Phòng: "+phongDao.getID(String.valueOf(obj.getRoom_id())).getName()) ;
+            tvspntenphong.setText("Phòng: "+phongDao.getID(String.valueOf(obj.getRoom_id())).getName());
 
             KhachHangDAO khachHangDAO = new KhachHangDAO(context);
             tvspntenkhachhang.setText("Khách hàng: "+khachHangDAO.getID(String.valueOf(obj.getGuest_id())).getName());
 
+            tvtungay.setText("Từ ngày: "+obj.getStart_date());
+            tvdenngay.setText("Đến ngày: "+obj.getEnd_date());
         }
         return holder;
     }

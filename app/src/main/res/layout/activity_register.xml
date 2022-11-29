@@ -22,10 +22,12 @@
         android:layout_height="wrap_content"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:hint="Tên người dùng"
-        android:id="@+id/ed_name_register"
+        android:id="@+id/til_name_register"
+        android:layout_marginBottom="15dp"
         >
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/ed_name_register"
             android:layout_width="match_parent"
             android:layout_height="50dp">
 
@@ -37,10 +39,13 @@
         android:layout_height="wrap_content"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:hint="Tên đăng nhập"
-        android:id="@+id/ed_username_register"
+        android:id="@+id/til_username_register"
+        android:layout_marginBottom="15dp"
+
         >
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/ed_username_register"
             android:layout_width="match_parent"
             android:layout_height="50dp">
 
@@ -53,10 +58,13 @@
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:hint="Mật khẩu"
         app:passwordToggleEnabled="true"
-        android:id="@+id/ed_pass_register"
+        android:id="@+id/til_pass_register"
+        android:layout_marginBottom="15dp"
+
         >
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/ed_pass_register"
             android:layout_width="match_parent"
             android:layout_height="50dp">
 
@@ -69,10 +77,11 @@
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:hint="Xác nhận mật khẩu"
         app:passwordToggleEnabled="true"
-        android:id="@+id/ed_repass_register"
+        android:id="@+id/til_repass_register"
         >
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/ed_repass_register"
             android:layout_width="match_parent"
             android:layout_height="50dp">
 

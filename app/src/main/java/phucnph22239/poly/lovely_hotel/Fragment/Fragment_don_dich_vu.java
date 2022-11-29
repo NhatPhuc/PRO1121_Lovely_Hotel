@@ -141,7 +141,7 @@ public class Fragment_don_dich_vu extends Fragment {
             }
         });
 
-        spinnerHoaDonAdapter = new SpinnerHoaDonAdapter(getContext(), (ArrayList<HoaDon>) hoaDonDAO.getAll());
+        spinnerHoaDonAdapter = new SpinnerHoaDonAdapter(getContext(), (ArrayList<HoaDon>) hoaDonDAO.getIdspn());
         dialog_spn_hd_phong.setAdapter(spinnerHoaDonAdapter);
         dialog_spn_hd_phong.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override

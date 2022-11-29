@@ -96,6 +96,7 @@ public class Fragment_khachhang extends Fragment {
                 WindowManager.LayoutParams windowacc = window.getAttributes();
                 windowacc.gravity = Gravity.NO_GRAVITY ;
                 window.setAttributes(windowacc);
+
                 Button btnCancel = dialog.findViewById(R.id.btnCancel);
                 Button btnAdd = dialog.findViewById(R.id.btnAdd_KH);
                 EditText ed_name = dialog.findViewById(R.id.edName);

@@ -14,7 +14,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:background="@color/teal_700"
+            android:background="@color/orange"
             android:text="Loại phòng"
             android:textSize="30dp"
             android:textStyle="bold"
@@ -47,7 +47,7 @@
                 android:layout_height="50dp"
                 android:text="thêm"
                 android:textStyle="bold"
-                android:backgroundTint="@color/teal_700"
+                android:backgroundTint="@color/orange"
                 android:textSize="20dp"
                 />
             <Button

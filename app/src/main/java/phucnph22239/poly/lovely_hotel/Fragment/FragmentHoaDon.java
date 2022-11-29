@@ -46,12 +46,15 @@ import phucnph22239.poly.lovely_hotel.Adapter.HoaDonAdapter;
 import phucnph22239.poly.lovely_hotel.Adapter.SpinnerKhachHangAdapter;
 import phucnph22239.poly.lovely_hotel.Adapter.SpinnerPhongAdapter;
 import phucnph22239.poly.lovely_hotel.DAO.HoaDonDAO;
+import phucnph22239.poly.lovely_hotel.DAO.HoaDonDichVuDAO;
 import phucnph22239.poly.lovely_hotel.DAO.KhachHangDAO;
 import phucnph22239.poly.lovely_hotel.DAO.PhongDao;
+import phucnph22239.poly.lovely_hotel.DAO.ThongKeDAO;
 import phucnph22239.poly.lovely_hotel.DTO.HoaDon;
 import phucnph22239.poly.lovely_hotel.DTO.KhachHang;
 import phucnph22239.poly.lovely_hotel.DTO.Phong;
 import phucnph22239.poly.lovely_hotel.R;
+import phucnph22239.poly.lovely_hotel.click_interface.HoaDonClick;
 
 
 public class FragmentHoaDon extends Fragment {
@@ -80,6 +83,7 @@ public class FragmentHoaDon extends Fragment {
         return inflater.inflate(R.layout.fragment_hoa_don, container, false);
     }
 
+    static final String TAG = "zzzz";
 
     SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
     FloatingActionButton fabAdd;
@@ -110,9 +114,13 @@ public class FragmentHoaDon extends Fragment {
 
     TextView tv_tienPhong,tv_tienDV,tv_tongTien;
 
-    int tienPhong,tienDV,tienDenBu,tongTien;
+    int tienPhong,tongTienPhong,tienDV,tienDenBu,tongTien,soNgay;
 
     ImageButton btn_refresh;
+
+    String tuNgay,denNgay;
+
+    int temp=0,a;
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
@@ -134,6 +142,17 @@ public class FragmentHoaDon extends Fragment {
                 openDialogHN(getActivity(),0);
             }
         });
+
+        hoaDonAdapter.setHoaDonClick(new HoaDonClick() {
+            @Override
+            public void onClick(View view, int position) {
+                a = position;
+                Log.d("zzzzz", "onClick: "+position);
+                listHoaDon = hoaDonDAO.getAll();
+                openDialogHN(getContext(),1);
+            }
+        });
+
     }
 
     private void loadTable(){
@@ -166,15 +185,17 @@ public class FragmentHoaDon extends Fragment {
         }
     };
 
-    public void openDialogHN(final Context context, final int type){
-        Dialog dialog = new Dialog(getContext());
+
+
+    public void openDialogHN(final Context context, final int type) {
+        Dialog dialog = new Dialog(context);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setContentView(R.layout.dialog_them_hoa_don);
         Window window = dialog.getWindow();
-        if(window==null){
+        if (window == null) {
             return;
         }
-        window.setLayout(WindowManager.LayoutParams.MATCH_PARENT,WindowManager.LayoutParams.WRAP_CONTENT);
+        window.setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT);
         window.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         Button btnAdd = dialog.findViewById(R.id.btn_luuhd);
         Button btnCancel = dialog.findViewById(R.id.btn_huyhd);
@@ -190,11 +211,99 @@ public class FragmentHoaDon extends Fragment {
         edGhiChu = dialog.findViewById(R.id.ed_bill_note);
 
         tv_tienPhong = dialog.findViewById(R.id.tv_bill_room_total);
-        tv_tienDV = dialog.findViewById(R.id.tv_bill_service_total);
-        tv_tongTien = dialog.findViewById(R.id.tv_bill_total);
+        tv_tienDV = dialog.findViewById(R.id.dialog_tv_bill_service_total);
+        tv_tongTien = dialog.findViewById(R.id.dialog_tv_bill_total);
         btn_refresh = dialog.findViewById(R.id.btn_refresh);
 
-        spinnerKhachHangAdapter = new SpinnerKhachHangAdapter(getContext(),khachHangDAO.getAll());
+        listHoaDon = hoaDonDAO.getAll();
+
+        listPhong = phongDao.getAll();
+
+        listKhachHang = khachHangDAO.getAll();
+
+        btnTuNgayHD.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Calendar c = Calendar.getInstance();
+                mYear = c.get(Calendar.YEAR);
+                mMonth = c.get(Calendar.MONTH);
+                mDay = c.get(Calendar.DAY_OF_MONTH);
+                DatePickerDialog d = new DatePickerDialog(getActivity(), 0, mDateTuNgay, mYear, mMonth, mDay);
+                d.show();
+            }
+        });
+        btnDenNgayHD.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Calendar c = Calendar.getInstance();
+                mYear = c.get(Calendar.YEAR);
+                mMonth = c.get(Calendar.MONTH);
+                mDay = c.get(Calendar.DAY_OF_MONTH);
+                DatePickerDialog d = new DatePickerDialog(getActivity(), 0, mDateDenNDen, mYear, mMonth, mDay);
+                d.show();
+
+
+            }
+        });
+
+        spinnerPhongAdapter = new SpinnerPhongAdapter(context, (ArrayList<Phong>) phongDao.getAll());
+        spnPhong.setAdapter(spinnerPhongAdapter);
+        spnPhong.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                listPhong = phongDao.getAll();
+                maPhong = String.valueOf(listPhong.get(position).getId());
+
+                phong = phongDao.getAll().get(position);
+                tuNgay = edTuNgayHD.getText().toString();
+                denNgay = edDenNgayHD.getText().toString();
+                if (tuNgay.isEmpty() || denNgay.isEmpty()) {
+                    Toast.makeText(getActivity(), "Hãy nhập ngày", Toast.LENGTH_SHORT).show();
+
+                } else {
+                    String[] temptungay = tuNgay.split("/");
+                    String[] tempdenngay = denNgay.split("/");
+
+                    String newTungay = "";
+                    String newdenngay = "";
+
+
+                    int inttungay = Integer.parseInt(newTungay.concat(temptungay[0]));
+                    int intdenngay = Integer.parseInt(newdenngay.concat(tempdenngay[0]));
+                    Log.d("zzzzz", "số ngày: " + (intdenngay - inttungay));
+                    soNgay = intdenngay - inttungay;
+
+
+                    if (inttungay > intdenngay) {
+                        Toast.makeText(getActivity(), "Lỗi, từ ngày phải bé hơn đến ngày", Toast.LENGTH_SHORT).show();
+
+                    }
+                }
+
+                tienPhong = phong.getPrice();
+                tongTienPhong = tienPhong * soNgay;
+                Log.d("zzzzz", "onItemSelected: " + soNgay);
+
+                tv_tienPhong.setText(tongTienPhong + " VNĐ");
+
+//
+//                  tính dịch vụ trong itemclick
+
+//                tienDV = 0;
+//                tv_tienDV.setText("Tiền dịch vụ: " + tienDV + " VNĐ");
+
+                tongTien = tongTienPhong + tienDV;
+//                tv_tongTien.setText("Tổng tiền hóa đơn: " + tongTien + " VNĐ");
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+
+        spinnerKhachHangAdapter = new SpinnerKhachHangAdapter(context, khachHangDAO.getAll());
         spnKhachHang.setAdapter(spinnerKhachHangAdapter);
         spnKhachHang.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -209,135 +318,290 @@ public class FragmentHoaDon extends Fragment {
             }
         });
 
-        spinnerPhongAdapter = new SpinnerPhongAdapter(getContext(), (ArrayList<Phong>) phongDao.getAll());
-        spnPhong.setAdapter(spinnerPhongAdapter);
-        spnPhong.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                listPhong = phongDao.getAll();
-                maPhong = String.valueOf(listPhong.get(position).getId());
-                phong = phongDao.getAll().get(position);
-
-                tienPhong = phong.getPrice();
-                tv_tienPhong.setText(tienPhong+" VNĐ");
-
-                tienDV = 0;
-                tv_tienDV.setText("Tiền dịch vụ: "+tienDV+" VNĐ");
-
-                tongTien = tienPhong+tienDV;
-                tv_tongTien.setText("Tổng tiền hóa đơn: "+tongTien+" VNĐ");
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
-
-        btnTuNgayHD.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Calendar c = Calendar.getInstance();
-                mYear = c.get(Calendar.YEAR);
-                mMonth = c.get(Calendar.MONTH);
-                mDay = c.get(Calendar.DAY_OF_MONTH);
-                DatePickerDialog d = new DatePickerDialog(getActivity(),0,mDateTuNgay,mYear,mMonth,mDay);
-                d.show();
-            }
-        });
-        btnDenNgayHD.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Calendar c = Calendar.getInstance();
-                mYear = c.get(Calendar.YEAR);
-                mMonth = c.get(Calendar.MONTH);
-                mDay = c.get(Calendar.DAY_OF_MONTH);
-                DatePickerDialog d = new DatePickerDialog(getActivity(),0,mDateDenNDen,mYear,mMonth,mDay);
-                d.show();
-
-            }
-        });
-
-
-
         Intent intent = getActivity().getIntent();
         String user = intent.getStringExtra("user");
 
         String datetime = sdf.format(c.getTime());
 
-        listHoaDon = hoaDonDAO.getAll();
+
+
+        if (type == 0) {
+            edTienMat.setText("0");
+
+            tuNgay = edTuNgayHD.getText().toString();
+            denNgay = edDenNgayHD.getText().toString();
+            if (tuNgay.isEmpty() || denNgay.isEmpty()) {
+                Toast.makeText(getActivity(), "Hãy nhập ngày", Toast.LENGTH_SHORT).show();
+
+            } else {
+                String[] temptungay = tuNgay.split("/");
+                String[] tempdenngay = denNgay.split("/");
+
+                String newTungay = "";
+                String newdenngay = "";
+
+
+                int inttungay = Integer.parseInt(newTungay.concat(temptungay[0]));
+                int intdenngay = Integer.parseInt(newdenngay.concat(tempdenngay[0]));
+                Log.d("zzzzz", "số ngày: " + (intdenngay - inttungay));
+                soNgay = intdenngay - inttungay;
+
+
+                if (inttungay > intdenngay) {
+                    Toast.makeText(getActivity(), "Lỗi, từ ngày phải bé hơn đến ngày", Toast.LENGTH_SHORT).show();
+
+                }
+            }
 
 
 //        tienDenBu = Integer.parseInt(String.valueOf(edTienMat.getText()));
-        btn_refresh.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                try {
+
+            btn_refresh.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                    String tuNgay = edTuNgayHD.getText().toString();
+                    String denNgay = edDenNgayHD.getText().toString();
+                    if (tuNgay.isEmpty() || denNgay.isEmpty()) {
+                        Toast.makeText(getActivity(), "Không được để trống", Toast.LENGTH_SHORT).show();
+
+                    } else {
+                        String[] temptungay = tuNgay.split("/");
+                        String[] tempdenngay = denNgay.split("/");
+
+                        String newTungay = "";
+                        String newdenngay = "";
+
+
+                        int inttungay = Integer.parseInt(newTungay.concat(temptungay[0]));
+                        int intdenngay = Integer.parseInt(newdenngay.concat(tempdenngay[0]));
+                        Log.d("zzzzz", "số ngày: " + (intdenngay - inttungay));
+                        soNgay = intdenngay - inttungay;
+
+
+                        if (inttungay > intdenngay) {
+                            Toast.makeText(getActivity(), "Lỗi, từ ngày phải bé hơn đến ngày", Toast.LENGTH_SHORT).show();
+                        } else {
+                            tienDenBu = Integer.parseInt(String.valueOf(edTienMat.getText()));
+                            tongTienPhong = tienPhong * soNgay;
+                            tongTien = tongTienPhong + tienDV + tienDenBu;
+                            tv_tongTien.setText("Tổng tiền hóa đơn: " + tongTien + " VNĐ");
+                            tv_tienPhong.setText(tongTienPhong + " VNĐ");
+
+                        }
+                    }
+
+
+                }
+            });
+
+            btnAdd.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
                     tienDenBu = Integer.parseInt(String.valueOf(edTienMat.getText()));
-                }catch (Exception e){
-                    Toast.makeText(context,"Nhập tiền đền bù (Nếu có)",Toast.LENGTH_LONG).show();
-                }
-                tongTien = tienPhong+tienDV+tienDenBu;
-                tv_tongTien.setText("Tổng tiền hóa đơn: "+tongTien+" VNĐ");
-            }
-        });
+                    tongTien = tongTienPhong + tienDV + tienDenBu;
+                    tv_tongTien.setText("Tổng tiền hóa đơn: " + tongTien + " VNĐ");
 
+                    if (edTuNgayHD.getText().length() == 0 || edDenNgayHD.getText().length() == 0 || edTienMat.getText().length() == 0) {
+                        Toast.makeText(getContext(), "Hãy nhập đầy đủ thông tin", Toast.LENGTH_SHORT).show();
+                    }else {
+                        hoaDon = new HoaDon();
+                        hoaDon.setManager_id(user);
+                        hoaDon.setGuest_id(Integer.parseInt(maKhacHang));
+                        hoaDon.setRoom_id(Integer.parseInt(maPhong));
+                        hoaDon.setStart_date(edTuNgayHD.getText().toString());
+                        hoaDon.setEnd_date(edDenNgayHD.getText().toString());
+                        hoaDon.setService_total(tienDV);
+                        hoaDon.setRoom_total(tongTienPhong);
+                        hoaDon.setLost_total(Integer.parseInt(String.valueOf(edTienMat.getText())));
+                        if (chkTrangThai.isChecked()) {
+                            hoaDon.setStatus(1);
+                        } else {
+                            hoaDon.setStatus(0);
+                        }
+                        hoaDon.setNote(String.valueOf(edGhiChu.getText()));
+                        hoaDon.setBill_date(datetime);
+                        hoaDon.setBill_total(tongTien);
 
-        btnAdd.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                tienDenBu = Integer.parseInt(String.valueOf(edTienMat.getText()));
-                tongTien = tienPhong+tienDV+tienDenBu;
-                tv_tongTien.setText("Tổng tiền hóa đơn: "+tongTien+" VNĐ");
-
-                if (validate()>0){
-                    hoaDon = new HoaDon();
-                    hoaDon.setManager_id(user);
-                    hoaDon.setGuest_id(Integer.parseInt(maKhacHang));
-                    hoaDon.setRoom_id(Integer.parseInt(maPhong));
-                    hoaDon.setStart_date(edTuNgayHD.getText().toString());
-                    hoaDon.setEnd_date(edDenNgayHD.getText().toString());
-                    hoaDon.setService_total(tienDV);
-                    hoaDon.setRoom_total(tienPhong);
-                    hoaDon.setLost_total(Integer.parseInt(String.valueOf(edTienMat.getText())));
-                    if (chkTrangThai.isChecked()){
-                        hoaDon.setStatus(1);
-                    }else{
-                        hoaDon.setStatus(0);
+                        if (hoaDonDAO.insert(hoaDon) > 0) {
+                            Toast.makeText(getActivity(), "Thêm thành công", Toast.LENGTH_LONG).show();
+                            listHoaDon.clear();
+                            listHoaDon.addAll(hoaDonDAO.getAll());
+                            hoaDonAdapter.notifyDataSetChanged();
+                            dialog.dismiss();
+                            loadTable();
+                        } else {
+                            Toast.makeText(getActivity(), "Thêm thất bại", Toast.LENGTH_SHORT).show();
+                        }
                     }
-                    hoaDon.setNote(String.valueOf(edGhiChu.getText()));
-                    hoaDon.setBill_date(datetime);
-                    hoaDon.setBill_total(tongTien);
-                    tv_tongTien.setText("");
 
-                    if (hoaDonDAO.insert(hoaDon)>0){
-                        Toast.makeText(getActivity(), "Thêm thành công", Toast.LENGTH_LONG).show();
-                        dialog.dismiss();
-                        loadTable();
-                    }else{
-                        Toast.makeText(getActivity(), "Thêm thất bại", Toast.LENGTH_SHORT).show();
-                    }
+                }
+            });
+
+            btnCancel.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Toast.makeText(context, "Bấm hủy", Toast.LENGTH_SHORT).show();
+
+                    dialog.dismiss();
+                }
+            });
+        } else if (type == 1) {
+            listHoaDon = hoaDonDAO.getAll();
+            btnAdd.setText("Sửa");
+            HoaDonDichVuDAO hoaDonDichVuDAO = new HoaDonDichVuDAO(context);
+            hoaDon = hoaDonDAO.getAll().get(a);
+            int maHD = listHoaDon.get(a).getId();
+            Log.d(TAG, "openDialogHN: ma hoa don "+maHD);
+
+
+            tienDV = hoaDonDichVuDAO.getTienDV(String.valueOf(maHD));
+            Log.d(TAG, "tien dv = "+tienDV);
+            tv_tienDV.setText("Tiền dịch vụ: " + tienDV + " VNĐ");
+
+
+            edTuNgayHD.setText(listHoaDon.get(a).getStart_date());
+            edDenNgayHD.setText(listHoaDon.get(a).getEnd_date());
+
+
+            for (int i = 0; i < spnPhong.getCount(); i++) {
+                if (listHoaDon.get(a).getRoom_id() == listPhong.get(i).getId()) {
+                    spnPhong.setSelection(i);
+                    maPhong = String.valueOf(listPhong.get(i).getId());
                 }
             }
-        });
+            spnPhong.setEnabled(false);
 
-        btnCancel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(getContext(),"Bấm hủy",Toast.LENGTH_SHORT).show();
-                dialog.dismiss();
+            for (int i = 0; i < spnKhachHang.getCount(); i++) {
+                if (listHoaDon.get(a).getRoom_id() == listKhachHang.get(i).getId()) {
+                    spnKhachHang.setSelection(i);
+                    maKhacHang = String.valueOf(listKhachHang.get(i).getId());
+                }
             }
-        });
+            spnKhachHang.setEnabled(false);
+            
+            if (listHoaDon.get(a).getStatus()==1){
+                chkTrangThai.setChecked(true);
+            }else {
+                chkTrangThai.setChecked(false);
+            }
+
+            edTienMat.setText(listHoaDon.get(a).getLost_total() + "");
+            edGhiChu.setText(listHoaDon.get(a).getNote());
+            tv_tienPhong.setText(listHoaDon.get(a).getRoom_total() + " VNĐ");
+            tv_tongTien.setText("Tổng tiền hóa đơn: " + listHoaDon.get(a).getBill_total() + " VNĐ");
+
+
+
+            btnCancel.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Toast.makeText(context, "Bấm hủy", Toast.LENGTH_SHORT).show();
+                    dialog.dismiss();
+                }
+            });
+
+            btn_refresh.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                    String tuNgay = edTuNgayHD.getText().toString();
+                    String denNgay = edDenNgayHD.getText().toString();
+                    if (tuNgay.isEmpty() || denNgay.isEmpty()) {
+                        Toast.makeText(getActivity(), "Không được để trống", Toast.LENGTH_SHORT).show();
+
+                    } else {
+                        String[] temptungay = tuNgay.split("/");
+                        String[] tempdenngay = denNgay.split("/");
+
+                        String newTungay = "";
+                        String newdenngay = "";
+
+
+                        int inttungay = Integer.parseInt(newTungay.concat(temptungay[0]));
+                        int intdenngay = Integer.parseInt(newdenngay.concat(tempdenngay[0]));
+                        Log.d("zzzzz", "số ngày: " + (intdenngay - inttungay));
+                        soNgay = intdenngay - inttungay;
+
+
+                        if (inttungay > intdenngay) {
+                            Toast.makeText(getActivity(), "Lỗi, từ ngày phải bé hơn đến ngày", Toast.LENGTH_SHORT).show();
+                        } else {
+                            tienDenBu = Integer.parseInt(String.valueOf(edTienMat.getText()));
+                            tongTienPhong = tienPhong * soNgay;
+                            tongTien = tongTienPhong + tienDV + tienDenBu;
+                            tv_tongTien.setText("Tổng tiền hóa đơn: " + tongTien + " VNĐ");
+//                            tv_tienPhong.setText(tongTienPhong + " VNĐ");
+
+                        }
+                    }
+
+
+                }
+            });
+
+            btnAdd.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    tienDenBu = Integer.parseInt(String.valueOf(edTienMat.getText()));
+                    tongTien = tongTienPhong + tienDV + tienDenBu;
+                    tv_tongTien.setText("Tổng tiền hóa đơn: " + tongTien + " VNĐ");
+                    if (edTuNgayHD.getText().length() == 0 || edDenNgayHD.getText().length() == 0 || edTienMat.getText().length() == 0) {
+                        Toast.makeText(getContext(), "Hãy nhập đầy đủ thông tin", Toast.LENGTH_SHORT).show();
+                    }else {
+                        hoaDon = new HoaDon();
+                        hoaDon.setId(listHoaDon.get(a).getId());
+                        hoaDon.setManager_id(user);
+                        hoaDon.setGuest_id(Integer.parseInt(maKhacHang));
+                        hoaDon.setRoom_id(Integer.parseInt(maPhong));
+                        hoaDon.setStart_date(edTuNgayHD.getText().toString());
+                        hoaDon.setEnd_date(edDenNgayHD.getText().toString());
+                        hoaDon.setService_total(tienDV);
+                        hoaDon.setRoom_total(tongTienPhong);
+                        hoaDon.setLost_total(Integer.parseInt(String.valueOf(edTienMat.getText())));
+                        if (chkTrangThai.isChecked()) {
+                            hoaDon.setStatus(1);
+                        } else {
+                            hoaDon.setStatus(0);
+                        }
+                        hoaDon.setNote(String.valueOf(edGhiChu.getText()));
+                        hoaDon.setBill_date(listHoaDon.get(a).getBill_date());
+                        hoaDon.setBill_total(tongTien);
+
+                        Log.d(TAG, "id ql: "+user);
+                        Log.d(TAG, "ma kh: "+maKhacHang);
+                        Log.d(TAG, "ma phong: "+maPhong);
+                        Log.d(TAG, "start: "+edTuNgayHD.getText().toString());
+                        Log.d(TAG, "end: "+edDenNgayHD.getText().toString());
+                        Log.d(TAG, "tien dv: "+tienDV);
+                        Log.d(TAG, "tien phong: "+tongTienPhong);
+                        Log.d(TAG, "tien den bu: "+edTienMat.getText());
+                        Log.d(TAG, "note: "+edGhiChu.getText());
+                        Log.d(TAG, "ngay tao hd: "+listHoaDon.get(a).getBill_date());
+                        Log.d(TAG, "tong tien: "+tongTien);
+
+
+                        if (hoaDonDAO.update(hoaDon) > 0) {
+                            Toast.makeText(getActivity(), "Sửa thành công", Toast.LENGTH_LONG).show();
+                            listHoaDon.clear();
+                            listHoaDon.addAll(hoaDonDAO.getAll());
+                            hoaDonAdapter.notifyDataSetChanged();
+                            dialog.dismiss();
+                            loadTable();
+                        } else {
+                            Toast.makeText(getActivity(), "Sửa thất bại", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                }
+            });
+
+
+        }
+
 
         dialog.show();
-    }
-    public int validate(){
-        int check =1;
-        if (edTuNgayHD.getText().length()==0 || edDenNgayHD.getText().length()==0||edTienMat.getText().length()==0){
-            Toast.makeText(getContext(),"Hãy nhập đầy đủ thông tin",Toast.LENGTH_SHORT).show();
-            check = -1;
-        }
-        return check;
+
     }
 }
+

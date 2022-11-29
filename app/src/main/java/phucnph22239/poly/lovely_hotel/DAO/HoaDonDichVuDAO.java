@@ -5,12 +5,14 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import phucnph22239.poly.lovely_hotel.DTO.HoaDon;
 import phucnph22239.poly.lovely_hotel.DTO.HoaDonDichVu;
+import phucnph22239.poly.lovely_hotel.DTO.Phong;
 import phucnph22239.poly.lovely_hotel.Database.DbHelper;
 
 public class HoaDonDichVuDAO {
@@ -45,10 +47,29 @@ public class HoaDonDichVuDAO {
         String sql = "SELECT * FROM Service_bills";
         return getData(sql);
     }
-    public List<HoaDonDichVu> getId(){
+    public HoaDonDichVu getId(String id){
         String sql = "SELECT * FROM Service_bills WHERE id=?";
-        return getData(sql);
+        List<HoaDonDichVu> list=getData(sql,id);
+        return list.get(0);
     }
+
+
+    @SuppressLint("Range")
+    public int getTienDV(String...bill_id ){
+        String getDoanhThuTongTien = "SELECT SUM(total) as tienDV FROM Service_bills WHERE bill_id =?";
+        List<Integer> list = new ArrayList<>();
+        Cursor c = db.rawQuery(getDoanhThuTongTien,bill_id);
+        while (c.moveToNext()){
+            try {
+                list.add(Integer.parseInt(c.getString(c.getColumnIndex("tienDV"))));
+            }catch (Exception e){
+                Log.d("zzzz", "getTienDV: "+e);
+                list.add(0);
+            }
+        }
+        return list.get(0);
+    }
+
 
     @SuppressLint("Range")
     private List<HoaDonDichVu> getData(String sql, String...selectionArgs) {
