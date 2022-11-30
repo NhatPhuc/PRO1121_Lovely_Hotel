@@ -17,6 +17,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+
 import java.util.ArrayList;
 
 import phucnph22239.poly.lovely_hotel.DAO.HoaDonDAO;
@@ -31,17 +33,22 @@ import phucnph22239.poly.lovely_hotel.click_interface.HoaDonClick;
 
 public class HoaDonAdapter extends RecyclerView.Adapter<HoaDonAdapter.HoaDonViewHolder>{
     private Context context;
-    private ArrayList<HoaDon> list;
+    private ArrayList<HoaDon> arrayList;
+
     private HoaDonClick hoaDonClick;
-
-    public HoaDonAdapter(Context context,ArrayList<HoaDon> list){
-        this.context= context;
-        this.list = list;
-    }
-
     public void setHoaDonClick(HoaDonClick hoaDonClick) {
         this.hoaDonClick = hoaDonClick;
     }
+
+    public HoaDonAdapter(Context context){
+        this.context= context;
+    }
+
+    public void setData(ArrayList<HoaDon> arrayList){
+        this.arrayList = arrayList;
+        notifyDataSetChanged();
+    }
+
 
     @NonNull
     @Override
@@ -52,7 +59,7 @@ public class HoaDonAdapter extends RecyclerView.Adapter<HoaDonAdapter.HoaDonView
 
     @Override
     public void onBindViewHolder(@NonNull HoaDonViewHolder holder, int position) {
-        HoaDon hoaDon = list.get(position);
+        HoaDon hoaDon = arrayList.get(position);
 
         KhachHangDAO khachHangDAO = new KhachHangDAO(context);
         KhachHang khachHang = khachHangDAO.getID(String.valueOf(hoaDon.getGuest_id()));
@@ -81,18 +88,13 @@ public class HoaDonAdapter extends RecyclerView.Adapter<HoaDonAdapter.HoaDonView
         holder.tv_ghiChu.setText("Ghi chú: "+hoaDon.getNote());
         holder.tv_tongTien.setText("Tổng tiền hóa đơn: "+hoaDon.getBill_total()+" VNĐ");
 
-//        holder.itemView.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//
-//            }
-//        });
+
 
     }
 
     @Override
     public int getItemCount() {
-        return list.size();
+        return arrayList.size();
     }
 
     public class HoaDonViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
@@ -111,13 +113,18 @@ public class HoaDonAdapter extends RecyclerView.Adapter<HoaDonAdapter.HoaDonView
             tv_tienDV = itemView.findViewById(R.id.tv_bill_service_total);
             tv_ghiChu = itemView.findViewById(R.id.tv_bill_note);
             tv_tongTien = itemView.findViewById(R.id.tv_bill_total);
-            itemView.setOnClickListener(this::onClick);
+            itemView.setOnClickListener(this);
         }
+
 
 
         @Override
         public void onClick(View v) {
-            hoaDonClick.onClick(v,getAdapterPosition());
+            try {
+                hoaDonClick.onClick(v,getAdapterPosition());
+            }catch (Exception e){
+                Log.d("zzzzz", "click hoa don: "+ e);
+            }
         }
     }
 }

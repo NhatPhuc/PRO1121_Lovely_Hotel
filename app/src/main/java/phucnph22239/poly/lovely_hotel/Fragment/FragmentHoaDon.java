@@ -134,6 +134,10 @@ public class FragmentHoaDon extends Fragment {
         listPhong  = new ArrayList<>();
         phongDao = new PhongDao(getActivity());
 
+        hoaDonDAO = new HoaDonDAO(getActivity());
+        hoaDonAdapter = new HoaDonAdapter(getActivity());
+
+
         loadTable();
 
         fabAdd.setOnClickListener(new View.OnClickListener() {
@@ -148,17 +152,20 @@ public class FragmentHoaDon extends Fragment {
             public void onClick(View view, int position) {
                 a = position;
                 Log.d("zzzzz", "onClick: "+position);
-                listHoaDon = hoaDonDAO.getAll();
+//                loadTable();
                 openDialogHN(getContext(),1);
             }
         });
 
+
+
+
+
     }
 
     private void loadTable(){
-        hoaDonDAO = new HoaDonDAO(getActivity());
         listHoaDon = hoaDonDAO.getAll();
-        hoaDonAdapter = new HoaDonAdapter(getActivity(), (ArrayList<HoaDon>) listHoaDon);
+        hoaDonAdapter.setData((ArrayList<HoaDon>) listHoaDon);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setAdapter(hoaDonAdapter);
     }
@@ -199,6 +206,8 @@ public class FragmentHoaDon extends Fragment {
         window.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         Button btnAdd = dialog.findViewById(R.id.btn_luuhd);
         Button btnCancel = dialog.findViewById(R.id.btn_huyhd);
+
+
 
         btnTuNgayHD = dialog.findViewById(R.id.img_bill_start_date);
         btnDenNgayHD = dialog.findViewById(R.id.img_bill_end_date);
@@ -448,6 +457,7 @@ public class FragmentHoaDon extends Fragment {
                 }
             });
         } else if (type == 1) {
+//            loadTable();
             listHoaDon = hoaDonDAO.getAll();
             btnAdd.setText("Sửa");
             HoaDonDichVuDAO hoaDonDichVuDAO = new HoaDonDichVuDAO(context);

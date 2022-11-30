@@ -60,6 +60,7 @@ public class HoaDonDAO {
         String sql = "SELECT * FROM Bills";
         return getData(sql);
     }
+
     public HoaDon getId(String id){
         String sql = "SELECT * FROM Bills WHERE id=?";
         List<HoaDon> list=getData(sql,id);
