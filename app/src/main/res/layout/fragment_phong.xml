@@ -21,14 +21,14 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rcv_phong"
-        android:layout_width="match_parent"
-        android:layout_height="570dp"
+        android:layout_width="409dp"
+        android:layout_height="609dp"
         android:layout_marginBottom="4dp"
 
+        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
         tools:listitem="@layout/item_phong" />
 
     <LinearLayout
@@ -39,13 +39,13 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <SearchView
-            android:id="@+id/sv_tim_phong"
-            android:layout_width="match_parent"
-            android:layout_height="49dp"
-            android:layout_margin="10dp"
-            android:background="@drawable/custom_edittext"
-            app:layout_constraintBottom_toTopOf="@+id/rcv_phong" />
+<!--        <SearchView-->
+<!--            android:id="@+id/sv_tim_phong"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="49dp"-->
+<!--            android:layout_margin="10dp"-->
+<!--            android:background="@drawable/custom_edittext"-->
+<!--            app:layout_constraintBottom_toTopOf="@+id/rcv_phong" />-->
     </LinearLayout>
 
 

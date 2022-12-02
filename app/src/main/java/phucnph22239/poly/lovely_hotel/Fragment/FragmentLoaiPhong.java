@@ -62,10 +62,16 @@ public class FragmentLoaiPhong extends Fragment {
                 View view1 = LayoutInflater.from(getContext()).inflate(R.layout.dialog_loai_phong, null);
                 builder.setView(view1);
                 Dialog dialog = builder.create();
+                Window window = dialog.getWindow();
+                if(window==null){
+                    return;
+                }
+                window.setLayout(WindowManager.LayoutParams.MATCH_PARENT,WindowManager.LayoutParams.WRAP_CONTENT);
+                window.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
                 dialog.show();
                 ed_loaiphong=view1.findViewById(R.id.ed_loaiphong);
                 btn_themlp=view1.findViewById(R.id.btn_themlp);
-                btn_themlp.setText("sửa");
+                btn_themlp.setText("Cập nhật");
                 btn_huylp=view1.findViewById(R.id.btn_huylp);
                 ed_loaiphong.getEditText().setText(loaiPhong.getName());
                 btn_themlp.setOnClickListener(new View.OnClickListener() {
@@ -76,13 +82,13 @@ public class FragmentLoaiPhong extends Fragment {
                         } else {
                             loaiPhong.setName(ed_loaiphong.getEditText().getText().toString());
                             if (loaiphongDAO.update(loaiPhong) > 0) {
-                                Toast.makeText(getContext(), "Sửa loại sách thành công", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getContext(), "Cập nhật loại sách thành công", Toast.LENGTH_SHORT).show();
                                 ed_loaiphong.getEditText().setText("");
                                 list.clear();
                                 list.addAll(loaiphongDAO.getAll());
                                 adapter.notifyDataSetChanged();
                             } else {
-                                Toast.makeText(getContext(), "Sửa loại sách thất bại", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getContext(), "Cập nhật loại sách thất bại", Toast.LENGTH_SHORT).show();
                             }
                         }
                     }

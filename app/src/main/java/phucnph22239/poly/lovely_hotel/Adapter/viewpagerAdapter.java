@@ -25,11 +25,11 @@ public class viewpagerAdapter extends FragmentStatePagerAdapter {
         Fragment fragment = null;
         switch (position){
             case 0:
-                return new FragmentTabPhong();
-            case 1:
                 return new FragmentHoaDon();
-            case 2:
+            case 1:
                 return new FragmentTabDichVu();
+            case 2:
+                return new FragmentTabPhong();
             case 3:
                 return new Fragment_khachhang();
             case 4:

@@ -57,7 +57,7 @@ public class HoaDonDAO {
     }
 
     public List<HoaDon> getAll(){
-        String sql = "SELECT * FROM Bills";
+        String sql = "SELECT * FROM Bills ORDER BY bill_date DESC";
         return getData(sql);
     }
 

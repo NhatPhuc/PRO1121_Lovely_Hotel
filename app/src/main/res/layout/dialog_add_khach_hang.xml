@@ -71,13 +71,13 @@
             android:layout_height="wrap_content">
             <Button
                 android:id="@+id/btnAdd_KH"
-                android:text="ADD"
+                android:text="Cập nhật"
                 android:layout_weight="1"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"/>
             <Button
                 android:id="@+id/btnCancel"
-                android:text="Cancel"
+                android:text="Hủy"
                 android:layout_weight="1"
                 android:layout_width="0dp"
                 android:layout_marginLeft="20dp"

@@ -160,7 +160,7 @@ public class LoaiDichVuAdapter extends RecyclerView.Adapter<LoaiDichVuAdapter.Lo
         Button btncancel = dialog.findViewById(R.id.btn_huydv);
 
         tvTitle.setText("Sửa Dịch Vụ");
-        btnadd.setText("Xác Nhận");
+        btnadd.setText("Cập nhật");
         btncancel.setText("Hủy");
 
         loaiDichVuDao = new LoaiDichVuDao(context);
@@ -189,9 +189,9 @@ public class LoaiDichVuAdapter extends RecyclerView.Adapter<LoaiDichVuAdapter.Lo
                         list.addAll(loaiDichVuDao.getAll());
                         notifyDataSetChanged();
 
-                        Toast.makeText(context, "Sửa thành công", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(context, "Cập nhật thành công", Toast.LENGTH_SHORT).show();
                     }else {
-                        Toast.makeText(context, "Sửa thất bại", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(context, "Cập nhật thất bại", Toast.LENGTH_SHORT).show();
                     }
                 }else {
                     temp=0;

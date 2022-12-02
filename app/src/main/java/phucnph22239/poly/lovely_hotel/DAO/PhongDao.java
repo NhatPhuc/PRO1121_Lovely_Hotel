@@ -67,9 +67,22 @@ public class PhongDao {
         List<Phong> list=getDaTa(sql,id);
         return list.get(0);
     }
-    public List<Phong> getAllstatus(){
-        String sql="select * from Rooms WHERE ";
-        return getDaTa(sql);
+
+
+
+//    String sql="SELECT * FROM Rooms WHERE name = " +
+//            "(SELECT name FROM Rooms " +
+//            "WHERE id = (SELECT room_id FROM Bills  " +
+//            "WHERE (start_date NOT BETWEEN ? AND ?) " +
+//            "AND (end_date NOT BETWEEN ? AND ?)))";
+
+    public List<Phong> getAllDatPhong(String tuNgayBD, String denNgayBD,String tuNgayKT,String denNgayKT){
+        String sql="SELECT * FROM Rooms WHERE id = " +
+                "(SELECT room_id FROM Bills  " +
+                "WHERE (start_date NOT BETWEEN ? AND ?) " +
+                "AND (end_date NOT BETWEEN ? AND ?))";
+        List<Phong> list = getDaTa(sql,tuNgayBD,denNgayBD,tuNgayKT,denNgayKT);
+        return list;
     }
 
     public int delete(int id){
