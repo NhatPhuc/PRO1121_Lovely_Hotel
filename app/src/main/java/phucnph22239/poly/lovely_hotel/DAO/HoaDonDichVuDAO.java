@@ -44,7 +44,7 @@ public class HoaDonDichVuDAO {
     }
 
     public List<HoaDonDichVu> getAll(){
-        String sql = "SELECT * FROM Service_bills";
+        String sql = "SELECT * FROM Service_bills ORDER BY service_date DESC";
         return getData(sql);
     }
     public HoaDonDichVu getId(String id){

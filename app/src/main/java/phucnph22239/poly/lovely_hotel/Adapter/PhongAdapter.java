@@ -147,16 +147,16 @@ public class PhongAdapter extends RecyclerView.Adapter<PhongAdapter.phongViewHol
             }
         });
 
-        holder.btn_datphong.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                try {
-                    fragmentHoaDon.openDialogHN(context,0);
-                }catch (Exception e){
-                    Log.d(TAG, "onClick dat phong: error "+ e);
-                }
-            }
-        });
+//        holder.btn_datphong.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                try {
+//                    fragmentHoaDon.openDialogHN(context,0);
+//                }catch (Exception e){
+//                    Log.d(TAG, "onClick dat phong: error "+ e);
+//                }
+//            }
+//        });
 
 
 
@@ -257,7 +257,7 @@ public class PhongAdapter extends RecyclerView.Adapter<PhongAdapter.phongViewHol
             item_phong_giaphong=itemView.findViewById(R.id.item_phong_giaphong);
             item_phong_loaiphong=itemView.findViewById(R.id.item_phong_loaiphong);
             imageView = itemView.findViewById(R.id.id_delete);
-            btn_datphong=itemView.findViewById(R.id.btn_datphong);
+//            btn_datphong=itemView.findViewById(R.id.btn_datphong);
         }
     }
 }

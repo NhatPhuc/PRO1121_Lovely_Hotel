@@ -1,6 +1,7 @@
 package phucnph22239.poly.lovely_hotel.Adapter;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -48,16 +49,15 @@ public class SpinnerHoaDonAdapter extends ArrayAdapter<HoaDon> {
             tvspntenkhachhang = holder.findViewById(R.id.item_spn_hoa_don_ten_khach_hang);
             tvtungay = holder.findViewById(R.id.item_spn_hoa_don_tu_ngay);
             tvdenngay = holder.findViewById(R.id.item_spn_hoa_don_den_ngay);
-            HoaDonDAO hoaDonDAO = new HoaDonDAO(context);
+
+            tvtungay.setText("Từ ngày: "+obj.getStart_date());
+            tvdenngay.setText("Đến ngày: "+obj.getEnd_date());
 
             PhongDao phongDao = new PhongDao(context);
             tvspntenphong.setText("Phòng: "+phongDao.getID(String.valueOf(obj.getRoom_id())).getName()) ;
 
             KhachHangDAO khachHangDAO = new KhachHangDAO(context);
             tvspntenkhachhang.setText("Khách hàng: "+khachHangDAO.getID(String.valueOf(obj.getGuest_id())).getName());
-
-            tvtungay.setText("Từ ngày: "+obj.getStart_date());
-            tvdenngay.setText("Đến ngày: "+obj.getEnd_date());
 
 
         }
@@ -77,16 +77,19 @@ public class SpinnerHoaDonAdapter extends ArrayAdapter<HoaDon> {
         if (obj != null){
             tvspntenphong = holder.findViewById(R.id.item_spn_hoa_don_ten_phong);
             tvspntenkhachhang = holder.findViewById(R.id.item_spn_hoa_don_ten_khach_hang);
-            HoaDonDAO hoaDonDAO = new HoaDonDAO(context);
+            tvtungay = holder.findViewById(R.id.item_spn_hoa_don_tu_ngay);
+            tvdenngay = holder.findViewById(R.id.item_spn_hoa_don_den_ngay);
+
+            tvtungay.setText("Từ ngày: "+obj.getStart_date());
+            tvdenngay.setText("Đến ngày: "+obj.getEnd_date());
 
             PhongDao phongDao = new PhongDao(context);
-            tvspntenphong.setText("Phòng: "+phongDao.getID(String.valueOf(obj.getRoom_id())).getName());
+            tvspntenphong.setText("Phòng : "+phongDao.getID(String.valueOf(obj.getRoom_id())).getName());
 
             KhachHangDAO khachHangDAO = new KhachHangDAO(context);
             tvspntenkhachhang.setText("Khách hàng: "+khachHangDAO.getID(String.valueOf(obj.getGuest_id())).getName());
 
-            tvtungay.setText("Từ ngày: "+obj.getStart_date());
-            tvdenngay.setText("Đến ngày: "+obj.getEnd_date());
+
         }
         return holder;
     }
