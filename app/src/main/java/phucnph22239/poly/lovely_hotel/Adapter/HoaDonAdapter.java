@@ -61,6 +61,14 @@ public class HoaDonAdapter extends RecyclerView.Adapter<HoaDonAdapter.HoaDonView
     public void onBindViewHolder(@NonNull HoaDonViewHolder holder, int position) {
         HoaDon hoaDon = arrayList.get(position);
 
+        if (hoaDon.getStatus()==1){
+            holder.tv_trangThai.setText("Đã trả phòng");
+            holder.tv_trangThai.setTextColor(Color.GREEN);
+        }else{
+            holder.tv_trangThai.setText("Chưa Trả Phòng");
+            holder.tv_trangThai.setTextColor(Color.RED);
+        }
+
         KhachHangDAO khachHangDAO = new KhachHangDAO(context);
         KhachHang khachHang = khachHangDAO.getID(String.valueOf(hoaDon.getGuest_id()));
         holder.tv_tenKhach.setText("Tên khách hàng: "+khachHang.getName());
@@ -73,15 +81,6 @@ public class HoaDonAdapter extends RecyclerView.Adapter<HoaDonAdapter.HoaDonView
         holder.tv_ngayBD.setText("Từ: "+ hoaDon.getStart_date());
         holder.tv_ngayKT.setText("Đến: "+hoaDon.getEnd_date());
         holder.tv_ngayHD.setText("Ngày tạo hóa đơn: "+hoaDon.getBill_date());
-
-
-        if (hoaDon.getStatus()==1){
-            holder.tv_trangThai.setText("Đã trả phòng");
-            holder.tv_trangThai.setTextColor(Color.GREEN);
-        }else{
-            holder.tv_trangThai.setText("Chưa Trả Phòng");
-            holder.tv_trangThai.setTextColor(Color.RED);
-        }
 
         holder.tv_tienMat.setText("Tiền đền bù: \n"+hoaDon.getLost_total()+" VNĐ");
         holder.tv_tienDV.setText("Tiền dịch vụ: \n"+hoaDon.getService_total()+" VNĐ");

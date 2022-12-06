@@ -21,6 +21,7 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.DatePicker;
@@ -124,11 +125,14 @@ public class FragmentHoaDon extends Fragment {
 
     Button btn_timPhong;
 
+    Spinner spn_trang_thai;
+
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         recyclerView = view.findViewById(R.id.rcv_hoa_don);
         fabAdd = view.findViewById(R.id.btn_add_hoa_don);
+        spn_trang_thai = view.findViewById(R.id.spinner_status_hd);
 
         listKhachHang = new ArrayList<>();
         khachHangDAO = new KhachHangDAO(getActivity());
@@ -154,22 +158,45 @@ public class FragmentHoaDon extends Fragment {
             public void onClick(View view, int position) {
                 a = position;
                 Log.d("zzzzz", "onClick: "+position);
-//                loadTable();
                 openDialogHN(getContext(),1);
             }
         });
 
 
 
-
-
     }
 
     private void loadTable(){
-        listHoaDon = hoaDonDAO.getAll();
-        hoaDonAdapter.setData((ArrayList<HoaDon>) listHoaDon);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        recyclerView.setAdapter(hoaDonAdapter);
+
+        ArrayAdapter<CharSequence> spinnerAdapter = ArrayAdapter.createFromResource(getActivity(),R.array.trang_thai_hd,android.R.layout.simple_spinner_item);
+        spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spn_trang_thai.setAdapter(spinnerAdapter);
+        spn_trang_thai.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                if (position==0){
+                    //chưa trả phòng
+                    listHoaDon = hoaDonDAO.getAllstatus0();
+                    hoaDonAdapter.setData((ArrayList<HoaDon>) listHoaDon);
+                    recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+                    recyclerView.setAdapter(hoaDonAdapter);
+                }else if (position==1){
+                    //đã trả phòng
+                    listHoaDon = hoaDonDAO.getAllstatus1();
+                    hoaDonAdapter.setData((ArrayList<HoaDon>) listHoaDon);
+                    recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+                    recyclerView.setAdapter(hoaDonAdapter);
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+
+
     }
 
     DatePickerDialog.OnDateSetListener mDateTuNgay = new DatePickerDialog.OnDateSetListener() {
@@ -228,7 +255,7 @@ public class FragmentHoaDon extends Fragment {
 
         btn_timPhong = dialog.findViewById(R.id.btn_tim_phong);
 
-        listHoaDon = hoaDonDAO.getAll();
+//        listHoaDon = hoaDonDAO.getAll();
 
         listPhong = phongDao.getAll();
 
@@ -259,58 +286,66 @@ public class FragmentHoaDon extends Fragment {
             }
         });
 
+        spnPhong.setVisibility(View.INVISIBLE);
+        spinnerPhongAdapter = new SpinnerPhongAdapter(context, (ArrayList<Phong>) phongDao.getAll());
+        spnPhong.setAdapter(spinnerPhongAdapter);
         btn_timPhong.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 tuNgay = edTuNgayHD.getText().toString();
                 denNgay = edDenNgayHD.getText().toString();
-//                spinnerPhongAdapter = new SpinnerPhongAdapter(context, (ArrayList<Phong>) phongDao.getAllDatPhong(tuNgay,denNgay,tuNgay,denNgay));
-                spinnerPhongAdapter = new SpinnerPhongAdapter(context, (ArrayList<Phong>) phongDao.getAll());
-                spnPhong.setAdapter(spinnerPhongAdapter);
-                spnPhong.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                    @Override
-                    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                        maPhong = String.valueOf(listPhong.get(position).getId());
+                if (tuNgay.length() == 0 || denNgay.length() == 0){
+                    Toast.makeText(getActivity(),"Hãy chọn ngày",Toast.LENGTH_LONG).show();
+                }else{
+//                    spinnerPhongAdapter = new SpinnerPhongAdapter(context, (ArrayList<Phong>) phongDao.getAllDatPhong(tuNgay,denNgay,tuNgay,denNgay));
+                    
+                    spnPhong.setVisibility(View.VISIBLE);
+                    spnPhong.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                        @Override
+                        public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                            maPhong = String.valueOf(listPhong.get(position).getId());
 
-                        phong = phongDao.getAll().get(position);
+                            phong = phongDao.getAll().get(position);
 
-                        if (tuNgay.isEmpty() || denNgay.isEmpty()) {
-                            Toast.makeText(getActivity(), "Hãy nhập ngày", Toast.LENGTH_SHORT).show();
+                            if (tuNgay.isEmpty() || denNgay.isEmpty()) {
+                                Toast.makeText(getActivity(), "Hãy chọn ngày", Toast.LENGTH_SHORT).show();
 
-                        } else {
-                            String[] temptungay = tuNgay.split("/");
-                            String[] tempdenngay = denNgay.split("/");
+                            } else {
+                                String[] temptungay = tuNgay.split("/");
+                                String[] tempdenngay = denNgay.split("/");
 
-                            String newTungay = "";
-                            String newdenngay = "";
-
-
-                            int inttungay = Integer.parseInt(newTungay.concat(temptungay[0]));
-                            int intdenngay = Integer.parseInt(newdenngay.concat(tempdenngay[0]));
-                            Log.d("zzzzz", "số ngày: " + (intdenngay - inttungay));
-                            soNgay = intdenngay - inttungay;
+                                String newTungay = "";
+                                String newdenngay = "";
 
 
-                            if (inttungay > intdenngay) {
-                                Toast.makeText(getActivity(), "Lỗi, từ ngày phải bé hơn đến ngày", Toast.LENGTH_SHORT).show();
+                                int inttungay = Integer.parseInt(newTungay.concat(temptungay[0]));
+                                int intdenngay = Integer.parseInt(newdenngay.concat(tempdenngay[0]));
+                                Log.d("zzzzz", "số ngày: " + (intdenngay - inttungay));
+                                soNgay = intdenngay - inttungay;
 
+
+                                if (inttungay > intdenngay) {
+                                    Toast.makeText(getActivity(), "Lỗi, từ ngày phải bé hơn đến ngày", Toast.LENGTH_SHORT).show();
+
+                                }
                             }
+
+                            tienPhong = phong.getPrice();
+                            tongTienPhong = tienPhong * soNgay;
+                            Log.d("zzzzz", "onItemSelected: " + soNgay);
+
+                            tv_tienPhong.setText(tongTienPhong + " VNĐ");
+
+                            tongTien = tongTienPhong + tienDV;
                         }
 
-                        tienPhong = phong.getPrice();
-                        tongTienPhong = tienPhong * soNgay;
-                        Log.d("zzzzz", "onItemSelected: " + soNgay);
+                        @Override
+                        public void onNothingSelected(AdapterView<?> parent) {
 
-                        tv_tienPhong.setText(tongTienPhong + " VNĐ");
-
-                        tongTien = tongTienPhong + tienDV;
-                    }
-
-                    @Override
-                    public void onNothingSelected(AdapterView<?> parent) {
-
-                    }
-                });
+                        }
+                    });
+                }
+//
 
             }
         });
@@ -322,7 +357,6 @@ public class FragmentHoaDon extends Fragment {
         spnKhachHang.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                listKhachHang = khachHangDAO.getAll();
                 maKhacHang = String.valueOf(listKhachHang.get(position).getId());
             }
 
@@ -463,13 +497,29 @@ public class FragmentHoaDon extends Fragment {
             });
         } else if (type == 1) {
             btn_refresh.performClick();
-            listHoaDon = hoaDonDAO.getAll();
-            btnAdd.setText("Sửa");
+            btnAdd.setText("Cập nhật");
+            btn_timPhong.performClick();
+            btn_timPhong.setEnabled(false);
             HoaDonDichVuDAO hoaDonDichVuDAO = new HoaDonDichVuDAO(context);
             hoaDon = hoaDonDAO.getAll().get(a);
             int maHD = listHoaDon.get(a).getId();
             Log.d(TAG, "openDialogHN: ma hoa don "+maHD);
 
+            for (int i = 0; i < spnKhachHang.getCount(); i++) {
+                if (listKhachHang.get(i).getId() == listHoaDon.get(a).getGuest_id()) {
+                    Log.d(TAG, "openDialogHN kh: "+i);
+                    spnKhachHang.setSelection(i);
+                    maKhacHang = String.valueOf(listKhachHang.get(i).getId());
+                }
+            }
+
+            for (int i = 0; i < spnPhong.getCount(); i++) {
+                if (listPhong.get(i).getId() == listHoaDon.get(a).getRoom_id()) {
+                    Log.d(TAG, "openDialogHN p: "+i);
+                    spnPhong.setSelection(i);
+                    maPhong = String.valueOf(listPhong.get(i).getId());
+                }
+            }
 
             tienDV = hoaDonDichVuDAO.getTienDV(String.valueOf(maHD));
             Log.d(TAG, "tien dv = "+tienDV);
@@ -479,22 +529,9 @@ public class FragmentHoaDon extends Fragment {
             edTuNgayHD.setText(listHoaDon.get(a).getStart_date());
             edDenNgayHD.setText(listHoaDon.get(a).getEnd_date());
 
-
-            for (int i = 0; i < spnPhong.getCount(); i++) {
-                if (listHoaDon.get(a).getRoom_id() == listPhong.get(i).getId()) {
-                    spnPhong.setSelection(i);
-                    maPhong = String.valueOf(listPhong.get(i).getId());
-                }
-            }
+            spnKhachHang.setEnabled(false);
             spnPhong.setEnabled(false);
 
-            for (int i = 0; i < spnKhachHang.getCount(); i++) {
-                if (listHoaDon.get(a).getRoom_id() == listKhachHang.get(i).getId()) {
-                    spnKhachHang.setSelection(i);
-                    maKhacHang = String.valueOf(listKhachHang.get(i).getId());
-                }
-            }
-            spnKhachHang.setEnabled(false);
             btn_timPhong.performClick();
 
             if (listHoaDon.get(a).getStatus()==1){

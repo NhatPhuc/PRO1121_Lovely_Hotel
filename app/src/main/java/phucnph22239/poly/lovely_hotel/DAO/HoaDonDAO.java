@@ -60,6 +60,15 @@ public class HoaDonDAO {
         String sql = "SELECT * FROM Bills ORDER BY bill_date DESC";
         return getData(sql);
     }
+    public List<HoaDon> getAllstatus0(){
+        String sql = "SELECT * FROM Bills WHERE status = 0 ORDER BY bill_date DESC";
+        return getData(sql);
+    }
+    public List<HoaDon> getAllstatus1(){
+        String sql = "SELECT * FROM Bills WHERE status = 1 ORDER BY bill_date DESC";
+        return getData(sql);
+    }
+
 
     public HoaDon getId(String id){
         String sql = "SELECT * FROM Bills WHERE id=?";

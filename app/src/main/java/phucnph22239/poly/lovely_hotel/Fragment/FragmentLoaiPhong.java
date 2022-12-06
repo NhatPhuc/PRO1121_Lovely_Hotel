@@ -87,6 +87,7 @@ public class FragmentLoaiPhong extends Fragment {
                                 list.clear();
                                 list.addAll(loaiphongDAO.getAll());
                                 adapter.notifyDataSetChanged();
+                                dialog.dismiss();
                             } else {
                                 Toast.makeText(getContext(), "Cập nhật loại sách thất bại", Toast.LENGTH_SHORT).show();
                             }
