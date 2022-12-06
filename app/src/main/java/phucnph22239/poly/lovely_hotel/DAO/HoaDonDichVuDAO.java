@@ -53,6 +53,10 @@ public class HoaDonDichVuDAO {
         return list.get(0);
     }
 
+    public int delete(int s){
+        return db.delete("Service_bills","id=?",new String[]{s+""});
+    }
+
 
     @SuppressLint("Range")
     public int getTienDV(String...bill_id ){

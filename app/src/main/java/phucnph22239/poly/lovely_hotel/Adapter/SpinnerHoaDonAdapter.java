@@ -50,8 +50,8 @@ public class SpinnerHoaDonAdapter extends ArrayAdapter<HoaDon> {
             tvtungay = holder.findViewById(R.id.item_spn_hoa_don_tu_ngay);
             tvdenngay = holder.findViewById(R.id.item_spn_hoa_don_den_ngay);
 
-            tvtungay.setText("Từ ngày: "+obj.getStart_date());
-            tvdenngay.setText("Đến ngày: "+obj.getEnd_date());
+            tvtungay.setText("Từ "+obj.getStart_date());
+            tvdenngay.setText("đến "+obj.getEnd_date());
 
             PhongDao phongDao = new PhongDao(context);
             tvspntenphong.setText("Phòng: "+phongDao.getID(String.valueOf(obj.getRoom_id())).getName()) ;
@@ -80,8 +80,8 @@ public class SpinnerHoaDonAdapter extends ArrayAdapter<HoaDon> {
             tvtungay = holder.findViewById(R.id.item_spn_hoa_don_tu_ngay);
             tvdenngay = holder.findViewById(R.id.item_spn_hoa_don_den_ngay);
 
-            tvtungay.setText("Từ ngày: "+obj.getStart_date());
-            tvdenngay.setText("Đến ngày: "+obj.getEnd_date());
+            tvtungay.setText("Từ "+obj.getStart_date());
+            tvdenngay.setText("đến "+obj.getEnd_date());
 
             PhongDao phongDao = new PhongDao(context);
             tvspntenphong.setText("Phòng : "+phongDao.getID(String.valueOf(obj.getRoom_id())).getName());

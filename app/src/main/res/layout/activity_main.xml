@@ -6,7 +6,8 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:id="@+id/content_frag"
-    tools:context=".MainActivity">
+    tools:context=".MainActivity"
+    >
 
     <androidx.viewpager.widget.ViewPager
         android:id="@+id/viewpager"
