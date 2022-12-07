@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -127,6 +128,9 @@ public class FragmentHoaDon extends Fragment {
 
     Spinner spn_trang_thai;
 
+    List<String> loi;
+
+
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -143,13 +147,31 @@ public class FragmentHoaDon extends Fragment {
         hoaDonDAO = new HoaDonDAO(getActivity());
         hoaDonAdapter = new HoaDonAdapter(getActivity());
 
+        loi = new ArrayList<>();
+
 
         loadTable();
 
         fabAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                openDialogHN(getActivity(),0);
+                listPhong = phongDao.getAll();
+
+                listKhachHang = khachHangDAO.getAll();
+
+                if (listKhachHang.size()==0){
+                    loi.add("khách hàng");
+                }
+                if (listPhong.size()==0){
+                    loi.add("phòng");
+                }
+                if (loi.isEmpty()){
+                    openDialogHN(getActivity(),0);
+
+                }else{
+                    Toast.makeText(getActivity(), "Bạn chưa thêm : "+loi, Toast.LENGTH_SHORT).show();
+                    loi = new ArrayList<>();
+                }
             }
         });
 
@@ -257,9 +279,6 @@ public class FragmentHoaDon extends Fragment {
 
 //        listHoaDon = hoaDonDAO.getAll();
 
-        listPhong = phongDao.getAll();
-
-        listKhachHang = khachHangDAO.getAll();
 
         btnTuNgayHD.setOnClickListener(new View.OnClickListener() {
             @Override
