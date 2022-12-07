@@ -80,6 +80,9 @@ public class Fragment_don_dich_vu extends Fragment {
 
     ImageButton btn_refresh;
 
+    List<String> loi;
+
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -89,13 +92,25 @@ public class Fragment_don_dich_vu extends Fragment {
         hoaDonDAO = new HoaDonDAO(getActivity());
         loaiDichVuDao = new LoaiDichVuDao(getActivity());
         hoaDonDichVuDAO = new HoaDonDichVuDAO(getActivity());
+        loi = new ArrayList<>();
+
 
         loadTable();
 
         fab_them_don_dv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                openDialog();
+                listLoaiDichVu = loaiDichVuDao.getAll();
+                if (listLoaiDichVu.size()==0){
+                    loi.add("dịch vụ");
+                }
+                if (loi.isEmpty()){
+                    openDialog();
+                }else{
+                    Toast.makeText(getActivity(), "Bạn chưa thêm : "+loi, Toast.LENGTH_SHORT).show();
+                    loi = new ArrayList<>();
+                }
+
 
             }
         });
@@ -141,12 +156,12 @@ public class Fragment_don_dich_vu extends Fragment {
             }
         });
 
-        spinnerHoaDonAdapter = new SpinnerHoaDonAdapter(getContext(), (ArrayList<HoaDon>) hoaDonDAO.getIdspn());
+        spinnerHoaDonAdapter = new SpinnerHoaDonAdapter(getContext(), (ArrayList<HoaDon>) hoaDonDAO.getAllstatus0());
         dialog_spn_hd_phong.setAdapter(spinnerHoaDonAdapter);
         dialog_spn_hd_phong.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                listHoaDon = hoaDonDAO.getAll();
+                listHoaDon = hoaDonDAO.getAllstatus0();
                 maHoaDon = String.valueOf(listHoaDon.get(position).getId());
             }
 

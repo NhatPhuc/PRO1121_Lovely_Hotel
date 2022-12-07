@@ -76,11 +76,6 @@ public class HoaDonDAO {
         return list.get(0);
     }
 
-    public List<HoaDon> getIdspn(){
-        String sql = "SELECT * FROM Bills WHERE status=0";
-//        List<HoaDon> list=
-        return getData(sql);
-    }
 
 
 
