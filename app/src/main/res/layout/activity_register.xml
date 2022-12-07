@@ -66,6 +66,7 @@
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/ed_pass_register"
             android:layout_width="match_parent"
+            android:inputType="textPassword"
             android:layout_height="50dp">
 
         </com.google.android.material.textfield.TextInputEditText>
@@ -83,6 +84,7 @@
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/ed_repass_register"
             android:layout_width="match_parent"
+            android:inputType="textPassword"
             android:layout_height="50dp">
 
         </com.google.android.material.textfield.TextInputEditText>
