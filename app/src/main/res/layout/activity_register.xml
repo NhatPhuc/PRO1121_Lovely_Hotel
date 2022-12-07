@@ -6,16 +6,16 @@
     android:orientation="vertical"
     android:layout_margin="8dp"
     android:padding="15dp">
+
     <TextView
-        android:gravity="center"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Đăng ký"
-        android:textSize="30dp"
-        android:textStyle="bold"
-        android:textColor="@color/teal_700"
         android:layout_marginBottom="15dp"
-        />
+        android:gravity="center"
+        android:text="Đăng ký"
+        android:textColor="@color/dark_blue"
+        android:textSize="30dp"
+        android:textStyle="bold" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
@@ -66,6 +66,7 @@
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/ed_pass_register"
             android:layout_width="match_parent"
+            android:inputType="textPassword"
             android:layout_height="50dp">
 
         </com.google.android.material.textfield.TextInputEditText>
@@ -83,6 +84,7 @@
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/ed_repass_register"
             android:layout_width="match_parent"
+            android:inputType="textPassword"
             android:layout_height="50dp">
 
         </com.google.android.material.textfield.TextInputEditText>
@@ -94,13 +96,13 @@
         android:text="Đăng ký"
         android:layout_marginTop="20dp"
         />
+
     <TextView
         android:id="@+id/tv_login"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="- Đăng nhập nếu đã có tài khoản -"
-        android:textColor="@color/teal_700"
         android:layout_marginTop="10dp"
+        android:text="- Đăng nhập nếu đã có tài khoản -"
         android:textAlignment="center"
-        />
+        android:textColor="@color/blue" />
 </LinearLayout>

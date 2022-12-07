@@ -60,6 +60,7 @@ public class FragmentPhong extends Fragment {
     SpinnerLoaiPhongAdapter spinnerLoaiPhongAdapter;
     Phong phong ;
 
+    List<String> loi;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -74,13 +75,25 @@ public class FragmentPhong extends Fragment {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                opendialog();
+                listLoaiPhong = loaiphongDAO.getAll();
+                if (listLoaiPhong.size()==0){
+                    loi.add("loại phòng");
+                }
+                if (loi.isEmpty()){
+                    opendialog();
+                }else{
+                    Toast.makeText(getActivity(), "Bạn chưa thêm : "+loi, Toast.LENGTH_SHORT).show();
+                    loi = new ArrayList<>();
+                }
+
             }
         });
         GridLayoutManager gridLayoutManager=new GridLayoutManager(getContext(),2);
         recyclerView.setLayoutManager(gridLayoutManager);
         adapter=new PhongAdapter(getContext(),list);
         recyclerView.setAdapter(adapter);
+        loi = new ArrayList<>();
+
         return view;
 
     }
