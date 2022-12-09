@@ -19,7 +19,7 @@
             android:textSize="20dp"
             android:layout_marginBottom="10dp"
             android:text="id phòng"
-
+            android:textColor="@color/black"
             />
         <TextView
             android:id="@+id/tv_bill_guest"
@@ -28,6 +28,7 @@
             android:textSize="20dp"
             android:layout_marginBottom="10dp"
             android:text="id khách hàng"
+            android:textColor="@color/black"
 
             />
         <LinearLayout
@@ -120,18 +121,31 @@
             android:textSize="20dp"
             android:layout_marginBottom="10dp"
             android:text="tổng tiền "
+            android:textColor="@color/black"
 
             />
 
-        <TextView
-            android:id="@+id/tv_bill_status"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="30dp"
-            android:layout_marginBottom="10dp"
-            android:text="trạng thái phòng"
-            android:textStyle="bold"
-            />
+            android:orientation="vertical">
+            <TextView
+                android:id="@+id/tv_bill_status"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="30dp"
+                android:layout_marginBottom="10dp"
+                android:text="trạng thái phòng"
+                android:textStyle="bold"
+                android:visibility="gone"
+                />
+            <Button
+                android:id="@+id/btn_check_in"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Nhận phòng"/>
+        </LinearLayout>
+
 
     </LinearLayout>
 </androidx.cardview.widget.CardView>

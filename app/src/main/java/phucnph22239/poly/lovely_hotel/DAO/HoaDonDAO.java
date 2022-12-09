@@ -68,6 +68,10 @@ public class HoaDonDAO {
         String sql = "SELECT * FROM Bills WHERE status = 1 ORDER BY bill_date DESC";
         return getData(sql);
     }
+    public List<HoaDon> getAllstatus3(){
+        String sql = "SELECT * FROM Bills WHERE status = 3 ORDER BY bill_date DESC";
+        return getData(sql);
+    }
 
 
     public HoaDon getId(String id){
@@ -76,7 +80,13 @@ public class HoaDonDAO {
         return list.get(0);
     }
 
-
+    public List<HoaDon> getAllIdDaDatPhong(String tuNgayBD, String denNgayBD,String tuNgayKT,String denNgayKT){
+        String sql="SELECT * FROM Bills "+
+                "WHERE (start_date NOT BETWEEN ? AND ?) " +
+                "AND (end_date NOT BETWEEN ? AND ?) )";
+        List<HoaDon> list = getData(sql,tuNgayBD,denNgayBD,tuNgayKT,denNgayKT);
+        return list;
+    }
 
 
     @SuppressLint("Range")

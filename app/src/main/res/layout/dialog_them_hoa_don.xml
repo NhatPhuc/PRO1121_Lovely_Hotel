@@ -76,6 +76,7 @@
                             android:hint="Ngày bắt đầu"
                             android:layout_width="match_parent"
                             android:layout_height="40dp"
+                            android:enabled="false"
                             android:textSize="15dp"/>
                     </LinearLayout>
                     <LinearLayout
@@ -91,12 +92,12 @@
                             android:layout_width="40dp"
                             android:layout_height="40dp"/>
                         <EditText
-
                             android:padding="6dp"
                             android:id="@+id/ed_end_date"
                             android:hint="Ngày kết thúc"
                             android:layout_width="match_parent"
                             android:layout_height="40dp"
+                            android:enabled="false"
                             android:textSize="15dp"/>
                     </LinearLayout>
                 </LinearLayout>
