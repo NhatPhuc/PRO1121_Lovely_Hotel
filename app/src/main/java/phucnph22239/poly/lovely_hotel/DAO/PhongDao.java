@@ -76,14 +76,13 @@ public class PhongDao {
 //            "WHERE (start_date NOT BETWEEN ? AND ?) " +
 //            "AND (end_date NOT BETWEEN ? AND ?)))";
 
-    public List<Phong> getAllDatPhong(String tuNgayBD, String denNgayBD,String tuNgayKT,String denNgayKT){
-        String sql="SELECT * FROM Rooms WHERE id = " +
-                "(SELECT room_id FROM Bills  " +
-                "WHERE (start_date NOT BETWEEN ? AND ?) " +
-                "AND (end_date NOT BETWEEN ? AND ?))";
-        List<Phong> list = getDaTa(sql,tuNgayBD,denNgayBD,tuNgayKT,denNgayKT);
-        return list;
-    }
+//    public List<Phong> getAllIdDaDatPhong(String tuNgayBD, String denNgayBD,String tuNgayKT,String denNgayKT){
+//        String sql="SELECT * FROM Bills "+
+//                "WHERE (start_date NOT BETWEEN ? AND ?) " +
+//                "AND (end_date NOT BETWEEN ? AND ?) )";
+//        List<Phong> list = getDaTa(sql,tuNgayBD,denNgayBD,tuNgayKT,denNgayKT);
+//        return list;
+//    }
 
     public int delete(int id){
         Cursor cursor = db.rawQuery("SELECT * FROM Bills WHERE room_id=?",new String[]{String.valueOf(id)});

@@ -155,10 +155,6 @@ public class FragmentHoaDon extends Fragment {
         fabAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                listPhong = phongDao.getAll();
-
-                listKhachHang = khachHangDAO.getAll();
-
                 if (listKhachHang.size()==0){
                     loi.add("khách hàng");
                 }
@@ -190,19 +186,29 @@ public class FragmentHoaDon extends Fragment {
 
     private void loadTable(){
 
+        listPhong = phongDao.getAll();
+        listKhachHang = khachHangDAO.getAll();
+        listHoaDon = hoaDonDAO.getAll();
+
         ArrayAdapter<CharSequence> spinnerAdapter = ArrayAdapter.createFromResource(getActivity(),R.array.trang_thai_hd,android.R.layout.simple_spinner_item);
         spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spn_trang_thai.setAdapter(spinnerAdapter);
         spn_trang_thai.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                if (position==0){
+                //chưa nhận phòng
+                if (position == 0){
+                    listHoaDon = hoaDonDAO.getAllstatus3();
+                    hoaDonAdapter.setData((ArrayList<HoaDon>) listHoaDon);
+                    recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+                    recyclerView.setAdapter(hoaDonAdapter);
+                }else if (position==1){
                     //chưa trả phòng
                     listHoaDon = hoaDonDAO.getAllstatus0();
                     hoaDonAdapter.setData((ArrayList<HoaDon>) listHoaDon);
                     recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
                     recyclerView.setAdapter(hoaDonAdapter);
-                }else if (position==1){
+                }else if (position==2){
                     //đã trả phòng
                     listHoaDon = hoaDonDAO.getAllstatus1();
                     hoaDonAdapter.setData((ArrayList<HoaDon>) listHoaDon);
@@ -393,6 +399,8 @@ public class FragmentHoaDon extends Fragment {
 
 
         if (type == 0) {
+            edTuNgayHD.setEnabled(true);
+            edDenNgayHD.setEnabled(true);
             edTienMat.setText("0");
 
             tuNgay = edTuNgayHD.getText().toString();
@@ -419,7 +427,6 @@ public class FragmentHoaDon extends Fragment {
 
                 }
             }
-
 
 //        tienDenBu = Integer.parseInt(String.valueOf(edTienMat.getText()));
 
@@ -482,11 +489,13 @@ public class FragmentHoaDon extends Fragment {
                         hoaDon.setService_total(tienDV);
                         hoaDon.setRoom_total(tongTienPhong);
                         hoaDon.setLost_total(Integer.parseInt(String.valueOf(edTienMat.getText())));
-                        if (chkTrangThai.isChecked()) {
-                            hoaDon.setStatus(1);
-                        } else {
-                            hoaDon.setStatus(0);
-                        }
+//                        if (chkTrangThai.isChecked()) {
+//                            hoaDon.setStatus(1);
+//                        } else {
+//                            hoaDon.setStatus(0);
+//                        }
+                        hoaDon.setStatus(3);
+
                         hoaDon.setNote(String.valueOf(edGhiChu.getText()));
                         hoaDon.setBill_date(datetime);
                         hoaDon.setBill_total(tongTien);
@@ -519,6 +528,8 @@ public class FragmentHoaDon extends Fragment {
             btnAdd.setText("Cập nhật");
             btn_timPhong.performClick();
             btn_timPhong.setEnabled(false);
+            btnDenNgayHD.setEnabled(false);
+            btnTuNgayHD.setEnabled(false);
             HoaDonDichVuDAO hoaDonDichVuDAO = new HoaDonDichVuDAO(context);
             hoaDon = hoaDonDAO.getAll().get(a);
             int maHD = listHoaDon.get(a).getId();
@@ -641,18 +652,17 @@ public class FragmentHoaDon extends Fragment {
                         hoaDon.setBill_date(listHoaDon.get(a).getBill_date());
                         hoaDon.setBill_total(tongTien);
 
-                        Log.d(TAG, "id ql: "+user);
-                        Log.d(TAG, "ma kh: "+maKhacHang);
-                        Log.d(TAG, "ma phong: "+maPhong);
-                        Log.d(TAG, "start: "+edTuNgayHD.getText().toString());
-                        Log.d(TAG, "end: "+edDenNgayHD.getText().toString());
-                        Log.d(TAG, "tien dv: "+tienDV);
-                        Log.d(TAG, "tien phong: "+tongTienPhong);
-                        Log.d(TAG, "tien den bu: "+edTienMat.getText());
-                        Log.d(TAG, "note: "+edGhiChu.getText());
-                        Log.d(TAG, "ngay tao hd: "+listHoaDon.get(a).getBill_date());
-                        Log.d(TAG, "tong tien: "+tongTien);
-
+//                        Log.d(TAG, "id ql: "+user);
+//                        Log.d(TAG, "ma kh: "+maKhacHang);
+//                        Log.d(TAG, "ma phong: "+maPhong);
+//                        Log.d(TAG, "start: "+edTuNgayHD.getText().toString());
+//                        Log.d(TAG, "end: "+edDenNgayHD.getText().toString());
+//                        Log.d(TAG, "tien dv: "+tienDV);
+//                        Log.d(TAG, "tien phong: "+tongTienPhong);
+//                        Log.d(TAG, "tien den bu: "+edTienMat.getText());
+//                        Log.d(TAG, "note: "+edGhiChu.getText());
+//                        Log.d(TAG, "ngay tao hd: "+listHoaDon.get(a).getBill_date());
+//                        Log.d(TAG, "tong tien: "+tongTien);
 
                         if (hoaDonDAO.update(hoaDon) > 0) {
                             Toast.makeText(getActivity(), "Sửa thành công", Toast.LENGTH_LONG).show();
@@ -668,9 +678,7 @@ public class FragmentHoaDon extends Fragment {
                 }
             });
 
-
         }
-
 
         dialog.show();
 

@@ -46,9 +46,9 @@
 
     <Spinner
         android:id="@+id/spinner_status_hd"
-        android:layout_width="174dp"
-        android:layout_height="27dp"
-        android:layout_marginEnd="16dp"
+        android:layout_width="228dp"
+        android:layout_height="23dp"
+        android:layout_marginEnd="24dp"
         android:layout_marginBottom="20dp"
         app:layout_constraintBottom_toTopOf="@+id/rcv_hoa_don"
         app:layout_constraintEnd_toEndOf="parent"
@@ -58,13 +58,12 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="48dp"
         android:layout_marginBottom="20dp"
-        android:text="Trạng thái hóa đơn"
+        android:text="Hóa đơn"
         android:textColor="@color/black"
         android:textSize="18dp"
         app:layout_constraintBottom_toTopOf="@+id/rcv_hoa_don"
-        app:layout_constraintEnd_toStartOf="@+id/spinner_status_hd"
-        app:layout_constraintHorizontal_bias="0.459"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1.0" />
