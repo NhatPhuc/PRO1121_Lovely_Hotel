@@ -187,6 +187,7 @@ public class PhongAdapter extends RecyclerView.Adapter<PhongAdapter.phongViewHol
                 spinnerLoaiPhongAdapter = new SpinnerLoaiPhongAdapter(context, (ArrayList<LoaiPhong>) loaiphongDAO.getAll());
                 dialog_spn_loaiphong.setAdapter(spinnerLoaiPhongAdapter);
                 for (int i=0;i<dialog_spn_loaiphong.getCount();i++){
+                    listLoaiPhong = loaiphongDAO.getAll();
                     if (list.get(position).getRoom_type_id() == listLoaiPhong.get(i).getId()){
                         dialog_spn_loaiphong.setSelection(i);
                     }

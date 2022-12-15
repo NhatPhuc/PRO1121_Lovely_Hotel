@@ -57,7 +57,7 @@ public class SpinnerHoaDonAdapter extends ArrayAdapter<HoaDon> {
             tvspntenphong.setText("Phòng: "+phongDao.getID(String.valueOf(obj.getRoom_id())).getName()) ;
 
             KhachHangDAO khachHangDAO = new KhachHangDAO(context);
-            tvspntenkhachhang.setText("Khách hàng: "+khachHangDAO.getID(String.valueOf(obj.getGuest_id())).getName());
+            tvspntenkhachhang.setText("KH: "+khachHangDAO.getID(String.valueOf(obj.getGuest_id())).getName());
 
 
         }

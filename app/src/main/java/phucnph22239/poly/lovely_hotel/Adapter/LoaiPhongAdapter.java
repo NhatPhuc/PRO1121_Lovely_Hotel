@@ -63,14 +63,33 @@ public class LoaiPhongAdapter extends RecyclerView.Adapter<LoaiPhongAdapter.view
                         .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                if (loaiphongDAO.delete(loaiphong.getId()) > 0) {
-                                    Toast.makeText(context, "Xóa thành công", Toast.LENGTH_SHORT).show();
-                                    list.clear();
-                                    list.addAll(loaiphongDAO.getAll());
-                                    notifyDataSetChanged();
-                                } else {
-                                    Toast.makeText(context, "Xóa thất bại", Toast.LENGTH_SHORT).show();
+//                                if (loaiphongDAO.delete(loaiphong.getId()) > 0) {
+//                                    Toast.makeText(context, "Xóa thành công", Toast.LENGTH_SHORT).show();
+//                                    list.clear();
+//                                    list.addAll(loaiphongDAO.getAll());
+//                                    notifyDataSetChanged();
+//                                } else {
+//                                    Toast.makeText(context, "Xóa thất bại", Toast.LENGTH_SHORT).show();
+//                                }
+
+                                int check = loaiphongDAO.delete(list.get(holder.getAdapterPosition()).getId());
+                                switch (check){
+                                    case  1 :
+                                        list.clear();
+                                        list.addAll(loaiphongDAO.getAll());
+                                        notifyDataSetChanged();
+                                        Toast.makeText(context,"Xóa thành công",Toast.LENGTH_SHORT).show();
+                                        break;
+                                    case -1:
+                                        Toast.makeText(context,"Không thể xóa vì có phòng với loại phòng này",Toast.LENGTH_SHORT).show();
+                                        break;
+                                    case 0 :
+                                        Toast.makeText(context,"Xóa không thành công",Toast.LENGTH_SHORT).show();
+                                        break;
+                                    default:
+                                        break;
                                 }
+
                             }
                         })
                         .setNegativeButton("CANNEL", new DialogInterface.OnClickListener() {
