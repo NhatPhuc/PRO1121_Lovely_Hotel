@@ -77,15 +77,35 @@ public class LoaiDichVuAdapter extends RecyclerView.Adapter<LoaiDichVuAdapter.Lo
                         .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                if (loaiDichVuDao.Delete(String.valueOf(loaiDichVu.getId()))>0){
-                                    Toast.makeText(context, "Xóa Thành Công", Toast.LENGTH_SHORT).show();
-                                }else {
-                                    Toast.makeText(context, "Xóa thất bại", Toast.LENGTH_SHORT).show();
+//                                if (loaiDichVuDao.delete(String.valueOf(loaiDichVu.getId()))>0){
+//                                    Toast.makeText(context, "Xóa Thành Công", Toast.LENGTH_SHORT).show();
+//                                }else {
+//                                    Toast.makeText(context, "Xóa thất bại", Toast.LENGTH_SHORT).show();
+//                                }
+//                                list.clear();
+//                                list.addAll(loaiDichVuDao.getAll());
+//                                notifyDataSetChanged();
+
+                                int check = loaiDichVuDao.delete(list.get(holder.getAdapterPosition()).getId());
+                                switch (check){
+                                    case  1 :
+                                        list.clear();
+                                        list.addAll(loaiDichVuDao.getAll());
+                                        notifyDataSetChanged();
+                                        Toast.makeText(context,"Xóa thành công",Toast.LENGTH_SHORT).show();
+                                        break;
+                                    case -1:
+                                        Toast.makeText(context,"Không thể xóa vì có đơn dịch vụ với loại dịch vụ này",Toast.LENGTH_SHORT).show();
+                                        break;
+                                    case 0 :
+                                        Toast.makeText(context,"Xóa không thành công",Toast.LENGTH_SHORT).show();
+                                        break;
+                                    default:
+                                        break;
                                 }
-                                list.clear();
-                                list.addAll(loaiDichVuDao.getAll());
-                                notifyDataSetChanged();
                             }
+
+
                         })
                         .setNegativeButton("CANNEL", new DialogInterface.OnClickListener() {
                             @Override

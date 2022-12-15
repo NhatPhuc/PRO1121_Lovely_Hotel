@@ -77,7 +77,7 @@ public class FragmentPhong extends Fragment {
             public void onClick(View v) {
                 listLoaiPhong = loaiphongDAO.getAll();
                 if (listLoaiPhong.size()==0){
-                    loi.add("loại phòng");
+                    loi.add(" Loại phòng ");
                 }
                 if (loi.isEmpty()){
                     opendialog();

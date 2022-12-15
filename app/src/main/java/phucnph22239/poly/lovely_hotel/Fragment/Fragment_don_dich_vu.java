@@ -101,8 +101,12 @@ public class Fragment_don_dich_vu extends Fragment {
             @Override
             public void onClick(View v) {
                 listLoaiDichVu = loaiDichVuDao.getAll();
+                listHoaDon = hoaDonDAO.getAllstatus0();
                 if (listLoaiDichVu.size()==0){
-                    loi.add("dịch vụ");
+                    loi.add(" Dịch vụ ");
+                }
+                if (listHoaDon.size()==0){
+                    loi.add(" Hóa đơn đặt được dịch vụ ");
                 }
                 if (loi.isEmpty()){
                     openDialog();

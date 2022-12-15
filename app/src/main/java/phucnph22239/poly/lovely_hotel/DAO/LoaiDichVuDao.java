@@ -31,9 +31,22 @@ public class LoaiDichVuDao {
         values.put("price",loaiDichVu.getPrice());
         return db.update("Services",values,"id=?",new String[]{String.valueOf(loaiDichVu.getId())});
     }
-    public long Delete(String id){
-        return db.delete("Services","id=?",new String[]{id});
+//    public long delete(String id){
+//        return db.delete("Services","id=?",new String[]{id});
+//    }
+
+    public int delete(int id){
+        Cursor cursor = db.rawQuery("SELECT * FROM Service_bills WHERE service_id=?",new String[]{String.valueOf(id)});
+        if (cursor.getCount()!=0){
+            return -1 ;
+        }
+        long check = db.delete("Services","id=?",new String[]{String.valueOf(id)});
+        if(check==-1){
+            return  0 ;
+        }
+        return 1 ;
     }
+
     public List<LoaiDichVu> getDaTa(String sql, String...selectionArgs){
         List<LoaiDichVu> list=new ArrayList<>();
         Cursor c=db.rawQuery(sql,selectionArgs);

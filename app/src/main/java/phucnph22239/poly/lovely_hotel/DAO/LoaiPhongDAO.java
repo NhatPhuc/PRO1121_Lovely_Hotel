@@ -30,9 +30,23 @@ public class LoaiPhongDAO {
         values.put("name",loaiPhong.getName());
         return db.update("Room_Types",values,"id=?",new String[]{loaiPhong.getId()+""});
     }
-    public int delete(int s){
-        return db.delete("Room_Types","id=?",new String[]{s+""});
+
+//    public int delete(int s){
+//        return db.delete("Room_Types","id=?",new String[]{s+""});
+//    }
+
+    public int delete(int id){
+        Cursor cursor = db.rawQuery("SELECT * FROM Rooms WHERE room_type_id=?",new String[]{String.valueOf(id)});
+        if (cursor.getCount()!=0){
+            return -1 ;
+        }
+        long check = db.delete("Room_Types","id=?",new String[]{String.valueOf(id)});
+        if(check==-1){
+            return  0 ;
+        }
+        return 1 ;
     }
+
     public List<LoaiPhong> getDaTa(String sql, String...selectionArgs){
         List<LoaiPhong> list=new ArrayList<>();
         Cursor c=db.rawQuery(sql,selectionArgs);

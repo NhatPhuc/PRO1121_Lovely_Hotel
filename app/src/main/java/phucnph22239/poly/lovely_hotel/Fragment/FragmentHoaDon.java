@@ -171,14 +171,14 @@ public class FragmentHoaDon extends Fragment {
             }
         });
 
-        hoaDonAdapter.setHoaDonClick(new HoaDonClick() {
-            @Override
-            public void onClick(View view, int position) {
-                a = position;
-                Log.d("zzzzz", "onClick: "+position);
-                openDialogHN(getContext(),1);
-            }
-        });
+//        hoaDonAdapter.setHoaDonClick(new HoaDonClick() {
+//            @Override
+//            public void onClick(View view, int position) {
+//                a = position;
+//                Log.d("zzzzz", "onClick: "+position);
+//                openDialogHN(getContext(),1);
+//            }
+//        });
 
 
 
@@ -202,18 +202,42 @@ public class FragmentHoaDon extends Fragment {
                     hoaDonAdapter.setData((ArrayList<HoaDon>) listHoaDon);
                     recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
                     recyclerView.setAdapter(hoaDonAdapter);
+                    hoaDonAdapter.setHoaDonClick(new HoaDonClick() {
+                        @Override
+                        public void onClick(View view, int position) {
+                            Toast.makeText(getContext(),"Chưa nhận phòng",Toast.LENGTH_LONG).show();
+                        }
+                    });
                 }else if (position==1){
                     //chưa trả phòng
                     listHoaDon = hoaDonDAO.getAllstatus0();
                     hoaDonAdapter.setData((ArrayList<HoaDon>) listHoaDon);
                     recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
                     recyclerView.setAdapter(hoaDonAdapter);
+
+                    hoaDonAdapter.setHoaDonClick(new HoaDonClick() {
+                        @Override
+                        public void onClick(View view, int position) {
+                            a = position;
+                            Log.d("zzzzz", "onClick: "+position);
+                            openDialogHN(getContext(),1);
+                        }
+                    });
                 }else if (position==2){
                     //đã trả phòng
                     listHoaDon = hoaDonDAO.getAllstatus1();
                     hoaDonAdapter.setData((ArrayList<HoaDon>) listHoaDon);
                     recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
                     recyclerView.setAdapter(hoaDonAdapter);
+
+                    hoaDonAdapter.setHoaDonClick(new HoaDonClick() {
+                        @Override
+                        public void onClick(View view, int position) {
+                            a = position;
+                            Log.d("zzzzz", "onClick: "+position);
+                            openDialogHN(getContext(),1);
+                        }
+                    });
                 }
             }
 
@@ -314,66 +338,7 @@ public class FragmentHoaDon extends Fragment {
         spnPhong.setVisibility(View.INVISIBLE);
         spinnerPhongAdapter = new SpinnerPhongAdapter(context, (ArrayList<Phong>) phongDao.getAll());
         spnPhong.setAdapter(spinnerPhongAdapter);
-        btn_timPhong.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                tuNgay = edTuNgayHD.getText().toString();
-                denNgay = edDenNgayHD.getText().toString();
-                if (tuNgay.length() == 0 || denNgay.length() == 0){
-                    Toast.makeText(getActivity(),"Hãy chọn ngày",Toast.LENGTH_LONG).show();
-                }else{
-//                    spinnerPhongAdapter = new SpinnerPhongAdapter(context, (ArrayList<Phong>) phongDao.getAllDatPhong(tuNgay,denNgay,tuNgay,denNgay));
-                    
-                    spnPhong.setVisibility(View.VISIBLE);
-                    spnPhong.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                        @Override
-                        public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                            maPhong = String.valueOf(listPhong.get(position).getId());
 
-                            phong = phongDao.getAll().get(position);
-
-                            if (tuNgay.isEmpty() || denNgay.isEmpty()) {
-                                Toast.makeText(getActivity(), "Hãy chọn ngày", Toast.LENGTH_SHORT).show();
-
-                            } else {
-                                String[] temptungay = tuNgay.split("/");
-                                String[] tempdenngay = denNgay.split("/");
-
-                                String newTungay = "";
-                                String newdenngay = "";
-
-
-                                int inttungay = Integer.parseInt(newTungay.concat(temptungay[0]));
-                                int intdenngay = Integer.parseInt(newdenngay.concat(tempdenngay[0]));
-                                Log.d("zzzzz", "số ngày: " + (intdenngay - inttungay));
-                                soNgay = intdenngay - inttungay;
-
-
-                                if (inttungay > intdenngay) {
-                                    Toast.makeText(getActivity(), "Lỗi, từ ngày phải bé hơn đến ngày", Toast.LENGTH_SHORT).show();
-
-                                }
-                            }
-
-                            tienPhong = phong.getPrice();
-                            tongTienPhong = tienPhong * soNgay;
-                            Log.d("zzzzz", "onItemSelected: " + soNgay);
-
-                            tv_tienPhong.setText(tongTienPhong + " VNĐ");
-
-                            tongTien = tongTienPhong + tienDV;
-                        }
-
-                        @Override
-                        public void onNothingSelected(AdapterView<?> parent) {
-
-                        }
-                    });
-                }
-//
-
-            }
-        });
 
 
 
@@ -396,37 +361,96 @@ public class FragmentHoaDon extends Fragment {
 
         String datetime = sdf.format(c.getTime());
 
+        btn_timPhong.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                tuNgay = edTuNgayHD.getText().toString();
+                denNgay = edDenNgayHD.getText().toString();
+                if (tuNgay.length() == 0 || denNgay.length() == 0){
+                    Toast.makeText(getActivity(),"Hãy chọn ngày",Toast.LENGTH_LONG).show();
+                }else{
+//                    spinnerPhongAdapter = new SpinnerPhongAdapter(context, (ArrayList<Phong>) phongDao.getAllDatPhong(tuNgay,denNgay,tuNgay,denNgay));
 
+                    String[] temptungay = tuNgay.split("/");
+                    String[] tempdenngay = denNgay.split("/");
+
+                    String newTungay = "";
+                    String newdenngay = "";
+
+
+                    int inttungay = Integer.parseInt(newTungay.concat(temptungay[0]));
+                    int intdenngay = Integer.parseInt(newdenngay.concat(tempdenngay[0]));
+                    Log.d("zzzzz", "số ngày: " + (intdenngay - inttungay));
+                    soNgay = intdenngay - inttungay;
+
+
+                    if (inttungay > intdenngay) {
+                        Toast.makeText(getActivity(), "Lỗi, từ ngày phải bé hơn đến ngày", Toast.LENGTH_SHORT).show();
+                    }else {
+                        spnPhong.setVisibility(View.VISIBLE);
+                        spnPhong.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                            @Override
+                            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                                maPhong = String.valueOf(listPhong.get(position).getId());
+
+                                phong = phongDao.getAll().get(position);
+
+
+                                tienPhong = phong.getPrice();
+                                tongTienPhong = tienPhong * soNgay;
+                                Log.d("zzzzz", "onItemSelected: " + soNgay);
+
+                                tv_tienPhong.setText(tongTienPhong + " VNĐ");
+
+                                tongTien = tongTienPhong + tienDV;
+                            }
+
+                            @Override
+                            public void onNothingSelected(AdapterView<?> parent) {
+
+                            }
+                        });
+
+                    }
+
+                }
+//
+
+            }
+        });
 
         if (type == 0) {
             edTuNgayHD.setEnabled(true);
             edDenNgayHD.setEnabled(true);
             edTienMat.setText("0");
 
-            tuNgay = edTuNgayHD.getText().toString();
-            denNgay = edDenNgayHD.getText().toString();
-            if (tuNgay.isEmpty() || denNgay.isEmpty()) {
-                Toast.makeText(getActivity(), "Hãy nhập ngày", Toast.LENGTH_SHORT).show();
+//            tuNgay = edTuNgayHD.getText().toString();
+//            denNgay = edDenNgayHD.getText().toString();
+//            if (tuNgay.isEmpty() || denNgay.isEmpty()) {
+//                Toast.makeText(getActivity(), "Hãy nhập ngày", Toast.LENGTH_SHORT).show();
+//
+//            } else {
+//                String[] temptungay = tuNgay.split("/");
+//                String[] tempdenngay = denNgay.split("/");
+//
+//                String newTungay = "";
+//                String newdenngay = "";
+//
+//
+//                int inttungay = Integer.parseInt(newTungay.concat(temptungay[0]));
+//                int intdenngay = Integer.parseInt(newdenngay.concat(tempdenngay[0]));
+//                Log.d("zzzzz", "số ngày: " + (intdenngay - inttungay));
+//                soNgay = intdenngay - inttungay;
+//
+//
+//                if (inttungay > intdenngay) {
+//                    Toast.makeText(getActivity(), "Lỗi, từ ngày phải bé hơn đến ngày", Toast.LENGTH_SHORT).show();
+//
+//                }
+//            }
 
-            } else {
-                String[] temptungay = tuNgay.split("/");
-                String[] tempdenngay = denNgay.split("/");
-
-                String newTungay = "";
-                String newdenngay = "";
 
 
-                int inttungay = Integer.parseInt(newTungay.concat(temptungay[0]));
-                int intdenngay = Integer.parseInt(newdenngay.concat(tempdenngay[0]));
-                Log.d("zzzzz", "số ngày: " + (intdenngay - inttungay));
-                soNgay = intdenngay - inttungay;
-
-
-                if (inttungay > intdenngay) {
-                    Toast.makeText(getActivity(), "Lỗi, từ ngày phải bé hơn đến ngày", Toast.LENGTH_SHORT).show();
-
-                }
-            }
 
 //        tienDenBu = Integer.parseInt(String.valueOf(edTienMat.getText()));
 
